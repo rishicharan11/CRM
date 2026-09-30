@@ -1,0 +1,624 @@
+/*
+  Paryatech colour system — light theme
+  Source: Booking module audit (COLOR-SYSTEM-PLAN.md) — approved 2026-09-18
+
+  Layers:
+    1. Primitives  — raw palette steps (only colours Booking uses)
+    2. Semantics   — role tokens for UI
+    3. Legacy      — --ground / --accent / … aliases for Booking continuity
+
+  Rules: teal = work · pink = place/person · status ≠ brand · info = slate (not channel blue)
+*/
+
+:root {
+  /* ========== 1. PRIMITIVES ========== */
+
+  /* Neutral */
+  --pt-neutral-0: #ffffff;
+  --pt-neutral-10: #e4e0db;
+  --pt-neutral-20: #f3f0ed;
+  --pt-neutral-25: #fcfbfa;
+  --pt-neutral-40: #f6f8fa;
+  --pt-neutral-50: #f1f4f7;
+  --pt-neutral-75: #e8ecf0;
+  --pt-neutral-100: #eef0f3;
+  --pt-neutral-200: #e4e7ec;
+  --pt-neutral-300: #d7dbe1;
+  --pt-neutral-350: #cfd3d9;
+  --pt-neutral-400: #c6cad1;
+  --pt-neutral-500: #8a909a;
+  --pt-neutral-600: #545c67;
+  --pt-neutral-700: #3e4550;
+  --pt-neutral-900: #20242b;
+  --pt-neutral-950: #16181d;
+
+  /* Teal — work brand */
+  --pt-teal-50: #e7f2f0;
+  --pt-teal-100: #dbebe8;
+  --pt-teal-200: #e3eeec;
+  --pt-teal-500: #0f6e63;
+  --pt-teal-600: #0b544b;
+  --pt-teal-700: #094840;
+
+  /* Pink — place / person brand */
+  --pt-pink-50: #fbeef4;
+  --pt-pink-80: #f1d6e3;
+  --pt-pink-100: #f8dee8;
+  --pt-pink-200: #efcfdf;
+  --pt-pink-500: #a5537e;
+  --pt-pink-700: #853f64;
+
+  /* Success */
+  --pt-success-50: #e9f6ee;
+  --pt-success-100: #dcefdf;
+  --pt-success-200: #cde9d6;
+  --pt-success-600: #15803d;
+
+  /* Warning */
+  --pt-warning-50: #fbf2e0;
+  --pt-warning-100: #f6e8c8;
+  --pt-warning-200: #f0dcb4;
+  --pt-warning-600: #b45309;
+
+  /* Danger */
+  --pt-danger-50: #fbedee;
+  --pt-danger-100: #f6e2e5;
+  --pt-danger-200: #f1d2d6;
+  --pt-danger-600: #be3b48;
+
+  /* Information (slate — not channel blue) */
+  --pt-info-50: #f1f4f7;
+  --pt-info-100: #e6eaef;
+  --pt-info-200: #e4e7ec;
+  --pt-info-700: #3d4654;
+
+  /* Channel blue (email / blue avatar — D1=A) */
+  --pt-blue-50: #e8f0fb;
+  --pt-blue-200: #cfe0f7;
+  --pt-blue-600: #1d4ed8;
+
+  /* ========== 2. SEMANTICS ========== */
+
+  /* Backgrounds */
+  --color-bg-page: var(--pt-neutral-10);
+  --color-bg-surface: var(--pt-neutral-0);
+  --color-bg-raised: var(--pt-neutral-25);
+  --color-bg-raised-hover: var(--pt-neutral-20);
+  --color-bg-subtle: var(--pt-neutral-50);
+  --color-bg-muted: var(--pt-neutral-40);
+  --color-bg-muted-strong: var(--pt-neutral-75);
+  --color-bg-selected: var(--pt-pink-50);
+  --color-bg-tooltip: var(--pt-neutral-900);
+  --color-bg-selection: var(--pt-pink-80);
+
+  /* Text */
+  --color-text-primary: var(--pt-neutral-950);
+  --color-text-secondary: var(--pt-neutral-700);
+  --color-text-muted: var(--pt-neutral-600);
+  --color-text-disabled: var(--pt-neutral-500);
+  --color-text-inverse: var(--pt-neutral-0);
+  --color-text-selected: var(--pt-pink-700);
+  --color-text-on-brand-muted: rgba(255, 255, 255, 0.82);
+
+  /* Borders */
+  --color-border-default: var(--pt-neutral-200);
+  --color-border-subtle: var(--pt-neutral-100);
+  --color-border-strong: var(--pt-neutral-300);
+  --color-border-brand: var(--pt-pink-200);
+
+  /* Actions — primary (work / teal) */
+  --color-action-primary: var(--pt-teal-500);
+  --color-action-primary-hover: var(--pt-teal-600);
+  --color-action-primary-pressed: var(--pt-teal-700);
+  --color-action-primary-soft: var(--pt-teal-50);
+  --color-action-primary-soft-pressed: var(--pt-teal-100);
+
+  /* Actions — secondary (person / pink) */
+  --color-action-secondary: var(--pt-pink-500);
+  --color-action-secondary-hover: var(--pt-pink-700);
+  --color-action-secondary-soft: var(--pt-pink-50);
+
+  /* Focus — D5=A dual context */
+  --color-focus: var(--pt-pink-500);
+  --color-focus-person: var(--pt-pink-500);
+  --color-focus-person-soft: rgba(165, 83, 126, 0.12);
+  --color-focus-work: var(--pt-teal-500);
+  --color-focus-work-soft: rgba(15, 110, 99, 0.12);
+
+  /* Status */
+  --color-status-success-text: var(--pt-success-600);
+  --color-status-success-bg: var(--pt-success-50);
+  --color-status-success-border: var(--pt-success-200);
+  --color-status-success-bg-hover: var(--pt-success-100);
+
+  --color-status-warning-text: var(--pt-warning-600);
+  --color-status-warning-bg: var(--pt-warning-50);
+  --color-status-warning-border: var(--pt-warning-200);
+  --color-status-warning-bg-hover: var(--pt-warning-100);
+
+  --color-status-danger-text: var(--pt-danger-600);
+  --color-status-danger-bg: var(--pt-danger-50);
+  --color-status-danger-border: var(--pt-danger-200);
+  --color-status-danger-bg-hover: var(--pt-danger-100);
+
+  --color-status-info-text: var(--pt-info-700);
+  --color-status-info-bg: var(--pt-info-50);
+  --color-status-info-border: var(--pt-info-200);
+  --color-status-info-bg-hover: var(--pt-info-100);
+
+  /* Component aliases */
+  --color-control-checkbox-border: var(--pt-neutral-400);
+  --color-chrome-scrollbar: var(--pt-neutral-350);
+  --color-channel-email-bg: var(--pt-blue-50);
+  --color-channel-email-border: var(--pt-blue-200);
+  --color-channel-email-text: var(--pt-blue-600);
+  --color-avatar-person-bg: var(--pt-pink-100);
+  --color-avatar-person-text: var(--pt-pink-700); /* D4=A — AA fix vs pink.500 */
+  --color-avatar-person-border: var(--pt-pink-200);
+  --color-avatar-work-bg: var(--pt-teal-50);
+  --color-avatar-work-text: var(--pt-teal-600);
+  --color-avatar-warn-bg: var(--pt-warning-50);
+  --color-avatar-warn-text: var(--pt-warning-600);
+  --color-avatar-warn-border: var(--pt-warning-200);
+  --color-avatar-channel-bg: var(--pt-blue-50);
+  --color-avatar-channel-text: var(--pt-blue-600);
+  --color-avatar-channel-border: var(--pt-blue-200);
+
+  /* Elevation (keep effect tokens) */
+  --blockShadow: 0 1px 2px rgba(23, 43, 77, 0.045);
+  --panelShadow: 0 1px 3px rgba(23, 43, 77, 0.05);
+  --menuShadow: 0 12px 30px rgba(20, 26, 33, 0.16);
+  --tooltipShadow: 0 6px 18px rgba(20, 26, 33, 0.22);
+  --overlayShadow: 0 20px 54px rgba(20, 26, 33, 0.22), 0 2px 8px rgba(20, 26, 33, 0.08);
+  --stickyShadow: 0 -8px 24px rgba(23, 43, 77, 0.08);
+
+  /* ========== 3. LEGACY ALIASES (Booking + existing components) ========== */
+
+  --ground: var(--color-bg-page);
+  --side: var(--color-bg-raised);
+  --side-hover: var(--color-bg-raised-hover);
+  --panel: var(--color-bg-surface);
+  --panel-ground: var(--color-bg-surface);
+  --surface: var(--color-bg-surface);
+  /* I5: same hex as --info-bg / subtle elevation vs status-info role — keep both names */
+  --surface-2: var(--color-bg-subtle);
+  --surface-3: var(--color-bg-muted);
+
+  --ink: var(--color-text-primary);
+  --ink-2: var(--color-text-secondary);
+  --ink-3: var(--color-text-muted);
+  /* I6: decorative / disabled chrome only — not body text (fails AA as copy) */
+  --ink-4: var(--color-text-disabled);
+
+  --line: var(--color-border-default);
+  --line-2: var(--color-border-subtle);
+  --line-hover: var(--color-border-strong);
+  --checkbox-line: var(--color-control-checkbox-border);
+
+  --accent: var(--color-action-primary);
+  --accent-ink: var(--color-action-primary-hover);
+  --accent-pressed: var(--color-action-primary-pressed);
+  --accent-soft: var(--color-action-primary-soft);
+  --accent-soft-pressed: var(--color-action-primary-soft-pressed);
+
+  --pink: var(--color-action-secondary);
+  --pink-ink: var(--color-action-secondary-hover);
+  --pink-soft: var(--color-action-secondary-soft);
+  --pink-line: var(--color-border-brand);
+  --pink-avatar: var(--color-avatar-person-bg);
+
+  --ok: var(--color-status-success-text);
+  --ok-bg: var(--color-status-success-bg);
+  --ok-line: var(--color-status-success-border);
+  --warn: var(--color-status-warning-text);
+  --warn-bg: var(--color-status-warning-bg);
+  --warn-line: var(--color-status-warning-border);
+  --bad: var(--color-status-danger-text);
+  --bad-bg: var(--color-status-danger-bg);
+  --bad-line: var(--color-status-danger-border);
+  --info: var(--color-status-info-text);
+  --info-bg: var(--color-status-info-bg);
+  --info-line: var(--color-status-info-border);
+
+  --tooltip-ink: var(--color-bg-tooltip);
+  --focus: var(--color-focus);
+
+  /* Status hover (new — was hardcoded) */
+  --ok-bg-hover: var(--color-status-success-bg-hover);
+  --warn-bg-hover: var(--color-status-warning-bg-hover);
+  --bad-bg-hover: var(--color-status-danger-bg-hover);
+  --info-bg-hover: var(--color-status-info-bg-hover);
+
+  /* Channel + chrome */
+  --channel-email-bg: var(--color-channel-email-bg);
+  --channel-email-border: var(--color-channel-email-border);
+  --channel-email-text: var(--color-channel-email-text);
+  --scrollbar: var(--color-chrome-scrollbar);
+  --selection: var(--color-bg-selection);
+  --focus-person-soft: var(--color-focus-person-soft);
+  --focus-work-soft: var(--color-focus-work-soft);
+  --on-brand: var(--color-text-inverse);
+  --on-brand-muted: var(--color-text-on-brand-muted);
+  --surface-muted-strong: var(--color-bg-muted-strong);
+  --teal-ring: var(--pt-teal-50);
+
+  /* Radius — soft-rect CTAs/chips 8; default controls 10; notes filter chips 999 (I3) */
+  --radius-xs: 5px;
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  /* Control heights (Gate 3 / Gate 1 CDP) */
+  --size-control-sm: 32px;
+  --size-control-toolbar: 36px;
+  --size-control-md: 38px;
+
+  /* Icon sizes */
+  --icon-size-2xs: 11px;
+  --icon-size-xs: 13px;
+  --icon-size-sm: 14px;
+  --icon-size-md: 15px;
+  --icon-size-nav: 17px;
+  --icon-size-lg: 20px;
+  --icon-stroke-default: 1.7;
+  --icon-stroke-emphasis: 1.9;
+  --icon-stroke-bold: 2;
+
+  /* Breakpoints (I11) */
+  --bp-shell: 1000px;
+  --bp-communication: 820px;
+
+  /* Layering */
+  --z-sticky: 25;
+  --z-chrome: 30;
+  --z-dropdown: 40;
+  --z-tooltip: 400;
+  --z-overlay: 500;
+
+  --duration-fast: 120ms;
+  --duration-shell: 220ms;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+
+  /* ========== 4. TYPOGRAPHY (Booking SoT — TYPOGRAPHY-COMPONENT-MAPPING.md) ==========
+     Approved 2026-09-18. Flagged near-misses kept as separate roles (no auto-normalize).
+  */
+
+  --font-sans: "Public Sans", system-ui, sans-serif;
+  --font-display: "Onest", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* --- Headings --- */
+  --type-heading-page-family: var(--font-display);
+  --type-heading-page-size: clamp(20px, 0.7cqi + 18px, 24px);
+  --type-heading-page-weight: 700;
+  --type-heading-page-line: 1.5;
+  --type-heading-page-tracking: -0.03em;
+
+  --type-heading-record-family: var(--font-display);
+  --type-heading-record-size: clamp(18px, 0.8cqi + 16px, 22px);
+  --type-heading-record-weight: 700;
+  --type-heading-record-line: 1.5;
+  --type-heading-record-tracking: -0.03em;
+
+  --type-heading-brand-family: var(--font-display);
+  --type-heading-brand-size: 17px;
+  --type-heading-brand-weight: 700;
+  --type-heading-brand-line: 1.5;
+  --type-heading-brand-tracking: -0.03em;
+
+  --type-heading-modal-family: var(--font-display);
+  --type-heading-modal-size: 17px;
+  --type-heading-modal-weight: 700;
+  --type-heading-modal-line: 1.5;
+  --type-heading-modal-tracking: -0.02em;
+
+  --type-heading-panel-family: var(--font-display);
+  --type-heading-panel-size: 16px;
+  --type-heading-panel-weight: 700;
+  --type-heading-panel-line: 1.5;
+  --type-heading-panel-tracking: normal;
+
+  --type-heading-section-family: var(--font-display);
+  --type-heading-section-size: 15px;
+  --type-heading-section-weight: 700;
+  --type-heading-section-line: 1.5;
+  --type-heading-section-tracking: -0.02em;
+
+  --type-heading-block-family: var(--font-display);
+  --type-heading-block-size: 14.5px;
+  --type-heading-block-weight: 700;
+  --type-heading-block-line: 1.5;
+  --type-heading-block-tracking: -0.02em;
+
+  --type-heading-service-family: var(--font-sans);
+  --type-heading-service-size: 15px;
+  --type-heading-service-weight: 700;
+  --type-heading-service-line: 1.3;
+  --type-heading-service-tracking: -0.01em;
+
+  /* --- Values --- */
+  --type-value-kpi-family: var(--font-display);
+  --type-value-kpi-size: 14.5px;
+  --type-value-kpi-weight: 600;
+  --type-value-kpi-line: 1.3;
+  --type-value-kpi-tracking: -0.02em;
+
+  --type-value-summary-family: var(--font-display);
+  --type-value-summary-size: 14.5px;
+  --type-value-summary-weight: 600;
+  --type-value-summary-line: 1.5;
+  --type-value-summary-tracking: normal;
+
+  /* --- Button / chrome labels (Onest) --- */
+  --type-label-button-lg-family: var(--font-display);
+  --type-label-button-lg-size: 14.5px;
+  --type-label-button-lg-weight: 600;
+  --type-label-button-lg-line: 1;
+
+  --type-label-button-family: var(--font-display);
+  --type-label-button-size: 13.5px;
+  --type-label-button-weight: 600;
+  --type-label-button-line: 1;
+
+  --type-label-button-sm-family: var(--font-display);
+  --type-label-button-sm-size: 12.5px;
+  --type-label-button-sm-weight: 600;
+  --type-label-button-sm-line: 1;
+
+  --type-label-button-xs-family: var(--font-display);
+  --type-label-button-xs-size: 12px;
+  --type-label-button-xs-weight: 600;
+  --type-label-button-xs-line: 1;
+
+  --type-label-tab-family: var(--font-display);
+  --type-label-tab-size: 13px;
+  --type-label-tab-weight: 500;
+  --type-label-tab-weight-active: 600;
+
+  --type-label-account-family: var(--font-display);
+  --type-label-account-size: 13px;
+  --type-label-account-weight: 600;
+
+  /* --- Compact Public Sans chrome (F1/F16 — not Onest CTAs) --- */
+  --type-label-compact-family: var(--font-sans);
+  --type-label-compact-size: 12.5px;
+  --type-label-compact-weight: 600;
+  --type-label-compact-line: 1;
+
+  --type-label-compact-xs-family: var(--font-sans);
+  --type-label-compact-xs-size: 12px;
+  --type-label-compact-xs-weight: 600;
+  --type-label-compact-xs-line: 1;
+
+  --type-label-jump-family: var(--font-sans);
+  --type-label-jump-size: 12px;
+  --type-label-jump-weight: 700;
+
+  /* --- Nav / status / chips --- */
+  --type-label-nav-family: var(--font-sans);
+  --type-label-nav-size: 13.5px;
+  --type-label-nav-weight: 500;
+  --type-label-nav-weight-active: 600;
+  --type-label-nav-line: 1.5;
+
+  --type-label-notes-family: var(--font-sans);
+  --type-label-notes-size: 13px;
+  --type-label-notes-weight: 600;
+
+  --type-label-status-family: var(--font-sans);
+  --type-label-status-size: 12px;
+  --type-label-status-weight: 600;
+  --type-label-status-line: 1;
+
+  /* I4 — Public Sans 12 / 600 / 0.12px (not Onest, not Mono) */
+  --type-label-table-head-family: var(--font-sans);
+  --type-label-table-head-size: 12px;
+  --type-label-table-head-weight: 600;
+  --type-label-table-head-tracking: 0.12px;
+
+  --type-label-channel-family: var(--font-sans);
+  --type-label-channel-size: 11px;
+  --type-label-channel-weight: 600;
+
+  --type-label-kind-family: var(--font-sans);
+  --type-label-kind-size: 10.5px;
+  --type-label-kind-weight: 700;
+  --type-label-kind-tracking: 0.06em;
+  --type-label-kind-transform: uppercase;
+  --type-label-kind-line: 1;
+
+  --type-label-avatar-family: var(--font-display);
+  --type-label-avatar-size: 12px;
+  --type-label-avatar-weight: 700;
+
+  --type-label-avatar-md-family: var(--font-display);
+  --type-label-avatar-md-size: 12.5px;
+  --type-label-avatar-md-weight: 700;
+
+  --type-label-avatar-sm-family: var(--font-display);
+  --type-label-avatar-sm-size: 11px;
+  --type-label-avatar-sm-weight: 600;
+
+  --type-label-tooltip-family: var(--font-sans);
+  --type-label-tooltip-size: 12px;
+  --type-label-tooltip-weight: 500;
+
+  /* --- Eyebrows --- */
+  --type-label-group-family: var(--font-sans);
+  --type-label-group-size: 11px;
+  --type-label-group-weight: 700;
+  --type-label-group-tracking: 0.1em;
+  --type-label-group-transform: uppercase;
+
+  --type-label-field-family: var(--font-sans);
+  --type-label-field-size: 11px;
+  --type-label-field-weight: 700;
+  --type-label-field-tracking: 0.08em;
+  --type-label-field-transform: uppercase;
+
+  --type-label-kpi-family: var(--font-sans);
+  --type-label-kpi-size: 11px;
+  --type-label-kpi-weight: 600;
+  --type-label-kpi-tracking: 0.08em;
+  --type-label-kpi-transform: uppercase;
+
+  --type-label-voucher-family: var(--font-sans);
+  --type-label-voucher-size: 11px;
+  --type-label-voucher-weight: 700;
+  --type-label-voucher-tracking: 0.06em;
+  --type-label-voucher-transform: uppercase;
+
+  --type-label-comm-family: var(--font-sans);
+  --type-label-comm-size: 10.5px;
+  --type-label-comm-weight: 700;
+  --type-label-comm-tracking: 0.08em;
+  --type-label-comm-transform: uppercase;
+
+  --type-label-eyebrow-mono-family: var(--font-mono);
+  --type-label-eyebrow-mono-size: 10.5px;
+  --type-label-eyebrow-mono-weight: 600;
+  --type-label-eyebrow-mono-tracking: 0.02em;
+
+  /* --- Body --- */
+  --type-body-family: var(--font-sans);
+  --type-body-size: 14px;
+  --type-body-weight: 400;
+  --type-body-line: 1.5;
+  --type-body-tracking: normal;
+
+  --type-body-input-family: var(--font-sans);
+  --type-body-input-size: 14px;
+  --type-body-input-weight: 400;
+
+  --type-body-search-family: var(--font-sans);
+  --type-body-search-size: 13.5px;
+  --type-body-search-weight: 400;
+
+  --type-body-emphasis-family: var(--font-sans);
+  --type-body-emphasis-size: 13.5px;
+  --type-body-emphasis-weight: 600;
+  --type-body-emphasis-line: 1.25;
+
+  --type-body-day-family: var(--font-display);
+  --type-body-day-size: 13.5px;
+  --type-body-day-weight: 600;
+
+  --type-body-secondary-family: var(--font-sans);
+  --type-body-secondary-size: 12.5px;
+  --type-body-secondary-weight: 400;
+
+  --type-body-meta-family: var(--font-sans);
+  --type-body-meta-size: 12.5px;
+  --type-body-meta-weight: 500;
+
+  --type-body-copy-family: var(--font-sans);
+  --type-body-copy-size: 13px;
+  --type-body-copy-weight: 400;
+  --type-body-copy-line: 1.5;
+
+  --type-body-copy-strong-family: var(--font-sans);
+  --type-body-copy-strong-size: 13px;
+  --type-body-copy-strong-weight: 600;
+
+  --type-body-choice-family: var(--font-sans);
+  --type-body-choice-size: 13.5px;
+  --type-body-choice-weight: 500;
+  --type-body-choice-weight-active: 600;
+
+  --type-body-owner-sub-family: var(--font-sans);
+  --type-body-owner-sub-size: 11.5px;
+  --type-body-owner-sub-weight: 400;
+
+  --type-body-owner-count-family: var(--font-sans);
+  --type-body-owner-count-size: 11.5px;
+  --type-body-owner-count-weight: 600;
+
+  --type-body-note-family: var(--font-sans);
+  --type-body-note-size: 13.5px;
+  --type-body-note-weight: 400;
+  --type-body-note-line: 1.55;
+
+  --type-body-file-family: var(--font-sans);
+  --type-body-file-size: 13px;
+  --type-body-file-weight: 500;
+
+  --type-body-conv-name-family: var(--font-display);
+  --type-body-conv-name-size: 14px;
+  --type-body-conv-name-weight: 600;
+
+  --type-body-note-meta-family: var(--font-sans);
+  --type-body-note-meta-size: 12px;
+  --type-body-note-meta-weight: 400;
+
+  --type-body-sf-note-family: var(--font-sans);
+  --type-body-sf-note-size: 12px;
+  --type-body-sf-note-weight: 500;
+  --type-body-sf-note-line: 1.35;
+
+  --type-body-msg-meta-family: var(--font-sans);
+  --type-body-msg-meta-size: 11px;
+  --type-body-msg-meta-weight: 400;
+
+  --type-body-empty-sheet-family: var(--font-sans);
+  --type-body-empty-sheet-size: 13.5px;
+  --type-body-empty-sheet-weight: 500;
+
+  /* --- Mono --- */
+  --type-mono-money-family: var(--font-mono);
+  --type-mono-money-size: 13.5px;
+  --type-mono-money-weight: 600;
+  --type-mono-money-tracking: -0.01em;
+
+  --type-mono-date-family: var(--font-mono);
+  --type-mono-date-size: 12.5px;
+  --type-mono-date-weight: 400;
+
+  --type-mono-range-family: var(--font-mono);
+  --type-mono-range-size: 12px;
+  --type-mono-range-weight: 400;
+
+  --type-mono-credit-family: var(--font-mono);
+  --type-mono-credit-size: 12px;
+  --type-mono-credit-weight: 500;
+  --type-mono-credit-tracking: -0.01em;
+
+  --type-mono-ref-family: var(--font-mono);
+  --type-mono-ref-size: 12px;
+  --type-mono-ref-weight: 500;
+
+  --type-mono-id-family: var(--font-mono);
+  --type-mono-id-size: 11px;
+  --type-mono-id-weight: 400;
+
+  --type-mono-badge-family: var(--font-mono);
+  --type-mono-badge-size: 11px;
+  --type-mono-badge-weight: 600;
+
+  --type-mono-time-family: var(--font-mono);
+  --type-mono-time-size: 11.5px;
+  --type-mono-time-weight: 400;
+
+  --type-mono-rec-id-family: var(--font-mono);
+  --type-mono-rec-id-size: 11.5px;
+  --type-mono-rec-id-weight: 500;
+  --type-mono-rec-id-tracking: -0.01em;
+
+  --type-mono-count-family: var(--font-mono);
+  --type-mono-count-size: 10.5px;
+  --type-mono-count-weight: 600;
+
+  --type-mono-file-family: var(--font-mono);
+  --type-mono-file-size: 11px;
+  --type-mono-file-weight: 400;
+}
+
+/*
+  --page-pad is set on container shells (ListPage / .pt-content), not :root,
+  because it uses cqi: clamp(16px, 2.2cqi, 52px)
+*/

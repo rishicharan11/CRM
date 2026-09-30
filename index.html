@@ -1,0 +1,2006 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Paryatech customer management" />
+    <title>Paryatech — Customers</title>
+    <link rel="icon" type="image/svg+xml" href="assets/paryatech-favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Onest:wght@400;500;600;700&amp;family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="design-system-03.css" />
+    <link rel="stylesheet" href="reference-parity.css" />
+    <link rel="stylesheet" href="new-customer.css" />
+  </head>
+  <body>
+    <svg class="svg-sprite" aria-hidden="true">
+      <symbol id="i-dashboard" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></symbol>
+      <symbol id="i-inbox" viewBox="0 0 24 24"><path d="M22 12h-6l-2 3h-4l-2-3H2"></path><path d="M5.5 6.5 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.5-5.5A2 2 0 0 0 16.8 5H7.2a2 2 0 0 0-1.7 1.5z"></path></symbol>
+      <symbol id="i-tasks" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="m9 12 2 2 4-4"></path></symbol>
+      <symbol id="i-referral-tree" viewBox="0 0 24 24"><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.5 18h3a4 4 0 0 0 4-4V8.5M12 10v4a4 4 0 0 1-4 4"/></symbol>
+      <symbol id="i-news" viewBox="0 0 24 24"><path d="M4 22h16a2 2 0 0 0 2-2V4a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v16a2 2 0 0 1-2 2 2 2 0 0 1-2-2V9h4"></path><path d="M8 7h8M8 11h8M8 15h5"></path></symbol>
+      <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H8.6A1.6 1.6 0 0 0 7 3.6v16.8A1.6 1.6 0 0 0 8.6 22h10.8a1.6 1.6 0 0 0 1.6-1.6V7.5Z"></path><path d="M14 2v6h6"></path></symbol>
+      <symbol id="i-package" viewBox="0 0 24 24"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path><path d="m3.3 7 8.7 5 8.7-5"></path><path d="M12 22V12"></path></symbol>
+      <symbol id="i-megaphone" viewBox="0 0 24 24"><path d="M3 11v2a2 2 0 0 0 2 2h3l8 4V5L8 9H5a2 2 0 0 0-2 2Z"/><path d="m8 15 1.5 5h3"/><path d="M19 9a4 4 0 0 1 0 6"/></symbol>
+      <symbol id="i-booking" viewBox="0 0 24 24"><path d="M6 3v3M18 3v3M4 9h16"/><rect x="3" y="5" width="18" height="16" rx="2"/><path d="m8 15 2 2 5-5"/></symbol>
+      <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></symbol>
+      <symbol id="i-vendor" viewBox="0 0 24 24"><path d="M4 21V5a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v16"/><path d="M17 9h3a1 1 0 0 1 1 1v11M8 7h2M8 11h2M8 15h2M13 7h1M13 11h1M13 15h1M2 21h20"/></symbol>
+      <symbol id="i-rupee" viewBox="0 0 24 24"><path d="M6 4h12M6 9h12M14.5 20 6 12h3c7 0 7-8 0-8"/></symbol>
+      <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"></path><path d="M7 15l3-4 3 3 4-6"></path></symbol>
+      <symbol id="i-automation" viewBox="0 0 24 24"><path d="M13 2 5 13h6l-1 9 8-12h-6l1-8Z"/></symbol>
+      <symbol id="i-team" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path></symbol>
+      <symbol id="i-support" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.7 2.7 0 1 1 4.2 2.3c-1 .6-1.7 1.1-1.7 2.2M12 17h.01"/></symbol>
+      <symbol id="i-nav-bookings" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></symbol>
+      <symbol id="i-nav-customer" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="10" r="3"></circle><path d="M6.2 19a6 6 0 0 1 11.6 0"></path></symbol>
+      <symbol id="i-nav-vendor" viewBox="0 0 24 24"><path d="M3 9.5 4.5 4h15L21 9.5"></path><path d="M4 9.5V20h16V9.5"></path><path d="M3 9.5a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"></path></symbol>
+      <symbol id="i-nav-finance" viewBox="0 0 24 24"><path d="M3 21h18"></path><path d="M5 21V10l7-5 7 5v11"></path><path d="M9 21v-6h6v6"></path></symbol>
+      <symbol id="i-nav-automation" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9z"></path></symbol>
+      <symbol id="i-nav-support" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol>
+      <symbol id="i-token" viewBox="0 0 24 24"><circle cx="9" cy="9" r="6"></circle><path d="M15.5 3.3a6 6 0 0 1 0 11.4"></path></symbol>
+      <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6 1.65 1.65 0 0 0 10 3.09V3a2 2 0 0 1 4 0v.09A1.65 1.65 0 0 0 15 4.6a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9c.14.31.4.55.72.66"></path></symbol>
+      <symbol id="i-signout" viewBox="0 0 24 24"><path d="M10 17l5-5-5-5M15 12H3"/><path d="M14 4h5a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-5"/></symbol>
+      <symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"></path></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+      <symbol id="i-panel-collapse" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 8l-4 4 4 4"/></symbol>
+      <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"></path></symbol>
+      <symbol id="i-external" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7.5"></circle><path d="m21 21-4.3-4.3"></path></symbol>
+      <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M3 5h18"></path><path d="M7 12h10"></path><path d="M10 19h4"></path></symbol>
+      <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 6v5h-5"/><path d="M18.2 17.2A8 8 0 1 1 20 11"/></symbol>
+      <symbol id="i-kanban" viewBox="0 0 24 24"><path d="M4 5h6v14H4zM14 5h6v8h-6z"/></symbol>
+      <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4" cy="6" r="1" fill="currentColor" stroke="none"/><circle cx="4" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="4" cy="18" r="1" fill="currentColor" stroke="none"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14"></path><path d="M5 12h14"></path></symbol>
+      <symbol id="i-more" viewBox="0 0 24 24"><g fill="currentColor" stroke="none"><circle cx="5" cy="12" r="1.6"></circle><circle cx="12" cy="12" r="1.6"></circle><circle cx="19" cy="12" r="1.6"></circle></g></symbol>
+      <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9Z"/></symbol>
+      <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.5"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/></symbol>
+      <symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3h10v6M7 18H5a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M7 14h10v7H7z"/><path d="M17 12h.01"/></symbol>
+      <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 21V9M7 14l5-5 5 5"/><path d="M5 3h14"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 5 5L20 7"/></symbol>
+      <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"></path></symbol>
+      <symbol id="i-flight" viewBox="0 0 24 24"><path d="m3 13 8-2 6-7 2 1-4 7 5 3-1 2-6-1-3 4-2-1 1-5-6 1Z"/></symbol>
+      <symbol id="i-accommodation" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1"/><path d="M9 7h2M14 7h2M9 11h2M14 11h2M9 15h2M14 15h2M11 21v-3h2v3"/></symbol>
+      <symbol id="i-visa" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="9" r="2.5"/><path d="M8 16a4 4 0 0 1 8 0"/></symbol>
+      <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13M10 11v5M14 11v5"/></symbol>
+      <symbol id="i-folder-upload" viewBox="0 0 24 24"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" fill="currentColor" stroke="none"/><circle cx="17" cy="17" r="4" fill="currentColor" stroke="#fff"/><path d="M17 19v-4m-2 2 2-2 2 2" fill="none" stroke="#fff"/></symbol>
+      <symbol id="i-message" viewBox="0 0 24 24"><path d="M4 5h16v12H8l-4 4Z"/><path d="M8 9h8M8 13h5"/></symbol>
+      <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.8a15 15 0 0 0 4.7 4.7L15 13l5 2v4a2 2 0 0 1-2 2C9.7 20.5 3.5 14.3 3 6a2 2 0 0 1 2-2Z"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></symbol>
+      <symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4.1A8 8 0 1 1 20 11.5Z"/><path d="M8.5 8.5c.7 3 2.1 4.4 5 5"/></symbol>
+      <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M4 6h14a2 2 0 0 1 2 2v10H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h12"/><path d="M15 11h6v4h-6a2 2 0 0 1 0-4Z"/></symbol>
+      <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></symbol>
+      <symbol id="i-alert" viewBox="0 0 24 24"><path d="m12 3 10 18H2Z"/><path d="M12 9v5M12 18h.01"/></symbol>
+      <symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></symbol>
+      <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="m15 9 5-5M16 4h4v4"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+      <symbol id="i-hourglass" viewBox="0 0 24 24"><path d="M7 3h10M7 21h10M8 3c0 4 1 6 4 9-3 3-4 5-4 9M16 3c0 4-1 6-4 9 3 3 4 5 4 9"/></symbol>
+      <symbol id="i-edit" viewBox="0 0 24 24"><path d="m4 16-1 5 5-1L19 9l-4-4Z"/><path d="m13 7 4 4"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></symbol>
+      <symbol id="i-camera" viewBox="0 0 24 24"><path d="M14.5 5 13 3h-2L9.5 5H6a3 3 0 0 0-3 3v9a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3Z"/><circle cx="12" cy="12.5" r="4"/></symbol>
+      <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></symbol>
+      <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></symbol>
+    </svg>
+
+    <a class="skip-link" href="#mainContent">Skip to main content</a>
+    <div class="app-shell pt-frame" id="appShell">
+      <aside class="sidebar pt-side" id="primarySidebar" aria-label="Primary navigation">
+        <div class="brand-row pt-side__top">
+          <a class="brand" id="brandHomeLink" href="#dashboard" aria-label="Paryatech dashboard">
+            <span class="pt-brand-mark">
+              <img class="brand-logo app-brand-logo app-brand-logo--full" src="assets/paryatech-lockup.png" alt="Paryatech" />
+              <img class="brand-mark app-brand-logo app-brand-logo--compact" src="assets/paryatech-mark.png" alt="" />
+            </span>
+            <span class="pt-brand-action"><svg class="brand-caret" aria-hidden="true"><use href="#i-chevron-down" /></svg></span>
+          </a>
+        </div>
+        <div class="pt-side__notes">
+          <div class="customer-notes-shortcut pt-notes" id="customerNotesShortcut">
+            <button class="customer-notes-shortcut-main pt-notes__main" id="customerNotesButton" type="button" aria-haspopup="dialog" aria-controls="customerNotesBackdrop" aria-expanded="false">
+              <svg aria-hidden="true"><use href="#i-file" /></svg>
+              <span id="customerNotesLabel">Module notes</span>
+              <span class="customer-notes-shortcut-count" id="customerNotesShortcutCount" hidden>0</span>
+            </button>
+            <button class="customer-notes-shortcut-add pt-notes__add" id="addCustomerNoteButton" type="button" aria-label="Write a note" aria-haspopup="dialog" aria-controls="customerNotesBackdrop"><svg aria-hidden="true"><use href="#i-plus" /></svg></button>
+          </div>
+        </div>
+
+        <div class="sidebar-scroll pt-side__scroll">
+          <nav class="nav-group pt-nav-group" aria-labelledby="workspaceLabel">
+            <p class="nav-label pt-nav-group__label" id="workspaceLabel">Workspace</p>
+            <a class="nav-item pt-nav-item" id="dashboardNavLink" href="#dashboard"><svg><use href="#i-dashboard" /></svg><span>Home</span></a>
+            <a class="nav-item pt-nav-item" id="inboxNavLink" href="#inbox" aria-label="All inbox"><svg><use href="#i-inbox" /></svg><span>All inbox</span></a>
+            <a class="nav-item pt-nav-item" href="#destinations"><svg><use href="#i-map-pin" /></svg><span>Destination</span></a>
+            <a class="nav-item pt-nav-item" href="#news"><svg><use href="#i-news" /></svg><span>News</span></a>
+            <a class="nav-item pt-nav-item" id="tasksNavLink" href="#tasks"><svg><use href="#i-tasks" /></svg><span>All tasks</span><span class="nav-count">4</span></a>
+          </nav>
+          <nav class="nav-group pt-nav-group" aria-labelledby="salesLabel">
+            <p class="nav-label pt-nav-group__label" id="salesLabel">Sales</p>
+            <a class="nav-item pt-nav-item" id="queryNavLink" href="#trip"><svg><use href="#i-file" /></svg><span>Queries</span></a>
+            <a class="nav-item pt-nav-item" href="#packages"><svg><use href="#i-package" /></svg><span>Packages</span></a>
+            <a class="nav-item pt-nav-item" href="#bookings"><svg><use href="#i-nav-bookings" /></svg><span>Bookings</span></a>
+          </nav>
+          <nav class="nav-group pt-nav-group" aria-labelledby="crmLabel">
+            <p class="nav-label pt-nav-group__label" id="crmLabel">CRM</p>
+            <a class="nav-item pt-nav-item" id="customersNavLink" href="#customers"><svg><use href="#i-nav-customer" /></svg><span>Customers</span></a>
+            <a class="nav-item pt-nav-item" href="#vendors"><svg><use href="#i-nav-vendor" /></svg><span>Vendors</span></a>
+          </nav>
+          <nav class="nav-group pt-nav-group" aria-labelledby="operationsLabel">
+            <p class="nav-label pt-nav-group__label" id="operationsLabel">Operations</p>
+            <a class="nav-item pt-nav-item" href="#finance"><svg><use href="#i-nav-finance" /></svg><span>All finances</span></a>
+            <a class="nav-item pt-nav-item" href="#team"><svg><use href="#i-team" /></svg><span>Team</span></a>
+            <a class="nav-item pt-nav-item" href="#automation"><svg><use href="#i-nav-automation" /></svg><span>Automations</span></a>
+            <a class="nav-item pt-nav-item" href="#reports"><svg><use href="#i-chart" /></svg><span>Reports</span></a>
+            <a class="nav-item pt-nav-item" href="#account"><svg><use href="#i-settings" /></svg><span>Settings</span></a>
+          </nav>
+        </div>
+
+        <div class="sidebar-footer pt-side__foot">
+          <div class="token-card pt-credits" aria-label="720 of 1,000 credits remaining">
+            <div><svg><use href="#i-token" /></svg><span>Credits</span></div>
+            <span>720 / 1,000</span>
+            <button class="button button-primary button-small token-upgrade" type="button" data-shell-action="Upgrade"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3.5c.55 3.1 2.35 4.9 5.5 5.5-3.15.6-4.95 2.4-5.5 5.5-.55-3.1-2.35-4.9-5.5-5.5C9.65 8.4 11.45 6.6 12 3.5Z" /><path d="M18.5 14.5c.28 1.55 1.2 2.47 2.75 2.75-1.55.28-2.47 1.2-2.75 2.75-.28-1.55-1.2-2.47-2.75-2.75 1.55-.28 2.47-1.2 2.75-2.75Z" /><path d="M5 14.5c.2 1.08.82 1.7 1.9 1.9-1.08.2-1.7.82-1.9 1.9-.2-1.08-.82-1.7-1.9-1.9 1.08-.2 1.7-.82 1.9-1.9Z" /></svg><span>Upgrade</span></button>
+            <span class="token-progress" aria-hidden="true"><span></span></span>
+          </div>
+          <button class="collapse-button pt-side-collapse" id="collapseButton" type="button" aria-label="Collapse navigation" aria-controls="primarySidebar" aria-expanded="true">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m11 7-5 5 5 5m7-10-5 5 5 5" /></svg><span class="collapse-icon-slot" aria-hidden="true"><img class="collapse-icon collapse-icon-collapse" src="assets/sidebar-collapse.svg" alt="" width="20" height="20" /><img class="collapse-icon collapse-icon-expand" src="assets/sidebar-expand.svg" alt="" width="20" height="20" /></span>
+            <span class="collapse-label collapse-label-collapse">Collapse</span>
+            <span class="collapse-label collapse-label-expand">Expand</span>
+          </button>
+        </div>
+      </aside>
+      <button class="sidebar-backdrop" id="sidebarBackdrop" type="button" aria-label="Close navigation" tabindex="-1"></button>
+
+      <section class="workspace-shell pt-workspace">
+        <header class="design-topbar pt-topbar" id="designTopbar">
+          <button class="topbar-back pt-icon-btn" id="shellBackButton" type="button" aria-label="Back to workspace" hidden><svg><use href="#i-chevron-left" /></svg></button>
+          <nav class="topbar-breadcrumbs pt-crumbs" aria-label="Breadcrumb">
+            <button class="topbar-crumb" id="shellBreadcrumbRoot" type="button">Workspace</button>
+            <span class="topbar-crumb-separator" aria-hidden="true">›</span>
+            <span class="topbar-crumb is-current" id="shellBreadcrumbCurrent" aria-current="page">Dashboard</span>
+            <span class="topbar-customer-crumb" id="shellCustomerCrumb" hidden>
+              <span class="topbar-crumb-separator" aria-hidden="true">›</span>
+              <button class="topbar-crumb" id="shellBreadcrumbCustomer" type="button"></button>
+            </span>
+            <span class="topbar-detail-crumb" id="shellDetailCrumb" hidden>
+              <span class="topbar-crumb-separator" aria-hidden="true">›</span>
+              <span class="topbar-crumb is-current" id="shellBreadcrumbDetail"></span>
+            </span>
+          </nav>
+          <div class="topbar-actions pt-topbar__actions">
+            <div class="app-top-actions">
+              <button class="topbar-search app-top-search" id="shellSearchLabel" type="button" aria-haspopup="dialog" aria-controls="globalSearchDialog">
+                <svg aria-hidden="true"><use href="#i-search" /></svg>
+                <span>Search anything</span>
+                <kbd><span class="search-modifier">Ctrl</span> K</kbd>
+                <input class="sr-only" id="shellSearch" type="search" tabindex="-1" aria-hidden="true" hidden />
+              </button>
+              <button class="topbar-icon-button pt-icon-btn app-top-util" id="shellHelpButton" type="button" data-shell-action="Help" aria-label="Help and support"><svg><use href="#i-info" /></svg></button>
+              <button class="topbar-icon-button pt-icon-btn app-top-util has-alert" id="shellNotificationsButton" type="button" aria-label="Notifications" aria-haspopup="dialog" aria-controls="notificationCenter" aria-expanded="false"><svg><use href="#i-bell" /></svg></button>
+              <button class="topbar-account account-btn" id="shellAccountButton" type="button" aria-label="Open account menu" aria-haspopup="menu" aria-controls="accountMenu" aria-expanded="false">
+                <span>RC</span>
+                <strong>Rishi</strong>
+                <svg aria-hidden="true"><use href="#i-chevron-down" /></svg>
+              </button>
+            </div>
+          </div>
+        </header>
+
+      <main class="main-content" id="mainContent">
+        <section class="view inbox-view" id="inboxView" aria-labelledby="inboxTitle" hidden>
+          <div class="inbox-shell">
+            <aside class="inbox-list-panel" aria-label="Conversations">
+              <header class="inbox-list-header">
+                <div class="inbox-title-row">
+                  <button class="shell-icon mobile-nav-button" id="inboxMobileNavButton" type="button" aria-label="Open navigation" aria-controls="primarySidebar" aria-expanded="false"><svg><use href="#i-menu" /></svg></button>
+                  <h1 id="inboxTitle">All inbox</h1>
+                  <span class="inbox-title-unread" id="inboxHeaderUnread" hidden>0</span>
+                </div>
+                <button class="button button-primary inbox-create-button" id="inboxCreateButton" type="button"><svg><use href="#i-plus" /></svg>Add conversation</button>
+              </header>
+              <div class="inbox-list-tools">
+                <label class="inbox-search">
+                  <span class="sr-only">Search conversations</span>
+                  <svg><use href="#i-search" /></svg>
+                  <input id="inboxSearch" type="search" placeholder="Search" autocomplete="off" />
+                </label>
+              </div>
+              <div class="inbox-filter-tabs" id="inboxFilterTabs" role="tablist" aria-label="Filter conversations">
+                <button class="is-active" type="button" role="tab" aria-selected="true" data-inbox-filter="all">All</button>
+                <button type="button" role="tab" aria-selected="false" data-inbox-filter="read">Read</button>
+                <button type="button" role="tab" aria-selected="false" data-inbox-filter="unread">Unread</button>
+                <button type="button" role="tab" aria-selected="false" data-inbox-filter="attachments">With attachments</button>
+              </div>
+              <div class="inbox-conversation-list" id="inboxConversationList"></div>
+            </aside>
+            <section class="inbox-thread-panel" id="inboxThreadPanel" aria-live="polite"></section>
+          </div>
+        </section>
+
+        <section class="view dashboard-view" id="dashboardView" aria-labelledby="dashboardTitle" hidden data-home-density="normal" data-home-mode="returning">
+          <div class="dashboard-density-row">
+            <div class="query-layout-toggle dashboard-density-toggle" role="group" aria-label="Home detail level">
+              <button class="is-active" type="button" id="dashboardDensityNormal" data-home-density="normal" aria-pressed="true">Normal</button>
+              <button type="button" id="dashboardDensityAdvance" data-home-density="advance" aria-pressed="false">Advanced</button>
+            </div>
+          </div>
+          <header class="dashboard-hero dashboard-hero-home">
+            <button class="shell-icon mobile-nav-button dashboard-mobile-nav" id="dashboardMobileNavButton" type="button" aria-label="Open navigation" aria-controls="primarySidebar" aria-expanded="false"><svg><use href="#i-menu" /></svg></button>
+            <div class="dashboard-greeting">
+              <time id="dashboardTimestamp" datetime="2026-08-13T15:26">Thursday · 13 August · 3:26 PM</time>
+              <h1 id="dashboardTitle">Good afternoon, Rishi</h1>
+            </div>
+            <div class="dashboard-hero-actions" id="dashboardHeroActions">
+              <button class="button button-secondary" id="dashboardNewCustomer" type="button"><svg><use href="#i-users" /></svg>Add customer</button>
+              <button class="button button-secondary" id="dashboardNewVendor" type="button"><svg><use href="#i-vendor" /></svg>Add vendor</button>
+              <button class="button button-primary" id="dashboardNewQuery" type="button"><svg><use href="#i-plus" /></svg>Add query</button>
+            </div>
+          </header>
+
+          <div class="dashboard-home-normal" id="dashboardHomeNormal">
+            <section class="dashboard-primary-grid home-simple-grid" aria-label="Workspace modules">
+              <article class="dashboard-panel home-module-card">
+                <header class="dashboard-panel-header"><h2>Active queries</h2><button type="button" data-dashboard-action="Queries">View all</button></header>
+                <div class="home-module-body">
+                  <strong class="home-module-value" id="homeQueriesValue">12</strong>
+                  <p class="home-module-primary" id="homeQueriesPrimary">Live enquiries in your pipeline</p>
+                  <p class="home-module-breakdown" id="homeQueriesBreakdown">2 sent · 3 in negotiation · 1 follow-up due</p>
+                  <span class="home-meter" aria-hidden="true"><span style="width:58%"></span></span>
+                </div>
+                <footer class="home-module-foot"><button class="button button-secondary button-small" type="button" data-dashboard-action="Queries">Open queries</button></footer>
+              </article>
+              <article class="dashboard-panel home-module-card">
+                <header class="dashboard-panel-header"><h2>Inbox</h2><button type="button" data-dashboard-action="Inbox">View all</button></header>
+                <div class="home-module-body">
+                  <strong class="home-module-value" id="homeInboxValue">18</strong>
+                  <p class="home-module-primary" id="homeInboxPrimary">Messages waiting in your inbox</p>
+                  <p class="home-module-breakdown" id="homeInboxBreakdown">4 unread · 2 from customers · 1 from supplier</p>
+                  <span class="home-meter" aria-hidden="true"><span style="width:42%"></span></span>
+                </div>
+                <footer class="home-module-foot"><button class="button button-secondary button-small" type="button" data-dashboard-action="Inbox">Open inbox</button></footer>
+              </article>
+              <article class="dashboard-panel home-module-card">
+                <header class="dashboard-panel-header"><h2>Bookings</h2><button type="button" data-dashboard-action="Bookings">View all</button></header>
+                <div class="home-module-body">
+                  <strong class="home-module-value" id="homeBookingsValue">9</strong>
+                  <p class="home-module-primary" id="homeBookingsPrimary">Confirmed trips in the next 30 days</p>
+                  <p class="home-module-breakdown" id="homeBookingsBreakdown">1 at risk · ₹84K payment pending · 2 departing soon</p>
+                  <span class="home-meter" aria-hidden="true"><span style="width:67%"></span></span>
+                </div>
+                <footer class="home-module-foot"><button class="button button-secondary button-small" type="button" data-dashboard-action="Bookings">Open bookings</button></footer>
+              </article>
+              <article class="dashboard-panel home-module-card">
+                <header class="dashboard-panel-header"><h2>Tasks</h2><button type="button" data-dashboard-action="Tasks">View all</button></header>
+                <div class="home-module-body">
+                  <strong class="home-module-value" id="homeTasksValue">11</strong>
+                  <p class="home-module-primary" id="homeTasksPrimary">Open tasks across the team</p>
+                  <p class="home-module-breakdown" id="homeTasksBreakdown">3 overdue · 2 due today · assigned to 4 members</p>
+                  <span class="home-meter" aria-hidden="true"><span style="width:49%"></span></span>
+                </div>
+                <footer class="home-module-foot"><button class="button button-secondary button-small" type="button" data-dashboard-action="Tasks">Open tasks</button></footer>
+              </article>
+            </section>
+            <div class="query-empty-state home-new-empty" id="dashboardNewEmptyNormal" hidden>
+              <span><svg><use href="#i-file" /></svg></span>
+              <h2>No workspace activity yet</h2>
+              <p>Create your first enquiry to begin. Queries, inbox, bookings and tasks will collect here.</p>
+              <button class="button button-primary button-small" id="dashboardNewEmptyCreate" type="button"><svg><use href="#i-plus" /></svg>Add query</button>
+            </div>
+          </div>
+
+          <div class="dashboard-home-advance" id="dashboardHomeAdvance" hidden>
+            <section class="dashboard-kpis" aria-label="Dashboard key performance indicators">
+              <article class="dashboard-kpi">
+                <span class="dashboard-kpi-icon" aria-hidden="true"><svg><use href="#i-alert" /></svg></span>
+                <div class="dashboard-kpi-content"><span class="dashboard-kpi-label">At-risk bookings</span><strong id="dashboardAtRiskValue">2</strong></div>
+              </article>
+              <article class="dashboard-kpi">
+                <span class="dashboard-kpi-icon" aria-hidden="true"><svg><use href="#i-clock" /></svg></span>
+                <div class="dashboard-kpi-content"><span class="dashboard-kpi-label">Payment due</span><strong id="dashboardPaymentValue">₹2.28L</strong></div>
+              </article>
+              <article class="dashboard-kpi">
+                <span class="dashboard-kpi-icon" aria-hidden="true"><svg><use href="#i-file" /></svg></span>
+                <div class="dashboard-kpi-content"><span class="dashboard-kpi-label">Queries needing action</span><strong id="dashboardQueryValue">7</strong></div>
+              </article>
+              <article class="dashboard-kpi">
+                <span class="dashboard-kpi-icon" aria-hidden="true"><svg><use href="#i-booking" /></svg></span>
+                <div class="dashboard-kpi-content"><span class="dashboard-kpi-label">Booking value</span><strong id="dashboardBookingValue">₹18.40L</strong></div>
+              </article>
+            </section>
+
+            <section class="dashboard-primary-grid home-advance-grid-2" aria-label="Open queries and bookings">
+              <article class="dashboard-panel">
+                <header class="dashboard-panel-header"><h2>Open queries</h2><button type="button" data-dashboard-action="Queries">View all</button></header>
+                <div class="query-table-scroller home-table-scroller">
+                  <table class="query-table home-table">
+                    <thead><tr><th>Customer / trip</th><th>Status</th><th>Value</th><th class="col-action">Action</th></tr></thead>
+                    <tbody id="homeQueriesTableBody">
+                      <tr><td><span class="query-table-name"><strong>Patel Group</strong><small>Rajasthan Circuit · Q-1831</small><small>Proposal · Rahul</small></span></td><td><span class="dashboard-status status-alert">Overdue</span></td><td><span class="query-table-value">₹6.40L</span></td><td><button class="button button-primary button-small" type="button" data-dashboard-action="Patel Group query">Open</button></td></tr>
+                      <tr><td><span class="query-table-name"><strong>Mehta Honeymoon</strong><small>Bali Escape · Q-1819</small><small>New · Unassigned</small></span></td><td><span class="dashboard-status status-task">New</span></td><td><span class="query-table-value">₹3.10L</span></td><td><button class="button button-secondary button-small" type="button" data-dashboard-action="Mehta query assign">Assign</button></td></tr>
+                      <tr><td><span class="query-table-name"><strong>Kapoor Family</strong><small>Kerala Backwaters · Q-1828</small><small>Quoted · Priya</small></span></td><td><span class="dashboard-status status-proposal">Expiring</span></td><td><span class="query-table-value">₹2.80L</span></td><td><button class="button button-secondary button-small" type="button" data-dashboard-action="Kapoor Family query">Open</button></td></tr>
+                      <tr><td><span class="query-table-name"><strong>Jain Family</strong><small>Shimla Package · Q-1842</small><small>Negotiation · Priya</small></span></td><td><span class="dashboard-status status-proposal">In nego</span></td><td><span class="query-table-value">₹4.20L</span></td><td><button class="button button-secondary button-small" type="button" data-dashboard-action="Jain Family query">Open</button></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="query-empty-state home-table-empty" id="homeQueriesEmpty" hidden>
+                  <span><svg><use href="#i-file" /></svg></span>
+                  <h2>No open queries yet</h2>
+                  <p>New enquiries will appear here.</p>
+                </div>
+              </article>
+              <article class="dashboard-panel">
+                <header class="dashboard-panel-header"><h2>Bookings</h2><button type="button" data-dashboard-action="Bookings">View all</button></header>
+                <div class="query-table-scroller home-table-scroller">
+                  <table class="query-table home-table">
+                    <thead><tr><th>Trip / window</th><th>Risk / payment</th><th>Amount</th><th class="col-action">Action</th></tr></thead>
+                    <tbody id="homeBookingsTableBody">
+                      <tr><td><span class="query-table-name"><strong>Tripura Trip</strong><small>Jain Family · BK-9021</small><small>Departs today</small></span></td><td><span class="dashboard-status status-alert">Voucher blocked</span></td><td><span class="query-table-value">₹1.85L</span></td><td><button class="button button-primary button-small" type="button" data-dashboard-action="Tripura Trip booking">Review</button></td></tr>
+                      <tr><td><span class="query-table-name"><strong>Goa Weekend</strong><small>Shah Family · BK-9014</small><small>12–15 Aug</small></span></td><td><span class="dashboard-status status-proposal">₹84K pending</span></td><td><span class="query-table-value">₹2.40L</span></td><td><button class="button button-secondary button-small" type="button" data-dashboard-action="Goa Weekend reminder">Remind</button></td></tr>
+                      <tr><td><span class="query-table-name"><strong>Shimla Package</strong><small>Mehta Group · BK-9002</small><small>Departs in 5d</small></span></td><td><span class="dashboard-status status-proposal">Passport missing</span></td><td><span class="query-table-value">₹1.20L</span></td><td><button class="button button-secondary button-small" type="button" data-dashboard-action="Shimla document request">Request</button></td></tr>
+                      <tr><td><span class="query-table-name"><strong>Kerala Backwaters</strong><small>Patel Group · BK-9008</small><small>20–26 Aug</small></span></td><td><span class="dashboard-status status-task">Confirmed</span></td><td><span class="query-table-value">₹5.10L</span></td><td><button class="button button-secondary button-small" type="button" data-dashboard-action="Kerala booking">Open</button></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="query-empty-state home-table-empty" id="homeBookingsEmpty" hidden>
+                  <span><svg><use href="#i-booking" /></svg></span>
+                  <h2>No bookings yet</h2>
+                  <p>Confirmed trips will show here.</p>
+                </div>
+              </article>
+            </section>
+
+            <section class="dashboard-primary-grid home-advance-grid-3" aria-label="Tasks, follow-ups and notes">
+              <article class="dashboard-panel">
+                <header class="dashboard-panel-header"><h2>Tasks</h2><button type="button" data-dashboard-action="Tasks">View all</button></header>
+                <ol class="dashboard-focus-list" id="homeTasksList">
+                  <li><span class="dashboard-status status-alert">Overdue</span><button type="button" data-dashboard-action="Chase hotel voucher">TK-88 · Chase hotel voucher</button><time>Tripura Trip</time></li>
+                  <li><span class="dashboard-status status-alert">Blocked</span><button type="button" data-dashboard-action="Send revised proposal">TK-76 · Send revised proposal</button><time>Patel Group</time></li>
+                  <li><span class="dashboard-status status-payment">Due today</span><button type="button" data-dashboard-action="Collect balance payment">TK-84 · Collect balance payment</button><time>Goa Weekend</time></li>
+                  <li><span class="dashboard-status status-task">Tue</span><button type="button" data-dashboard-action="Request passports">TK-79 · Request passports</button><time>Shimla Package</time></li>
+                </ol>
+                <div class="query-empty-state home-table-empty" id="homeTasksEmpty" hidden>
+                  <span><svg><use href="#i-tasks" /></svg></span>
+                  <h2>No tasks yet</h2>
+                  <p>Open and overdue tasks will land here.</p>
+                </div>
+              </article>
+              <article class="dashboard-panel">
+                <header class="dashboard-panel-header"><h2>Follow-ups</h2><button type="button" data-dashboard-action="Queries">View all</button></header>
+                <ol class="dashboard-focus-list" id="homeFollowupsList">
+                  <li><span class="dashboard-status status-alert">Overdue</span><button type="button" data-dashboard-action="Patel Group follow-up">FU-09 · Patel Group · Rajasthan</button><time>₹6.40L proposal</time></li>
+                  <li><span class="dashboard-status status-task">Due today</span><button type="button" data-dashboard-action="Jain Family follow-up">FU-12 · Jain Family · Shimla</button><time>16:00 IST</time></li>
+                  <li><span class="dashboard-status status-proposal">Expiring</span><button type="button" data-dashboard-action="Kapoor Family follow-up">FU-07 · Kapoor Family · Kerala</button><time>Expires in 2 days</time></li>
+                </ol>
+                <div class="query-empty-state home-table-empty" id="homeFollowupsEmpty" hidden>
+                  <span><svg><use href="#i-clock" /></svg></span>
+                  <h2>No follow-ups yet</h2>
+                  <p>Scheduled customer follow-ups will show here.</p>
+                </div>
+              </article>
+              <article class="dashboard-panel">
+                <header class="dashboard-panel-header"><h2>Notes</h2><button type="button" data-dashboard-action="Notes">View all</button></header>
+                <ol class="dashboard-focus-list home-notes-list" id="homeNotesList">
+                  <li><span class="dashboard-status status-task">2h ago</span><button type="button" data-dashboard-action="Coral Bay note">Coral Bay holding Bali rates until Friday EOD</button><time>Mehta honeymoon</time></li>
+                  <li><span class="dashboard-status status-task">Yesterday</span><button type="button" data-dashboard-action="Shah Family note">Shah Family prefer evening airport pickup</button><time>No early check-in</time></li>
+                  <li><span class="dashboard-status status-task">2d ago</span><button type="button" data-dashboard-action="Shimla passports note">Shimla passports must be chased before Tuesday</button><time>Departure risk</time></li>
+                </ol>
+                <form class="home-notes-compose" id="homeNotesCompose">
+                  <label class="sr-only" for="homeNoteInput">New note</label>
+                  <input class="home-notes-input" id="homeNoteInput" type="text" placeholder="Write a note…" autocomplete="off" />
+                  <button class="button button-secondary button-small" type="submit">Save note</button>
+                </form>
+              </article>
+            </section>
+          </div>
+        </section>
+
+        <section class="view queries-view" id="queriesView" aria-labelledby="queriesTitle" hidden>
+          <header class="queries-header">
+            <div class="queries-heading">
+              <button class="shell-icon mobile-nav-button" id="queriesMobileNavButton" type="button" aria-label="Open navigation" aria-controls="primarySidebar" aria-expanded="false"><svg><use href="#i-menu" /></svg></button>
+              <h1 id="queriesTitle">Queries</h1>
+            </div>
+            <div class="queries-header-actions">
+              <button class="button button-ghost button-icon" id="queriesRefreshButton" type="button" aria-label="Refresh"><svg><use href="#i-refresh" /></svg></button>
+              <button class="button button-primary" id="createQueryButton" type="button"><svg><use href="#i-plus" /></svg>Add query</button>
+            </div>
+          </header>
+
+          <section class="queries-control-panel" aria-label="Query views and filters">
+            <div class="query-category-tabs" role="tablist" aria-label="Query category">
+              <button class="is-active" type="button" role="tab" aria-selected="true" data-query-category="Trip"><img src="assets/query-trip.svg" alt="" />Trip <span class="category-tab-count">4</span></button>
+              <button type="button" role="tab" aria-selected="false" data-query-category="Flight"><img src="assets/query-flight.svg" alt="" />Flight <span class="category-tab-count">3</span></button>
+              <button type="button" role="tab" aria-selected="false" data-query-category="Accommodation"><img src="assets/query-accommodation.svg" alt="" />Accommodation <span class="category-tab-count">3</span></button>
+              <button type="button" role="tab" aria-selected="false" data-query-category="Visa"><img src="assets/query-visa.svg" alt="" />Visa <span class="category-tab-count">3</span></button>
+              <button type="button" role="tab" aria-selected="false" data-query-category="Cruise"><img src="assets/query-cruise.svg" alt="" />Cruise <span class="category-tab-count">3</span></button>
+              <button type="button" role="tab" aria-selected="false" data-query-category="Transport"><img src="assets/query-transport.svg" alt="" />Transport <span class="category-tab-count">3</span></button>
+            </div>
+            <div class="queries-control-topline">
+              <div class="filter-anchor query-filter-anchor">
+                <label class="search-field queries-search" for="queriesSearch">
+                  <svg><use href="#i-search" /></svg>
+                  <input id="queriesSearch" type="search" aria-label="Search queries" placeholder="Search queries or customers" autocomplete="off" />
+                </label>
+                <button class="search-filter" id="queriesFilterButton" type="button" aria-label="Filter queries" aria-controls="queriesFilterPopover" aria-expanded="false"><svg><use href="#i-sliders" /></svg><span class="filter-button-label">Filters</span></button>
+                <section class="filter-popover query-filter-popover" id="queriesFilterPopover" aria-labelledby="queriesFilterTitle" hidden>
+                  <h2 id="queriesFilterTitle">Select Filters</h2>
+                  <div class="filter-select">
+                    <button class="filter-select-button" id="queryScopeButton" type="button" aria-expanded="false" aria-controls="queryScopeOptions"><span id="queryScopeValue">Mine</span><svg><use href="#i-chevron-down" /></svg></button>
+                    <div class="filter-options" id="queryScopeOptions" role="listbox" aria-label="Show" hidden>
+                      <button type="button" role="option" aria-selected="true" data-query-option="scope" data-value="mine">Mine<span></span></button>
+                      <button type="button" role="option" aria-selected="false" data-query-option="scope" data-value="all">All<span></span></button>
+                    </div>
+                  </div>
+                  <div class="filter-select">
+                    <button class="filter-select-button" id="queryPriorityButton" type="button" aria-expanded="false" aria-controls="queryPriorityOptions"><span id="queryPriorityValue">Priority</span><svg><use href="#i-chevron-down" /></svg></button>
+                    <div class="filter-options" id="queryPriorityOptions" role="listbox" aria-label="Priority" hidden>
+                      <button type="button" role="option" aria-selected="false" data-query-option="priority" data-value="High">High<span></span></button>
+                      <button type="button" role="option" aria-selected="false" data-query-option="priority" data-value="Medium">Medium<span></span></button>
+                      <button type="button" role="option" aria-selected="false" data-query-option="priority" data-value="Low">Low<span></span></button>
+                    </div>
+                  </div>
+                  <div class="filter-select">
+                    <button class="filter-select-button" id="queryPendingButton" type="button" aria-expanded="false" aria-controls="queryPendingOptions"><span id="queryPendingValue">Pending on</span><svg><use href="#i-chevron-down" /></svg></button>
+                    <div class="filter-options" id="queryPendingOptions" role="listbox" aria-label="Pending on" hidden>
+                      <button type="button" role="option" aria-selected="false" data-query-option="pendingOn" data-value="Us">Us<span></span></button>
+                      <button type="button" role="option" aria-selected="false" data-query-option="pendingOn" data-value="Customer">Customer<span></span></button>
+                      <button type="button" role="option" aria-selected="false" data-query-option="pendingOn" data-value="Vendor">Vendor<span></span></button>
+                    </div>
+                  </div>
+                  <div class="filter-select">
+                    <button class="filter-select-button" id="queryTierButton" type="button" aria-expanded="false" aria-controls="queryTierOptions"><span id="queryTierValue">Customer tier</span><svg><use href="#i-chevron-down" /></svg></button>
+                    <div class="filter-options" id="queryTierOptions" role="listbox" aria-label="Customer tier" hidden>
+                      <button type="button" role="option" aria-selected="false" data-query-option="tier" data-value="Gold">Gold<span></span></button>
+                      <button type="button" role="option" aria-selected="false" data-query-option="tier" data-value="Silver">Silver<span></span></button>
+                      <button type="button" role="option" aria-selected="false" data-query-option="tier" data-value="Bronze">Bronze<span></span></button>
+                    </div>
+                  </div>
+                  <footer class="filter-actions"><button class="button button-secondary" id="clearQueryFilters" type="button">Clear</button><button class="button button-primary" id="applyQueryFilters" type="button" disabled>Apply</button></footer>
+                </section>
+              </div>
+              <div class="query-layout-toggle" role="group" aria-label="Query layout">
+                <button class="is-active" type="button" data-query-layout="kanban" aria-label="Kanban view" aria-pressed="true"><svg><use href="#i-kanban" /></svg></button>
+                <button type="button" data-query-layout="list" aria-label="List view" aria-pressed="false"><svg><use href="#i-list" /></svg></button>
+              </div>
+            </div>
+          </section>
+
+          <section class="query-workspace" aria-live="polite">
+            <div class="query-kanban-shell" id="queryKanbanShell">
+              <div class="query-kanban" id="queryKanban"></div>
+            </div>
+            <section class="query-list-shell" id="queryListShell" hidden>
+              <div class="query-status-tabs" id="queryStatusTabs" role="tablist" aria-label="Query status">
+                <button class="is-active" type="button" role="tab" aria-selected="true" data-query-status="All">All statuses</button>
+                <button type="button" role="tab" aria-selected="false" data-query-status="Unassigned">Unassigned</button>
+                <button type="button" role="tab" aria-selected="false" data-query-status="New">New</button>
+                <button type="button" role="tab" aria-selected="false" data-query-status="Quoting">Quoting</button>
+                <button type="button" role="tab" aria-selected="false" data-query-status="Negotiation">Negotiation</button>
+                <button type="button" role="tab" aria-selected="false" data-query-status="Won">Won</button>
+                <button type="button" role="tab" aria-selected="false" data-query-status="Lost">Lost</button>
+              </div>
+              <p class="table-scroll-hint">Scroll horizontally to see all columns <span aria-hidden="true">→</span></p>
+              <div class="query-table-scroller">
+                <table class="query-table">
+                  <thead><tr><th id="queryNameHeading">Trip name</th><th>Priority</th><th>Pending on</th><th id="queryValueHeading">Trip value</th><th>Activity</th><th class="col-action">Action</th></tr></thead>
+                  <tbody id="queryListBody"></tbody>
+                </table>
+              </div>
+              <footer class="pagination" id="queryListPagination" aria-label="Query list pagination"></footer>
+            </section>
+            <div class="query-empty-state" id="queryEmptyState" hidden>
+              <span><svg><use href="#i-file" /></svg></span>
+              <h2 id="queryEmptyTitle">No queries yet</h2>
+              <p>Create a query to start collecting requirements.</p>
+              <button class="button button-primary button-small" id="queryEmptyCreate" type="button"><svg><use href="#i-plus" /></svg>Add query</button>
+            </div>
+          </section>
+        </section>
+
+        <section class="view query-detail-view" id="queryDetailView" aria-labelledby="queryDetailTitle" hidden>
+          <div id="queryDetailContent"></div>
+        </section>
+
+        <section class="view tasks-view" id="tasksView" aria-labelledby="tasksTitle" hidden>
+          <header class="tasks-header">
+            <div class="tasks-heading">
+              <button class="shell-icon mobile-nav-button" id="tasksMobileNavButton" type="button" aria-label="Open navigation" aria-controls="primarySidebar" aria-expanded="false"><svg><use href="#i-menu" /></svg></button>
+              <h1 id="tasksTitle">All tasks</h1>
+            </div>
+            <div class="tasks-header-actions">
+              <button class="button button-ghost button-icon" id="tasksRefreshButton" type="button" aria-label="Refresh"><svg><use href="#i-refresh" /></svg></button>
+              <button class="button button-primary" id="newTaskButton" type="button"><svg><use href="#i-plus" /></svg>Add task</button>
+            </div>
+          </header>
+
+          <section class="tasks-control-panel" aria-label="Task views and filters">
+            <div class="tasks-tabs" role="tablist" aria-label="Task category">
+              <button class="tasks-tab is-active" type="button" role="tab" aria-selected="true" data-task-view="inbox"><svg><use href="#i-inbox" /></svg>My Inbox <span class="category-tab-count">0</span></button>
+              <button class="tasks-tab" type="button" role="tab" aria-selected="false" data-task-view="team"><svg><use href="#i-team" /></svg>Team <span class="category-tab-count">0</span></button>
+              <button class="tasks-tab" type="button" role="tab" aria-selected="false" data-task-view="overdue"><svg><use href="#i-alert" /></svg>Overdue <span class="category-tab-count">0</span></button>
+              <button class="tasks-tab" type="button" role="tab" aria-selected="false" data-task-view="completed"><svg><use href="#i-check" /></svg>Completed <span class="category-tab-count">0</span></button>
+              <button class="tasks-tab" type="button" role="tab" aria-selected="false" data-task-view="followups"><svg><use href="#i-clock" /></svg>Follow-ups <span class="category-tab-count">0</span></button>
+            </div>
+            <div class="tasks-control-topline">
+              <span class="sr-only" id="tasksResultCount">0 tasks</span>
+              <div class="filter-anchor task-filter-anchor">
+                <label class="search-field tasks-search" for="tasksSearch">
+                  <svg><use href="#i-search" /></svg>
+                  <input id="tasksSearch" type="search" aria-label="Search tasks" placeholder="Search tasks or related records" autocomplete="off" />
+                </label>
+                <button class="search-filter" id="tasksFilterButton" type="button" aria-label="Filter tasks" aria-controls="tasksFilterPopover" aria-expanded="false"><svg><use href="#i-sliders" /></svg><span class="filter-button-label">Filters</span></button>
+                <section class="filter-popover task-filter-popover" id="tasksFilterPopover" aria-labelledby="tasksFilterTitle" hidden>
+                  <h2 id="tasksFilterTitle">Select Filters</h2>
+                  <div class="task-filter-fields">
+                    <label class="field task-filter-select"><span class="sr-only">Priority</span><select id="tasksPriorityFilter" aria-label="Priority"><option value="all">Priority</option><option>High</option><option>Medium</option><option>Low</option></select></label>
+                    <label class="field task-filter-select"><span class="sr-only">Related entity</span><select id="tasksEntityFilter" aria-label="Related entity"><option value="all">Related entity</option><option>Booking</option><option>Query</option><option>Customer</option><option>Vendor</option></select></label>
+                    <label class="field task-filter-select"><span class="sr-only">Assignee</span><select id="tasksAssigneeFilter" aria-label="Assignee"><option value="all">Assignee</option><option>Rishi Charan</option><option>Kumar Iyer</option><option>Meera Shah</option><option>Vikram Soni</option><option>Unassigned</option></select></label>
+                    <label class="field task-filter-select"><span class="sr-only">Order</span><select id="tasksSort" aria-label="Order"><option value="created-desc">Created: newest</option><option value="created-asc">Created: oldest</option><option value="due-asc">Due: soonest</option><option value="due-desc">Due: latest</option><option value="priority-desc">Priority: highest</option><option value="priority-asc">Priority: lowest</option></select></label>
+                    <div class="field-grid task-filter-date-grid">
+                      <label class="field"><span>Due from</span><input id="tasksDateFrom" type="date" /></label>
+                      <label class="field"><span>Due to</span><input id="tasksDateTo" type="date" /></label>
+                    </div>
+                  </div>
+                  <footer class="filter-actions"><button class="button button-secondary" id="clearTaskFilters" type="button">Clear</button><button class="button button-primary" id="applyTaskFilters" type="button" disabled>Apply</button></footer>
+                </section>
+              </div>
+              <div class="query-layout-toggle" role="group" aria-label="Task layout">
+                <button class="is-active" type="button" data-task-layout="kanban" aria-label="Kanban view" aria-pressed="true"><svg><use href="#i-kanban" /></svg></button>
+                <button type="button" data-task-layout="list" aria-label="List view" aria-pressed="false"><svg><use href="#i-list" /></svg></button>
+              </div>
+            </div>
+          </section>
+
+          <section class="task-workspace" aria-live="polite">
+            <div class="task-board-shell" id="taskBoardShell" aria-label="Task status board">
+              <div class="task-board" id="taskBoard"></div>
+            </div>
+            <section class="query-list-shell task-list-shell" id="taskListShell" hidden>
+              <div class="query-status-tabs task-status-tabs" id="taskStatusTabs" role="tablist" aria-label="Task status">
+                <button class="is-active" type="button" role="tab" aria-selected="true" data-task-status-tab="All">All statuses</button>
+                <button type="button" role="tab" aria-selected="false" data-task-status-tab="Backlog">Backlog</button>
+                <button type="button" role="tab" aria-selected="false" data-task-status-tab="Open">Open</button>
+                <button type="button" role="tab" aria-selected="false" data-task-status-tab="In Progress">In Progress</button>
+                <button type="button" role="tab" aria-selected="false" data-task-status-tab="Blocked">Blocked</button>
+                <button type="button" role="tab" aria-selected="false" data-task-status-tab="Done">Done</button>
+                <button type="button" role="tab" aria-selected="false" data-task-status-tab="Cancelled">Cancelled</button>
+              </div>
+              <p class="table-scroll-hint">Scroll horizontally to see all columns <span aria-hidden="true">→</span></p>
+              <div class="query-table-scroller">
+                <table class="query-table task-table">
+                  <thead><tr><th>Task name</th><th>Priority</th><th>Related entity</th><th>Due</th><th>Activity</th><th class="col-action">Action</th></tr></thead>
+                  <tbody id="taskListBody"></tbody>
+                </table>
+              </div>
+              <footer class="pagination" id="taskListPagination" aria-label="Task list pagination"></footer>
+            </section>
+            <div class="tasks-empty-state" id="tasksEmptyState" hidden>
+              <span><svg><use href="#i-tasks" /></svg></span>
+              <h2>No tasks match this view</h2>
+              <p>Clear the filters or create a new task for this category.</p>
+              <button class="button button-primary button-small" id="tasksEmptyCreate" type="button"><svg><use href="#i-plus" /></svg>Add task</button>
+            </div>
+          </section>
+          <p class="sr-only" id="taskBoardAnnouncement" aria-live="polite"></p>
+        </section>
+
+        <section class="view" id="customerListView" aria-labelledby="customersTitle">
+          <div class="page-header">
+            <div class="page-title-row">
+              <button class="shell-icon mobile-nav-button" id="mobileNavButton" type="button" aria-label="Open navigation" aria-controls="primarySidebar" aria-expanded="false"><svg><use href="#i-menu" /></svg></button>
+              <h1 id="customersTitle">Customers</h1>
+            </div>
+            <div class="header-actions">
+              <button class="button button-ghost button-icon" id="refreshButton" type="button" aria-label="Refresh"><svg><use href="#i-refresh" /></svg></button>
+              <button class="button button-secondary" id="importButton" type="button"><svg><use href="#i-download" /></svg>Import</button>
+              <button class="button button-secondary" id="documentVaultButton" type="button"><svg><use href="#i-file" /></svg>Document vault</button>
+              <button class="button button-primary" id="createButton" type="button"><svg><use href="#i-plus" /></svg>Add customer</button>
+            </div>
+          </div>
+
+          <section class="customer-controls" aria-label="Customer filters">
+            <div class="control-topline customer-search-topline">
+              <div class="filter-anchor customer-search-anchor">
+                <label class="search-field customer-search" for="customerSearch">
+                  <svg><use href="#i-search" /></svg>
+                  <input id="customerSearch" type="search" placeholder="Search customers" autocomplete="off" aria-label="Search customers" />
+                </label>
+                <label class="customer-location-search" for="customerLocationSearch">
+                  <svg aria-hidden="true"><use href="#i-map-pin" /></svg>
+                  <input id="customerLocationSearch" type="search" placeholder="Location" aria-label="Search customer locations" autocomplete="off" />
+                </label>
+                <button class="search-filter" id="filterButton" type="button" aria-label="Customer filters" aria-expanded="false" aria-controls="filterPopover"><svg><use href="#i-sliders" /></svg><span class="filter-button-label">Filters</span></button>
+                <section class="filter-popover customer-filter-popover" id="filterPopover" role="dialog" aria-labelledby="filterTitle" hidden>
+                  <div class="customer-filter-head">
+                    <div><h2 id="filterTitle">Filters</h2></div>
+                    <button id="clearCustomerFilters" type="button" hidden>Clear all</button>
+                  </div>
+                  <fieldset class="customer-filter-group">
+                    <legend>Tier</legend>
+                    <div id="tierFilterOptions"></div>
+                  </fieldset>
+                  <fieldset class="customer-filter-group">
+                    <legend>Group type</legend>
+                    <div id="groupFilterOptions">
+                      <label class="customer-filter-option"><input type="checkbox" data-group-value="Family" /><span>Family</span></label>
+                      <label class="customer-filter-option"><input type="checkbox" data-group-value="Corporate" /><span>Corporate</span></label>
+                      <label class="customer-filter-option"><input type="checkbox" data-group-value="Other" /><span>Other</span></label>
+                    </div>
+                  </fieldset>
+                  <fieldset class="customer-filter-group">
+                    <legend>Customer activity</legend>
+                    <label class="customer-filter-option"><input id="outstandingFilter" type="checkbox" /><span>Outstanding balance</span></label>
+                    <label class="customer-filter-option"><input id="expiringFilter" type="checkbox" /><span>Document expiring soon</span></label>
+                  </fieldset>
+                </section>
+              </div>
+              <div class="filter-chips" id="appliedFilters" aria-label="Applied filters" hidden></div>
+            </div>
+            <div class="category-tabs" role="tablist" aria-label="Customer category">
+              <button class="category-tab is-active" type="button" role="tab" aria-selected="true" data-category="All">All <span class="category-tab-count">16</span></button>
+              <button class="category-tab" type="button" role="tab" aria-selected="false" data-category="B2C">B2C <span class="category-tab-count">10</span></button>
+              <button class="category-tab" type="button" role="tab" aria-selected="false" data-category="B2B">B2B <span class="category-tab-count">2</span></button>
+              <button class="category-tab" type="button" role="tab" aria-selected="false" data-category="Sub-Agent">Sub-Agent <span class="category-tab-count">2</span></button>
+              <button class="category-tab" type="button" role="tab" aria-selected="false" data-category="Other">Other <span class="category-tab-count">2</span></button>
+            </div>
+          </section>
+
+          <section class="customer-table-panel" aria-label="Customers">
+            <p class="table-scroll-hint">Scroll horizontally to see all columns <span aria-hidden="true">→</span></p>
+            <div class="table-scroller">
+              <table class="customer-table">
+                <thead><tr><th scope="col">Customer</th><th scope="col">Category</th><th scope="col">Tier</th><th scope="col">Location</th><th scope="col">Travellers</th><th scope="col">Total value</th><th scope="col" class="col-action">Action</th></tr></thead>
+                <tbody id="customerRows"></tbody>
+              </table>
+            </div>
+            <div class="empty-state" id="emptyState" hidden>
+              <span class="empty-icon"><svg><use href="#i-users" /></svg></span>
+              <strong>No customers found</strong>
+              <p>Try a different search or clear the current filter.</p>
+              <button class="button button-secondary button-small" id="clearFilters" type="button">Clear filters</button>
+            </div>
+            <footer class="pagination" id="pagination" aria-label="Customer list pagination"></footer>
+          </section>
+          <div class="customer-action-menu customer-row-action-menu" id="customerRowActionMenu" role="menu" hidden>
+            <button type="button" role="menuitem" id="editCustomerRowAction"><svg><use href="#i-edit" /></svg><span>Edit</span></button>
+            <button class="is-danger" type="button" role="menuitem" id="deleteCustomerRowAction"><svg><use href="#i-trash" /></svg><span>Delete</span></button>
+          </div>
+        </section>
+
+        <section class="view customer-profile" id="customerDetailView" aria-labelledby="customerDetailTitle" hidden>
+
+          <header class="profile-customer-header">
+            <div class="profile-heading-row">
+              <button class="button button-tertiary button-small view-back-button" id="backToCustomers" type="button"><svg><use href="#i-chevron-left" /></svg>Back</button>
+              <div class="profile-identity">
+                <span class="detail-avatar" id="detailAvatar">JF</span>
+                <div class="profile-identity-copy">
+                  <div class="detail-title-line">
+                    <h1 id="customerDetailTitle">Jain Family</h1>
+                    <span class="kind-badge" id="detailCategory">B2C</span>
+                    <span class="tier tier-gold" id="detailTier">Gold</span>
+                  </div>
+                  <p class="profile-code"><span id="detailId">CUST-0001</span><i>•</i><span id="detailLocation">Hyderabad, India</span><i>•</i><span>Customer created date: <span id="detailCustomerCreatedDate">1 Jan 2023</span></span></p>
+                </div>
+              </div>
+            </div>
+            <div class="profile-actions" aria-label="Customer actions">
+              <button class="button button-tertiary button-small" type="button" id="newQueryButton" data-profile-action="Add query"><svg><use href="#i-plus" /></svg>Add query</button>
+              <button class="button button-primary button-small" type="button" data-profile-action="Add booking"><svg><use href="#i-plus" /></svg>Add booking</button>
+              <div class="customer-action-menu-wrap">
+                <button class="shell-icon customer-action-menu-button" id="customerActionMenuButton" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="customerActionMenu" aria-label="Customer actions"><svg><use href="#i-more" /></svg></button>
+                <div class="customer-action-menu" id="customerActionMenu" role="menu" hidden>
+                  <button type="button" role="menuitem" id="editCustomerAction"><svg><use href="#i-edit" /></svg><span><strong>Edit customer</strong><small>Update profile and contact details</small></span></button>
+                  <button class="is-danger" type="button" role="menuitem" id="deleteCustomerAction"><svg><use href="#i-trash" /></svg><span><strong>Delete customer</strong><small>Remove this customer and records</small></span></button>
+                </div>
+              </div>
+            </div>
+          </header>
+
+          <div class="detail-tabs" role="tablist" aria-label="Customer details">
+            <button class="detail-tab is-active" id="profileTabOverview" type="button" role="tab" aria-selected="true" aria-controls="profilePanelOverview" data-profile-tab="overview">Overview</button>
+            <button class="detail-tab" id="profileTabTravellers" type="button" role="tab" aria-selected="false" aria-controls="profilePanelTravellers" data-profile-tab="travellers">Travellers<span class="category-tab-count" id="travellersTabCount">0</span></button>
+            <button class="detail-tab" id="profileTabDocuments" type="button" role="tab" aria-selected="false" aria-controls="profilePanelDocuments" data-profile-tab="documents">Documents<span class="category-tab-count" id="documentsTabCount">0</span></button>
+            <button class="detail-tab" id="profileTabPipeline" type="button" role="tab" aria-selected="false" aria-controls="profilePanelPipeline" data-profile-tab="pipeline">Pipeline<span class="category-tab-count" id="pipelineTabCount">0</span></button>
+            <button class="detail-tab" id="profileTabFinance" type="button" role="tab" aria-selected="false" aria-controls="profilePanelFinance" data-profile-tab="finance">Finance<span class="category-tab-count" id="financeTabCount">0</span></button>
+            <button class="detail-tab" id="profileTabTasks" type="button" role="tab" aria-selected="false" aria-controls="profilePanelTasks" data-profile-tab="tasks">Tasks<span class="category-tab-count" id="tasksTabCount">0</span></button>
+            <button class="detail-tab" id="profileTabCommunication" type="button" role="tab" aria-selected="false" aria-controls="profilePanelCommunication" data-profile-tab="communication">Communication<span class="category-tab-count" id="communicationTabCount">0</span></button>
+          </div>
+
+          <div class="profile-tab-panel is-active" id="profilePanelOverview" role="tabpanel" aria-labelledby="profileTabOverview" data-profile-panel="overview">
+          <section class="customer-summary" aria-labelledby="customerSummaryTitle">
+            <h2 id="customerSummaryTitle">Customer summary</h2>
+            <div class="metrics-grid">
+              <article class="metric-card"><span class="customer-kpi-icon" aria-hidden="true"><svg><use href="#i-wallet" /></svg></span><div class="customer-kpi-content"><span>Lifetime spend</span><strong id="detailValue">₹3,00,000</strong></div></article>
+              <article class="metric-card"><span class="customer-kpi-icon" aria-hidden="true"><svg><use href="#i-flight" /></svg></span><div class="customer-kpi-content"><span>Trips</span><strong id="detailTrips">2</strong></div></article>
+              <article class="metric-card"><span class="customer-kpi-icon" aria-hidden="true"><svg><use href="#i-users" /></svg></span><div class="customer-kpi-content"><span>Travellers</span><strong id="detailTravellers">4</strong></div></article>
+              <article class="metric-card"><span class="customer-kpi-icon" aria-hidden="true"><svg><use href="#i-file" /></svg></span><div class="customer-kpi-content"><span>Documents</span><strong id="detailDocuments">12 / 12 valid</strong></div></article>
+            </div>
+          </section>
+
+
+          <div class="profile-overview-layout">
+            <div class="profile-summary-grid">
+              <article class="profile-panel contact-card">
+                <header class="profile-panel-header"><h2>Primary contact</h2><button type="button" data-profile-action="Edit primary contact">Edit</button></header>
+                <address>
+                  <span><svg><use href="#i-users" /></svg><b id="detailContactName">Jain Family</b></span>
+                  <span><svg><use href="#i-phone" /></svg><b id="detailPhone">+91 98202 45480</b></span>
+                  <span><svg><use href="#i-mail" /></svg><b id="detailEmail">jain.family@example.com</b></span>
+                  <span><svg><use href="#i-map-pin" /></svg><b id="detailContactLocation">Hyderabad, India</b></span>
+                </address>
+                <div class="contact-actions">
+                  <button type="button" data-profile-action="Call"><svg><use href="#i-phone" /></svg><span>Call</span></button>
+                  <button type="button" data-profile-action="Email"><svg><use href="#i-mail" /></svg><span>Email</span></button>
+                </div>
+              </article>
+
+              <article class="profile-panel profile-facts-card">
+                <header class="profile-panel-header"><h2>Profile</h2><button type="button" data-profile-action="Edit profile">Edit</button></header>
+                <dl>
+                  <div><dt>Customer code</dt><dd id="detailProfileCode">CUST-0001</dd></div>
+                  <div><dt>Category</dt><dd id="detailProfileCategory">B2C</dd></div>
+                  <div><dt>Group</dt><dd id="detailGroup">Family</dd></div>
+                  <div><dt>Location</dt><dd id="detailProfileLocation">Hyderabad, India</dd></div>
+                  <div><dt>Tier</dt><dd><span class="tier tier-gold" id="detailProfileTier">Gold</span></dd></div>
+                  <div><dt>Source</dt><dd id="detailSource">Website</dd></div>
+                  <div><dt>Customer created date</dt><dd id="detailProfileCreatedDate">1 Jan 2023</dd></div>
+                </dl>
+              </article>
+
+              <article class="profile-panel profile-facts-card overview-dates-card">
+                <header class="profile-panel-header"><h2>Important dates</h2><button type="button" data-profile-action="Edit important dates">Edit</button></header>
+                <dl id="overviewImportantDates">
+                  <div><dt>Birthday</dt><dd>14 Jun 1998</dd></div>
+                  <div><dt>Passport expiry</dt><dd>25 Jul 2035</dd></div>
+                  <div><dt>Anniversary</dt><dd>Not set</dd></div>
+                  <div><dt>Custom date</dt><dd>Not set</dd></div>
+                </dl>
+              </article>
+            </div>
+
+            <section class="overview-trio" aria-label="Tasks, preferences and referrals">
+              <article class="trio-panel trio-tasks" aria-labelledby="trioTasksTitle">
+                <header class="trio-panel-header"><h2 id="trioTasksTitle">Task</h2><button type="button" id="trioViewAllTasks">View all</button></header>
+                <div class="trio-task-cards" id="overviewTaskCards"></div>
+              </article>
+              <article class="trio-panel trio-preferences" aria-labelledby="trioPreferencesTitle">
+                <header class="trio-panel-header"><h2 id="trioPreferencesTitle">Preference</h2><button type="button" data-profile-action="Edit preferences">Edit</button></header>
+                <div class="trio-pref-chips" id="overviewPreferenceChips"></div>
+              </article>
+              <article class="trio-panel trio-referral" aria-labelledby="trioReferralTitle">
+                <header class="trio-panel-header"><h2 id="trioReferralTitle">Referral Tree</h2><button type="button" id="trioViewReferral">View</button></header>
+                <div class="trio-referral-tree" id="overviewReferralTree"></div>
+                <footer class="trio-referral-source">
+                  <span>Acquisition source</span>
+                  <p><svg><use href="#i-target" /></svg><span>Source:</span><strong id="overviewReferralSource">Website</strong></p>
+                </footer>
+              </article>
+            </section>
+
+            <article class="profile-panel recent-activity-panel">
+              <header class="profile-panel-header"><h2>Recent activity</h2><button type="button" data-profile-action="View activity">View all</button></header>
+              <ol class="activity-list">
+                <li><time>Aug 30, 2026</time><span class="activity-dot"></span><p><strong>Proposal created</strong><small id="detailActivityTrip">Thailand Beach &amp; Bangkok</small></p></li>
+                <li><time>Jul 15, 2026</time><span class="activity-dot"></span><p><strong>Proposal sent</strong><small>Shared with primary contact</small></p></li>
+                <li><time>Jan 7, 2026</time><span class="activity-dot is-positive"></span><p><strong>Booking accepted</strong><small>Himachal Hills, Your Way</small></p></li>
+              </ol>
+            </article>
+          </div>
+          </div>
+
+          <section class="profile-tab-panel profile-section" id="profilePanelTravellers" role="tabpanel" aria-labelledby="profileTabTravellers" data-profile-panel="travellers" hidden>
+            <header class="section-heading section-heading-end">
+              <button class="button button-tertiary button-small" id="addTravellerButton" type="button"><svg><use href="#i-plus" /></svg>Add traveller</button>
+            </header>
+            <div class="traveller-accordion" id="travellerAccordion"></div>
+          </section>
+
+          <section class="profile-tab-panel profile-section" id="profilePanelDocuments" role="tabpanel" aria-labelledby="profileTabDocuments" data-profile-panel="documents" hidden>
+            <article class="readiness-banner">
+              <span class="readiness-ring"><span><b id="documentReadinessPercent">100</b><small>%</small></span></span>
+              <div class="readiness-copy"><strong>Document readiness</strong><b><span id="documentReadinessCopy">100</span>%</b><p id="documentReadinessMessage">All required documents are up to date.</p></div>
+              <div class="readiness-actions">
+                <button class="button button-tertiary button-small" type="button" data-profile-action="Open document vault"><svg><use href="#i-file" /></svg>Open document vault</button>
+                <button class="button button-primary button-small" type="button" data-profile-action="Request documents"><svg><use href="#i-message" /></svg>Request documents</button>
+              </div>
+            </article>
+            <section class="document-review-inbox" id="documentReviewInbox" aria-labelledby="documentReviewInboxTitle" hidden>
+              <header>
+                <div><span class="approval-kicker"><svg><use href="#i-bell" /></svg>Approval needed</span><h2 id="documentReviewInboxTitle">Customer uploads waiting for review</h2><p>Open each file, confirm the traveller and document details, then approve or request a replacement.</p></div>
+                <span class="approval-count" id="documentReviewInboxCount">0 pending</span>
+              </header>
+              <div class="document-review-queue" id="documentReviewQueue"></div>
+            </section>
+            <section class="document-table-shell" aria-label="Customer documents">
+              <article class="document-request-card" id="documentRequestCard" hidden>
+                <div>
+                  <span class="status-badge status-requested" id="documentRequestStatus">Link ready</span>
+                  <strong>Document request</strong>
+                  <p id="documentRequestSummary"></p>
+                </div>
+                <button class="text-action" id="copyActiveRequestLink" type="button">Copy upload link</button>
+              </article>
+              <div class="traveller-document-hierarchy" id="travellerDocumentHierarchy"></div>
+            </section>
+          </section>
+
+          <section class="profile-tab-panel profile-section" id="profilePanelPipeline" role="tabpanel" aria-labelledby="profileTabPipeline" data-profile-panel="pipeline" hidden>
+            <section class="metrics-grid customer-pipeline-summary" aria-label="Customer pipeline totals">
+              <article class="metric-card"><span>Total queries</span><strong id="customerPipelineQueryTotal">0</strong></article>
+              <article class="metric-card"><span>Proposals sent</span><strong id="customerPipelineProposalTotal">0</strong></article>
+              <article class="metric-card"><span>Proposal value</span><strong id="customerPipelineProposalValue">₹0</strong></article>
+              <article class="metric-card"><span>Vouchers</span><strong id="customerPipelineVoucherTotal">0</strong></article>
+            </section>
+            <div class="customer-pipeline-tabs" role="tablist" aria-label="Pipeline records">
+              <button class="is-active" type="button" role="tab" aria-selected="true" data-customer-pipeline-view="queries">Queries <span id="customerPipelineQueryCount">0</span></button>
+              <button type="button" role="tab" aria-selected="false" data-customer-pipeline-view="proposals">Proposals <span id="customerPipelineProposalCount">0</span></button>
+              <button type="button" role="tab" aria-selected="false" data-customer-pipeline-view="vouchers">Vouchers <span id="customerPipelineVoucherCount">0</span></button>
+            </div>
+            <section class="customer-pipeline-sheet" aria-label="Pipeline records">
+              <div class="customer-pipeline-content" id="customerPipelineContent"></div>
+            </section>
+          </section>
+
+
+          <section class="profile-tab-panel profile-section" id="profilePanelFinance" role="tabpanel" aria-labelledby="profileTabFinance" data-profile-panel="finance" hidden>
+            <section class="finance-summary-section" aria-labelledby="customerFinanceSummaryTitle">
+              <header class="finance-summary-head"><h2 id="customerFinanceSummaryTitle">Finance summary</h2></header>
+              <div class="metrics-grid finance-summary" aria-label="Customer finance totals">
+                <article class="metric-card"><span>Total booking value</span><div class="finance-kpi-value"><span class="finance-kpi-icon" aria-hidden="true"><svg><use href="#i-card" /></svg></span><strong id="financeTotalBooked">₹0</strong></div><p class="finance-kpi-note">Total value of customer bookings</p></article>
+                <article class="metric-card"><span>Credited</span><div class="finance-kpi-value"><span class="finance-kpi-icon" aria-hidden="true"><svg><use href="#i-card" /></svg></span><strong id="financeTotalCredited">₹0</strong></div><p class="finance-kpi-note">Credits added to the customer ledger</p></article>
+                <article class="metric-card"><span>Debited</span><div class="finance-kpi-value"><span class="finance-kpi-icon" aria-hidden="true"><svg><use href="#i-card" /></svg></span><strong id="financeTotalDebited">₹0</strong></div><p class="finance-kpi-note">Payments received from the customer</p></article>
+                <article class="metric-card"><span>Outstanding</span><div class="finance-kpi-value"><span class="finance-kpi-icon" aria-hidden="true"><svg><use href="#i-card" /></svg></span><strong id="financeOutstanding">₹0</strong></div><p class="finance-kpi-note">Balance remaining across bookings</p></article>
+              </div>
+            </section>
+            <article class="section-card bank-details-card" aria-labelledby="bankDetailsTitle">
+              <header class="section-card-header">
+                <h2 id="bankDetailsTitle">Bank details</h2>
+                <div class="bank-details-actions">
+                  <button class="button button-tertiary button-small" id="editBankDetailsButton" type="button"><svg><use href="#i-edit" /></svg>Edit bank details</button>
+                  <button class="button button-primary button-small" id="addBankAccountButton" type="button"><svg><use href="#i-plus" /></svg>Add another account</button>
+                </div>
+              </header>
+              <div class="bank-details-grid" id="bankDetailsGrid"></div>
+              <div class="bank-empty" id="bankEmptyState" hidden>
+                <p>No bank accounts added yet.</p>
+                <button class="button button-secondary button-small" id="bankEmptyAddButton" type="button"><svg><use href="#i-plus" /></svg>Add bank details</button>
+              </div>
+            </article>
+            <article class="section-card payment-history">
+              <header class="section-card-header"><h2>Payment history (<span id="financePaymentHistoryCount">0</span>)</h2><a class="button button-tertiary button-small" id="financeFullLedgerLink" href="#finance" aria-label="Open full ledger in All finances"><svg><use href="#i-nav-finance" /></svg>Full ledger</a></header>
+              <div class="payment-table-wrap">
+                <table class="payment-table">
+                  <thead><tr><th>Date</th><th>Description</th><th>Amount</th><th>Debit / credit</th><th>Total outstanding</th></tr></thead>
+                  <tbody id="financeLedgerRows"></tbody>
+                </table>
+              </div>
+            </article>
+          </section>
+
+          <section class="profile-tab-panel profile-section profile-tasks-panel" id="profilePanelTasks" role="tabpanel" aria-labelledby="profileTabTasks" data-profile-panel="tasks" hidden>
+            <div class="profile-tasks-toolbar" role="search" aria-label="Customer tasks">
+              <div class="filter-anchor task-filter-anchor">
+                <label class="search-field profile-tasks-search" for="profileTaskSearch">
+                  <svg aria-hidden="true"><use href="#i-search" /></svg>
+                  <input id="profileTaskSearch" type="search" placeholder="Search" autocomplete="off" aria-label="Search customer tasks" />
+                </label>
+                <button class="search-filter" id="profileTaskFilterButton" type="button" aria-label="Filter customer tasks" aria-controls="profileTaskFilterPopover" aria-expanded="false"><svg aria-hidden="true"><use href="#i-sliders" /></svg><span class="filter-button-label">Filters</span></button>
+                <section class="filter-popover task-filter-popover" id="profileTaskFilterPopover" aria-labelledby="profileTaskFilterTitle" hidden>
+                  <h2 id="profileTaskFilterTitle">Select Filters</h2>
+                  <div class="task-filter-fields">
+                    <label class="field"><span>Priority</span><select id="profileTaskPriorityFilter"><option value="all">All priorities</option><option>High</option><option>Medium</option><option>Low</option></select></label>
+                    <label class="field"><span>Related entity</span><select id="profileTaskEntityFilter"><option value="all">All entities</option></select></label>
+                    <label class="field"><span>Assignee</span><select id="profileTaskAssigneeFilter"><option value="all">All assignees</option></select></label>
+                    <label class="field"><span>Order</span><select id="profileTaskSort"><option value="created-desc">Created: newest</option><option value="created-asc">Created: oldest</option><option value="due-asc">Due: soonest</option><option value="due-desc">Due: latest</option><option value="priority-desc">Priority: highest</option><option value="priority-asc">Priority: lowest</option></select></label>
+                    <div class="field-grid task-filter-date-grid">
+                      <label class="field"><span>Due from</span><input id="profileTaskDateFrom" type="date" /></label>
+                      <label class="field"><span>Due to</span><input id="profileTaskDateTo" type="date" /></label>
+                    </div>
+                  </div>
+                  <footer class="filter-actions"><button class="button button-secondary" id="clearProfileTaskFilters" type="button">Clear</button><button class="button button-primary" id="applyProfileTaskFilters" type="button" disabled>Apply</button></footer>
+                </section>
+              </div>
+              <button class="button button-primary" id="newProfileTaskButton" type="button"><svg><use href="#i-plus" /></svg>Add task</button>
+            </div>
+            <div class="profile-tasks-table-wrap">
+              <div class="profile-tasks-scroller">
+                <table class="profile-tasks-table">
+                  <thead><tr><th scope="col">Task name</th><th scope="col">Priority</th><th scope="col">Related entity</th><th scope="col">Assignee</th><th scope="col">Due</th><th scope="col" class="col-action">Action</th></tr></thead>
+                  <tbody id="profileTaskRows"></tbody>
+                </table>
+              </div>
+              <footer class="pagination" id="profileTaskPagination" aria-label="Customer tasks pagination"></footer>
+            </div>
+          </section>
+
+          <section class="profile-tab-panel profile-section" id="profilePanelCommunication" role="tabpanel" aria-labelledby="profileTabCommunication" data-profile-panel="communication" hidden>
+            <article class="customer-mail-shell" id="customerMailShell" aria-labelledby="customerMailTitle">
+              <header class="customer-mail-header">
+                <div class="customer-mail-identity">
+                  <button class="customer-mail-sidebar-toggle" id="customerMailSidebarToggle" type="button" aria-label="Collapse mailboxes" aria-controls="customerMailSidebar" aria-expanded="true"><svg><use href="#i-menu" /></svg></button>
+                  <span class="customer-mail-header-avatar" id="customerMailHeaderAvatar">RC</span>
+                  <h2 id="customerMailTitle">Rishi Charan</h2>
+                </div>
+                <button class="button button-primary button-small" id="customerMailComposeButton" type="button"><svg><use href="#i-plus" /></svg>Compose email</button>
+              </header>
+              <div class="customer-mail-layout">
+                <aside class="customer-mail-sidebar" id="customerMailSidebar" aria-label="Email navigation">
+                  <div class="customer-mail-filters" role="tablist" aria-label="Email views">
+                    <button class="is-active" type="button" role="tab" aria-selected="true" data-customer-mail-filter="all" title="All mail"><svg><use href="#i-mail" /></svg><span>All mail</span><b id="customerMailAllCount">0</b></button>
+                    <button type="button" role="tab" aria-selected="false" data-customer-mail-filter="inbox" title="Inbox"><svg><use href="#i-inbox" /></svg><span>Inbox</span><b id="customerMailInboxCount">0</b></button>
+                    <button type="button" role="tab" aria-selected="false" data-customer-mail-filter="sent" title="Sent"><svg><use href="#i-check" /></svg><span>Sent</span><b id="customerMailSentCount">0</b></button>
+                  </div>
+                </aside>
+                <div class="customer-mail-main">
+                  <section class="customer-mail-list-view" id="customerMailListView" aria-labelledby="customerMailThreadTitle">
+                    <header class="customer-mail-thread-heading">
+                      <div><h3 id="customerMailThreadTitle">All mail</h3><p id="customerMailThreadSummary"></p></div>
+                      <span class="customer-mail-address" id="customerMailAddress"></span>
+                    </header>
+                    <div class="customer-mail-thread" id="customerMailThread" role="list" aria-live="polite"></div>
+                  </section>
+                  <article class="customer-mail-reader" id="customerMailReader" tabindex="-1" aria-labelledby="customerMailReaderSubject" hidden>
+                    <header>
+                      <button class="button button-secondary button-small button-icon" id="customerMailReaderBack" type="button" aria-label="Back to mail"><svg><use href="#i-chevron-left" /></svg></button>
+                      <div><span class="customer-mail-reader-direction" id="customerMailReaderDirection"></span><h3 id="customerMailReaderSubject"></h3></div>
+                      <time id="customerMailReaderTime"></time>
+                    </header>
+                    <div class="customer-mail-reader-meta">
+                      <span class="customer-mail-reader-avatar" id="customerMailReaderAvatar"></span>
+                      <div><strong id="customerMailReaderSender"></strong><span id="customerMailReaderRoute"></span></div>
+                    </div>
+                    <div class="customer-mail-reader-body" id="customerMailReaderBody"></div>
+                    <div class="customer-mail-reader-attachments" id="customerMailReaderAttachments" hidden></div>
+                  </article>
+                  <form class="customer-mail-composer" id="customerMailComposer" aria-labelledby="customerMailComposerTitle" hidden>
+                    <h3 class="sr-only" id="customerMailComposerTitle">Compose email</h3>
+                    <div class="customer-mail-compose-fields">
+                      <label><span>To</span><input id="customerMailTo" name="to" type="email" readonly /></label>
+                      <label><span>Subject</span><input id="customerMailSubject" name="subject" type="text" placeholder="Add a subject" required /></label>
+                      <label class="customer-mail-message-field"><span>Message</span><textarea id="customerMailBody" name="body" rows="10" placeholder="Write your email…" required></textarea></label>
+                    </div>
+                    <div class="customer-mail-composer-attachments" id="customerMailComposerAttachments" hidden></div>
+                    <footer>
+                      <div class="customer-mail-compose-tools">
+                        <input class="sr-only" id="customerMailAttachmentInput" type="file" multiple />
+                        <button class="button button-secondary button-small" id="customerMailUploadButton" type="button"><svg><use href="#i-file" /></svg>Upload</button>
+                        <div class="customer-mail-template-anchor">
+                          <button class="button button-secondary button-small" id="customerMailTemplateButton" type="button" aria-haspopup="menu" aria-controls="customerMailTemplateMenu" aria-expanded="false"><svg><use href="#i-message" /></svg>Template</button>
+                          <div class="customer-mail-template-menu" id="customerMailTemplateMenu" role="menu" hidden>
+                            <button type="button" role="menuitem" data-customer-mail-template="documents"><strong>Request documents</strong><small>Ask for missing travel files</small></button>
+                            <button type="button" role="menuitem" data-customer-mail-template="acceptance"><strong>Request acceptance</strong><small>Ask the customer to approve a proposal</small></button>
+                            <button type="button" role="menuitem" data-customer-mail-template="letter"><strong>Request supporting letter</strong><small>Ask for an employer or sponsor letter</small></button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="customer-mail-compose-actions">
+                        <button class="button button-secondary button-small" id="cancelCustomerMail" type="button">Discard</button>
+                        <button class="button button-primary button-small" id="sendCustomerMail" type="submit" disabled>Send</button>
+                      </div>
+                    </footer>
+                  </form>
+                </div>
+              </div>
+            </article>
+          </section>
+
+        </section>
+
+        <section class="view" id="documentVaultView" aria-labelledby="documentVaultTitle" hidden>
+          <div class="page-header">
+            <div class="page-title-row">
+              <button class="button button-tertiary button-small view-back-button" id="backFromVault" type="button"><svg><use href="#i-chevron-left" /></svg>Back</button>
+              <h1 id="documentVaultTitle">Document vault</h1>
+            </div>
+            <div class="header-actions">
+              <button class="button button-ghost button-icon" id="vaultRefreshButton" type="button" aria-label="Refresh"><svg><use href="#i-refresh" /></svg></button>
+              <button class="button button-primary" id="addFileButton" type="button"><svg><use href="#i-plus" /></svg>Add file</button>
+            </div>
+          </div>
+          <input id="vaultSearch" type="search" autocomplete="off" hidden />
+          <section class="customer-controls vault-controls" aria-label="Document vault filters">
+            <div class="control-topline customer-search-topline">
+              <div class="filter-anchor customer-search-anchor">
+                <label class="search-field customer-search" for="vaultSearchVisible">
+                  <svg><use href="#i-search" /></svg>
+                  <input id="vaultSearchVisible" type="search" placeholder="Search" autocomplete="off" aria-label="Search document vault" />
+                </label>
+                <button class="search-filter" id="vaultFilterButton" type="button" aria-label="Select filters" aria-expanded="false" aria-controls="vaultFilterPopover"><svg><use href="#i-sliders" /></svg></button>
+                <section class="filter-popover customer-filter-popover" id="vaultFilterPopover" aria-labelledby="vaultFilterTitle" hidden>
+                  <h2 id="vaultFilterTitle">Select Filters</h2>
+                  <div class="filter-select">
+                    <button class="filter-select-button" id="vaultTierButton" type="button" aria-expanded="false" aria-controls="vaultTierOptions"><span id="vaultTierValue">Tier</span><svg><use href="#i-chevron-down" /></svg></button>
+                    <div class="filter-options" id="vaultTierOptions" role="listbox" aria-label="Tier" hidden>
+                      <button type="button" role="option" aria-selected="false" data-vault-tier="Gold">Gold<span></span></button>
+                      <button type="button" role="option" aria-selected="false" data-vault-tier="Silver">Silver<span></span></button>
+                      <button type="button" role="option" aria-selected="false" data-vault-tier="Bronze">Bronze<span></span></button>
+                    </div>
+                  </div>
+                  <div class="filter-select">
+                    <button class="filter-select-button" id="vaultCategoryButton" type="button" aria-expanded="false" aria-controls="vaultCategoryOptions"><span id="vaultCategoryValue">Category</span><svg><use href="#i-chevron-down" /></svg></button>
+                    <div class="filter-options" id="vaultCategoryOptions" role="listbox" aria-label="Category" hidden>
+                      <button type="button" role="option" aria-selected="false" data-vault-category="B2C">B2C<span></span></button>
+                      <button type="button" role="option" aria-selected="false" data-vault-category="B2B">B2B<span></span></button>
+                      <button type="button" role="option" aria-selected="false" data-vault-category="Sub-Agent">Sub-Agent<span></span></button>
+                      <button type="button" role="option" aria-selected="false" data-vault-category="Other">Other<span></span></button>
+                    </div>
+                  </div>
+                  <label class="toggle-row"><span>Document expiring soon</span><input id="vaultExpiringFilter" type="checkbox" /><i aria-hidden="true"></i></label>
+                  <footer class="filter-actions">
+                    <button class="button button-secondary" id="vaultCancelFilters" type="button">Cancel</button>
+                    <button class="button button-primary" id="vaultApplyFilters" type="button" disabled>Apply</button>
+                  </footer>
+                </section>
+              </div>
+              <div class="filter-chips" id="vaultAppliedFilters" aria-label="Applied vault filters" hidden></div>
+            </div>
+          </section>
+          <section class="vault-panel" aria-label="Documents by customer">
+            <div class="vault-table-head" id="vaultTableHead" aria-hidden="true">
+              <span>Customer</span><span>Travellers</span><span>Documents</span><span>Expiring</span><span></span>
+            </div>
+            <div class="vault-list" id="vaultList"></div>
+            <div class="empty-state" id="vaultEmptyState" hidden>
+              <span class="empty-icon"><svg><use href="#i-file" /></svg></span>
+              <strong>No documents found</strong>
+              <p>Search by customer, traveller, document name, or type.</p>
+              <button class="button button-secondary button-small" id="clearVaultSearch" type="button">Clear search</button>
+            </div>
+            <footer class="pagination" id="vaultPagination" aria-label="Document vault pagination"></footer>
+          </section>
+        </section>
+        <section class="view shell-page notifications-page" id="notificationsView" aria-labelledby="notificationsViewTitle" hidden>
+          <header class="shell-page-header notifications-page-header">
+            <div class="notifications-page-heading"><span class="notifications-page-icon" aria-hidden="true"><svg><use href="#i-bell" /></svg></span><div><h1 id="notificationsViewTitle">Notifications</h1><p>Mentions, assigned tasks, approvals, booking updates and system notices.</p></div></div>
+            <div class="shell-page-actions"><button class="button button-secondary" type="button" data-notification-filter="unread">Show unread</button><button class="button button-secondary" type="button" data-mark-notifications-read>Mark all as read</button><button class="button button-primary" type="button" data-notification-preferences>Notification preferences</button></div>
+          </header>
+          <div class="notification-page-list" role="list" aria-label="All notifications">
+            <article class="notification-row is-unread" role="listitem"><span class="notification-dot"></span><div><strong>New reply from Aarav Sharma</strong><p>“The Dubai itinerary looks good. Can you update the hotel?”</p><time datetime="2026-09-28T10:22">10 minutes ago</time></div></article>
+            <article class="notification-row is-unread" role="listitem"><span class="notification-dot"></span><div><strong>Follow-up due today</strong><p>Query QRY-1048 · Meera Iyer · Bali family holiday</p><time datetime="2026-09-28T09:00">1 hour ago</time></div></article>
+            <article class="notification-row" role="listitem"><span class="notification-dot"></span><div><strong>Customer record updated</strong><p>Priya Nair added passport details for two travellers.</p><time datetime="2026-09-27T17:40">Yesterday</time></div></article>
+          </div>
+        </section>
+
+        <section class="view shell-page account-page" id="accountView" aria-labelledby="accountViewTitle" hidden>
+          <header class="shell-page-header account-page-header"><div class="account-page-identity"><div class="account-identity-avatar">RC</div><div><h1 id="accountViewTitle">Account settings</h1><p><span id="accountHeaderName">Rishi Charan</span> · <span id="accountHeaderEmail">rishi@paryatech.com</span></p></div></div><span class="account-page-role">Administrator</span></header>
+          <div class="account-settings-layout">
+            <nav class="account-section-nav" aria-label="Account settings"><button class="is-active" type="button" data-account-section="profile" aria-current="page">My profile</button><button type="button" data-account-section="security">Security and sign-in</button><button type="button" data-account-section="devices">Devices and sessions</button><button type="button" data-account-section="preferences">Personal preferences</button><button type="button" data-account-section="role">Workspace role and memberships</button></nav>
+            <div class="account-panels">
+              <section class="account-panel" data-account-panel="profile"><header><h2>Profile</h2><p>Your name and contact details across Paryatech.</p></header><div class="account-profile-row"><div class="account-identity-avatar" id="accountProfileAvatar" aria-hidden="true">RC</div><div><strong id="accountProfileName">Rishi Charan</strong><span>PNG or JPG · maximum 5 MB</span></div><input id="accountPhotoInput" type="file" accept="image/png,image/jpeg" aria-label="Choose profile photo" hidden /><button class="button button-secondary button-small" id="accountChangePhoto" type="button">Change photo</button></div><div class="account-field-grid"><label class="field"><span>Full name</span><input id="accountFullName" type="text" value="Rishi Charan" autocomplete="name" required /></label><label class="field"><span>Email</span><input id="accountEmail" type="email" value="rishi@paryatech.com" autocomplete="email" required /></label><label class="field"><span>Phone</span><input id="accountPhone" type="tel" value="+91 98765 43210" autocomplete="tel" /></label></div><footer><button class="button button-primary" id="saveAccountProfile" type="button">Save changes</button></footer></section>
+              <section class="account-panel" data-account-panel="security" hidden><header><h2>Security and sign-in</h2><p>Keep your account protected with a strong password.</p></header><label class="field"><span>Password</span><input type="password" value="paryatech-password" readonly /></label><button class="button button-secondary" type="button">Change password</button></section>
+              <section class="account-panel" data-account-panel="devices" hidden><header><h2>Devices and sessions</h2><p>Review where your account is currently signed in.</p></header><div class="account-device"><div><strong>Safari on macOS</strong><span>Current session · Bengaluru, India</span></div><button class="button button-secondary button-small" type="button">Sign out</button></div></section>
+              <section class="account-panel" data-account-panel="preferences" hidden><header><h2>Personal preferences</h2><p>Set how dates, times, and workspace updates appear.</p></header><div class="account-field-grid"><label class="field"><span>Language</span><select><option>English (India)</option></select></label><label class="field"><span>Time zone</span><select><option>India Standard Time (GMT+5:30)</option></select></label></div><button class="button button-primary" type="button">Save preferences</button></section>
+              <section class="account-panel" data-account-panel="role" hidden><header><h2>Workspace role</h2><p>Your access is managed by the workspace owner.</p></header><div class="account-role-card"><span>Current role</span><strong>Administrator</strong><p>Full access to customers, queries, finances, automations, and team settings.</p></div></section>
+            </div>
+          </div>
+        </section>
+        <section class="view new-customer-page" id="customerCreateView" aria-labelledby="customerCreateTitle" hidden>
+        <form id="customerForm">
+          <header class="new-customer-form-head"><h1 id="customerCreateTitle">Add customer</h1></header>
+
+
+          <div class="onboarding-body customer-onboarding-body">
+            <section class="onboarding-step" data-onboarding-step="0" aria-labelledby="onboardingBasicTitle">
+              <header class="onboarding-step-heading"><span class="new-customer-section-icon" aria-hidden="true"><svg><use href="#i-nav-customer" /></svg></span><div>
+                <h3 id="onboardingBasicTitle">Identity</h3>
+                <p>Name the customer and add their profile identity.</p>
+              </div></header>
+              <div class="new-customer-section-content">
+              <div class="onboarding-basic-grid">
+                <div>
+                  <button class="customer-photo-upload" id="customerPhotoButton" type="button" aria-describedby="customerPhotoHelp">
+                    <img id="customerPhotoPreview" alt="" hidden />
+                    <span class="customer-photo-placeholder">
+                      <svg><use href="#i-camera" /></svg>
+                      <span id="customerPhotoHelp">JPEG or PNG<br />(max 5MB)</span>
+                    </span>
+                  </button>
+                  <input class="sr-only" id="customerPhotoInput" name="photo" type="file" accept="image/jpeg,image/png" />
+                </div>
+                <div class="onboarding-basic-fields">
+                  <label class="field"><span>Customer name <b aria-hidden="true">*</b></span><input id="customerName" name="name" type="text" placeholder="e.g. Maya’s family" autocomplete="name" required /></label>
+                  <label class="field"><span>Customer code</span><span class="input-with-icon"><input id="customerCode" name="code" type="text" readonly /><svg aria-hidden="true"><use href="#i-info" /></svg></span></label>
+                </div>
+              </div>
+              </div>
+            </section>
+
+            <section class="onboarding-step" data-onboarding-step="1" aria-labelledby="onboardingContactTitle">
+              <header class="onboarding-step-heading"><span class="new-customer-section-icon" aria-hidden="true"><svg><use href="#i-users" /></svg></span><div>
+                <h3 id="onboardingContactTitle">Primary traveller &amp; contact</h3>
+                <p>This person will be the main point of contact for communication.</p>
+              </div></header>
+              <div class="new-customer-section-content">
+              <div class="contact-name-grid">
+                <label class="field"><span>Title</span><select name="title"><option>Mr</option><option>Ms</option><option>Mrs</option><option>Dr</option></select></label>
+                <label class="field"><span>Full name <small>(as per Aadhaar)</small> <b aria-hidden="true">*</b></span><input id="primaryTravellerName" name="primaryName" type="text" autocomplete="name" required /></label>
+              </div>
+              <div class="field-grid">
+                <label class="field"><span>Date of birth</span><input name="dateOfBirth" type="date" /></label>
+                <label class="field"><span>Gender</span><select name="gender"><option value="">Select</option><option>Female</option><option>Male</option><option>Non-binary</option><option>Prefer not to say</option></select></label>
+              </div>
+              <div class="field-grid">
+                <label class="field"><span>Phone <b aria-hidden="true">*</b></span><span class="compound-field"><select name="phoneCountry" aria-label="Phone country code"><option>+91</option><option>+1</option><option>+44</option><option>+971</option></select><input id="customerPhone" name="phone" type="tel" placeholder="98765 43210" autocomplete="tel" required /></span></label>
+                <label class="field"><span>Email</span><input name="email" type="email" placeholder="example@123mail.com" autocomplete="email" /></label>
+              </div>
+              <div class="whatsapp-row">
+                <label class="field"><span>WhatsApp</span><span class="compound-field"><select name="whatsappCountry" aria-label="WhatsApp country code"><option>+91</option><option>+1</option><option>+44</option><option>+971</option></select><input id="customerWhatsapp" name="whatsapp" type="tel" placeholder="98765 43210" autocomplete="tel" /></span></label>
+                <label class="check-control"><input id="sameAsPhone" type="checkbox" /><span><svg><use href="#i-check" /></svg></span>Same as phone</label>
+              </div>
+              </div>
+            </section>
+
+            <section class="onboarding-step" data-onboarding-step="2" aria-labelledby="onboardingTravelTitle">
+              <header class="onboarding-step-heading"><span class="new-customer-section-icon" aria-hidden="true"><svg><use href="#i-search" /></svg></span><div>
+                <h3 id="onboardingTravelTitle">Travel preferences</h3>
+                <p>Helps us suggest relevant packages and match with the right vendors.</p>
+              </div></header>
+              <div class="new-customer-section-content">
+              <div class="field onboarding-preferences">
+                <span id="preferenceInputLabel">Travel preferences / interest</span>
+                <div class="preference-typeahead" id="preferenceTypeahead">
+                  <div class="preference-combobox">
+                    <svg aria-hidden="true"><use href="#i-search" /></svg>
+                    <input id="preferenceInput" type="text" placeholder="e.g. Beach, Boutique, Vegetarian" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="preferenceSuggestions" aria-autocomplete="list" aria-labelledby="preferenceInputLabel" />
+                  </div>
+                  <div class="themed-list preference-suggestions" id="preferenceSuggestions" role="listbox" aria-label="Matching preferences" hidden></div>
+                  <div class="preference-chips" id="preferenceChips" aria-live="polite"></div>
+                  <div id="preferenceHidden"></div>
+                </div>
+              </div>
+              </div>
+            </section>
+
+            <section class="onboarding-step" data-onboarding-step="3" aria-labelledby="onboardingCategoryTitle">
+              <header class="onboarding-step-heading"><span class="new-customer-section-icon" aria-hidden="true"><svg><use href="#i-team" /></svg></span><div>
+                <h3 id="onboardingCategoryTitle">Customer category</h3>
+                <p>Defines the type of customer and helps with labeling and access.</p>
+              </div></header>
+              <div class="new-customer-section-content">
+              <fieldset class="category-options">
+                <legend class="sr-only">Customer category</legend>
+                <label><input type="radio" name="category" value="B2C" checked /><span><i><svg><use href="#i-check" /></svg></i><strong>B2C</strong><small>Individual traveller or family</small></span></label>
+                <label><input type="radio" name="category" value="B2B" /><span><i><svg><use href="#i-check" /></svg></i><strong>B2B</strong><small>Corporate or business account</small></span></label>
+                <label><input type="radio" name="category" value="Sub-Agent" /><span><i><svg><use href="#i-check" /></svg></i><strong>Sub-Agent</strong><small>Reseller or partner agency</small></span></label>
+                <label><input type="radio" name="category" value="Other" /><span><i><svg><use href="#i-check" /></svg></i><strong>Other</strong><small>Anything that doesn’t fit above</small></span></label>
+              </fieldset>
+              <label class="field"><span>Group type</span><select name="groupType"><option value="">Select</option><option>Family</option><option>Friends</option><option>Corporate</option><option>Educational</option><option>Religious</option><option>Other</option></select></label>
+              </div>
+            </section>
+
+            <section class="onboarding-step" data-onboarding-step="4" aria-labelledby="onboardingAdditionalTitle">
+              <header class="onboarding-step-heading"><span class="new-customer-section-icon" aria-hidden="true"><svg><use href="#i-rupee" /></svg></span><div>
+                <h3 id="onboardingAdditionalTitle">Additional details</h3>
+                <p>Set financial limits and add any internal notes.</p>
+              </div></header>
+              <div class="new-customer-section-content">
+              <label class="field"><span>Credit limit (INR)</span><input name="creditLimit" type="number" min="0" placeholder="e.g. 99,000" /></label>
+              <fieldset class="tier-options">
+                <legend>Customer tiers</legend>
+                <label class="tier-gold"><input type="checkbox" name="tier" value="Gold" checked /><span></span>Gold</label>
+                <label class="tier-silver"><input type="checkbox" name="tier" value="Silver" /><span></span>Silver</label>
+                <label class="tier-bronze"><input type="checkbox" name="tier" value="Bronze" /><span></span>Bronze</label>
+                <label class="tier-corporate"><input type="checkbox" name="tier" value="Corporate" /><span></span>Corporate</label>
+                <label class="tier-other"><input type="checkbox" name="tier" value="Other" /><span></span>Other</label>
+                <button class="inline-add" id="addTierButton" type="button"><svg><use href="#i-plus" /></svg>Add tier</button>
+              </fieldset>
+              <label class="field"><span>Note</span><textarea name="note" rows="4" placeholder="Type here…"></textarea></label>
+              </div>
+            </section>
+
+            <section class="onboarding-step" data-onboarding-step="5" aria-labelledby="onboardingReferralTitle">
+              <header class="onboarding-step-heading"><span class="new-customer-section-icon" aria-hidden="true"><svg><use href="#i-referral-tree" /></svg></span><div>
+                <h3 id="onboardingReferralTitle">How did they find us?</h3>
+                <p>Acquisition source helps you understand which channels bring customers.</p>
+              </div></header>
+              <div class="new-customer-section-content">
+              <fieldset class="category-options">
+                <legend class="sr-only">Acquisition source</legend>
+                <label><input type="radio" name="referralType" value="person" /><span><i><svg><use href="#i-check" /></svg></i><strong>A person</strong><small>Referred by an existing traveller</small></span></label>
+                <label><input type="radio" name="referralType" value="channel" /><span><i><svg><use href="#i-check" /></svg></i><strong>A channel</strong><small>Walk-in, website, Instagram, partner…</small></span></label>
+              </fieldset>
+              <div id="referralPersonFields" hidden>
+                <label class="field"><span>Referred by</span><select name="referrerId" id="onboardingReferrer"><option value="">Select a customer</option></select></label>
+              </div>
+              <div id="referralChannelFields" hidden>
+                <fieldset class="tier-options channel-options">
+                  <legend class="sr-only">Channel</legend>
+                  <label><input type="radio" name="sourceChannel" value="Walk-in" /><span></span>Walk-in</label>
+                  <label><input type="radio" name="sourceChannel" value="Website" checked /><span></span>Website</label>
+                  <label><input type="radio" name="sourceChannel" value="Instagram" /><span></span>Instagram</label>
+                  <label><input type="radio" name="sourceChannel" value="Partner" /><span></span>Partner</label>
+                </fieldset>
+              </div>
+              </div>
+            </section>
+          </div>
+
+          <footer class="new-customer-actions">
+            <button class="button button-secondary button-small" id="customerCreateCancel" type="button">Cancel</button>
+            <button class="button button-secondary button-small" id="onboardingSecondary" type="button"><span>Save as draft</span></button>
+            <button class="button button-primary button-small" id="onboardingContinue" type="button">Add customer</button>
+          </footer>
+        </form>
+        </section>
+
+      </main>
+      </section>
+    </div>
+    <div class="shell-overlay search-overlay" id="globalSearchBackdrop" hidden>
+      <section class="global-search-dialog" id="globalSearchDialog" role="dialog" aria-modal="true" aria-labelledby="globalSearchTitle">
+        <h2 class="sr-only" id="globalSearchTitle">Search anything</h2>
+        <label class="global-search-field"><svg aria-hidden="true"><use href="#i-search" /></svg><span class="sr-only">Search anything</span><input id="globalSearchInput" type="search" placeholder="Search customers, queries, tasks…" autocomplete="off" /><kbd>Esc</kbd></label>
+        <div class="global-search-results" id="globalSearchResults" role="listbox" aria-label="Search results">
+          <p class="search-result-heading">Quick access</p>
+          <button type="button" role="option" data-global-search-target="customers"><svg><use href="#i-users" /></svg><span><strong>Customers</strong><small>Browse and manage customer records</small></span><kbd>G C</kbd></button>
+          <button type="button" role="option" data-global-search-target="queries"><svg><use href="#i-file" /></svg><span><strong>Queries</strong><small>Open sales enquiries and itineraries</small></span><kbd>G Q</kbd></button>
+          <button type="button" role="option" data-global-search-target="tasks"><svg><use href="#i-tasks" /></svg><span><strong>Tasks</strong><small>Review assigned and due work</small></span><kbd>G T</kbd></button>
+          <button type="button" role="option" data-global-search-target="notifications"><svg><use href="#i-bell" /></svg><span><strong>Notifications</strong><small>See workspace updates and activity</small></span></button>
+          <button type="button" role="option" data-global-search-target="account:profile"><svg><use href="#i-users" /></svg><span><strong>Profile</strong><small>Manage your personal account details</small></span></button>
+          <button type="button" role="option" data-global-search-target="account:security"><svg><use href="#i-support" /></svg><span><strong>Security and sign-in</strong><small>Password and account security</small></span></button>
+          <button type="button" role="option" data-global-search-target="account:preferences"><svg><use href="#i-settings" /></svg><span><strong>Personal preferences</strong><small>Language, time zone, and display settings</small></span></button>
+          <p class="search-result-heading">Recent</p>
+          <button type="button" role="option" data-global-search-target="customer:CUST-0001"><span class="search-result-avatar">JF</span><span><strong>Jain Family</strong><small>Customer · CUST-0001 · Hyderabad</small></span></button>
+          <button type="button" role="option" data-global-search-target="query:QRY-2001"><svg><use href="#i-flight" /></svg><span><strong>Winter vacation tour planning for Shimla</strong><small>Query QRY-2001 · Jain Family</small></span></button>
+        </div>
+        <footer class="global-search-footer"><span><kbd>↑</kbd><kbd>↓</kbd> Navigate</span><span><kbd>↵</kbd> Open</span><span><kbd>Esc</kbd> Close</span></footer>
+      </section>
+    </div>
+    <div class="shell-overlay popover-overlay" id="notificationCenterBackdrop" hidden>
+      <section class="notification-center" id="notificationCenter" role="dialog" aria-modal="false" aria-labelledby="notificationCenterTitle">
+        <header><h2 id="notificationCenterTitle">Notification center</h2><button class="shell-icon" id="closeNotificationCenter" type="button" aria-label="Close notifications"><svg><use href="#i-x" /></svg></button></header>
+        <div class="notification-toolbar"><div role="tablist" aria-label="Notification filter"><button class="is-active" id="notificationsUnreadTab" type="button" role="tab" aria-selected="true">Unread</button><button id="notificationsAllTab" type="button" role="tab" aria-selected="false">All</button></div><button id="markNotificationsRead" type="button">Mark all as read</button></div>
+        <div class="notification-list" id="notificationList" role="list"><article class="notification-row is-unread" role="listitem"><span class="notification-dot"></span><div><strong>New reply from Aarav Sharma</strong><p>The Dubai itinerary looks good. Can you update the hotel?</p><time>10 minutes ago</time></div></article><article class="notification-row is-unread" role="listitem"><span class="notification-dot"></span><div><strong>Follow-up due today</strong><p>Query QRY-1048 · Meera Iyer</p><time>1 hour ago</time></div></article></div>
+        <footer><button id="viewAllNotifications" type="button">View all notifications</button><button id="notificationPreferences" type="button">Notification preferences</button></footer>
+      </section>
+    </div>
+    <div class="shell-overlay popover-overlay" id="accountMenuBackdrop" hidden>
+      <div class="account-menu" id="accountMenu" role="menu" aria-label="Account menu">
+        <header><span>RC</span><div><strong>Rishi Charan</strong><small>rishi@paryatech.com</small></div></header>
+        <button type="button" role="menuitem" data-account-section="profile"><svg><use href="#i-users" /></svg><span>Account settings</span></button>
+        <button type="button" role="menuitem" data-account-section="preferences"><svg><use href="#i-settings" /></svg><span>Personal preferences</span></button>
+        <button type="button" role="menuitem" data-account-section="security"><svg><use href="#i-support" /></svg><span>Security and sign-in</span></button>
+        <div class="account-menu-divider"></div>
+        <button class="account-signout" id="shellSignOut" type="button" role="menuitem"><svg><use href="#i-signout" /></svg><span>Sign out</span></button>
+      </div>
+    </div>
+    <div class="sidebar-tooltip" id="sidebarTooltip" role="tooltip" hidden></div>
+
+    <div class="modal-backdrop task-modal-backdrop" id="taskDetailsBackdrop" hidden>
+      <section class="modal task-modal task-details-modal" role="dialog" aria-modal="true" aria-labelledby="taskDetailsTitle">
+        <header class="modal-header task-modal-header"><div><span class="overline">Saved task</span><h2 id="taskDetailsTitle">Task details</h2></div><button class="shell-icon" id="closeTaskDetails" type="button" aria-label="Close task details"><svg><use href="#i-x" /></svg></button></header>
+        <div class="modal-body task-details-body" id="taskDetailsBody"></div>
+        <footer class="modal-actions task-detail-actions" id="taskDetailActions"><button class="button task-delete-button" id="taskDeleteButton" type="button"><svg aria-hidden="true"><use href="#i-trash" /></svg>Delete task</button><div><button class="button button-secondary" id="taskEditButton" type="button"><svg aria-hidden="true"><use href="#i-edit" /></svg>Edit task</button><button class="button button-primary" id="taskCompleteButton" type="button"><svg aria-hidden="true"><use href="#i-check" /></svg><span id="taskCompleteButtonLabel">Mark completed</span></button></div></footer>
+        <div class="task-delete-confirm" id="taskDeleteConfirm" hidden><div><strong>Delete this task?</strong><p>This task will be removed from all task views.</p></div><div><button class="button button-secondary" id="cancelTaskDelete" type="button">Cancel</button><button class="button task-delete-confirm-button" id="confirmTaskDelete" type="button">Delete task</button></div></div>
+      </section>
+    </div>
+
+    <div class="modal-backdrop task-modal-backdrop" id="taskModalBackdrop" hidden>
+      <section class="modal task-modal" role="dialog" aria-modal="true" aria-labelledby="taskModalTitle">
+        <form id="taskForm">
+          <header class="modal-header task-modal-header">
+            <h2 id="taskModalTitle">Add task</h2>
+            <button class="shell-icon" id="closeTaskModal" type="button" aria-label="Close task form"><svg><use href="#i-x" /></svg></button>
+          </header>
+          <div class="modal-body task-modal-body">
+            <input id="taskId" name="taskId" type="hidden" />
+            <div class="task-create-primary-grid">
+              <div class="field task-id-field"><span id="taskIdLabel">Task ID</span><output id="taskIdDisplay" aria-labelledby="taskIdLabel"></output></div>
+              <label class="field"><span>Task name</span><input id="taskTitleInput" name="title" type="text" placeholder="What needs to be done?" maxlength="110" required /></label>
+            </div>
+            <label class="field task-description-field"><span>Description <small>Optional</small></span><textarea id="taskDescription" name="description" rows="3" placeholder="Add useful context or the expected outcome"></textarea></label>
+            <div class="field-grid task-status-priority-grid">
+              <label class="field"><span>Status</span><select id="taskStatus" name="status"><option>Backlog</option><option selected>Open</option><option>In Progress</option><option>Blocked</option><option>Done</option><option>Cancelled</option></select></label>
+              <label class="field"><span>Priority</span><select id="taskPriority" name="priority"><option value="High">P1</option><option value="Medium" selected>P2</option><option value="Low">P3</option></select></label>
+            </div>
+            <div class="field"><span id="taskAssigneeLabel">Assignee</span><div class="assignee-multiselect" id="taskAssigneeMultiselect"><button class="filter-select-button assignee-multiselect-button" id="taskAssigneeButton" type="button" aria-expanded="false" aria-controls="taskAssigneePopover" aria-labelledby="taskAssigneeLabel taskAssigneeButtonLabel"><span id="taskAssigneeButtonLabel">Select assignees</span><svg><use href="#i-chevron-down" /></svg></button><div class="assignee-multiselect-popover" id="taskAssigneePopover" role="group" aria-label="Assignees" hidden></div></div></div>
+            <div class="field task-due-field">
+              <span>Due date and time <small>Optional</small></span>
+              <div class="task-date-time-grid">
+                <label class="task-due-control"><span class="sr-only">Due date</span><input id="taskDueDate" name="dueDate" type="date" data-placeholder="dd/mm/yyyy" aria-label="Due date" /></label>
+                <label class="task-time-control"><svg aria-hidden="true"><use href="#i-clock" /></svg><span class="sr-only">Due time</span><input id="taskDueTime" name="dueTime" type="time" aria-label="Due time" disabled /></label>
+              </div>
+            </div>
+          </div>
+          <footer class="modal-actions task-modal-actions">
+            <button class="button button-secondary" id="cancelTaskModal" type="button">Cancel</button>
+            <button class="button button-primary" id="taskModalSubmit" type="submit">Create task</button>
+          </footer>
+        </form>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="referralTreeBackdrop" hidden>
+      <section class="modal referral-tree-modal" role="dialog" aria-modal="true" aria-labelledby="referralTreeTitle">
+        <header class="modal-header">
+          <div><span class="overline">Customer relationships</span><h2 id="referralTreeTitle">Referral tree</h2><p id="referralTreeSubtitle"></p></div>
+          <button class="shell-icon" id="closeReferralTree" type="button" aria-label="Close referral tree"><svg><use href="#i-x" /></svg></button>
+        </header>
+        <div class="modal-body referral-tree-body">
+          <div class="referral-referrer-editor">
+            <label class="field" for="referralReferrerSelect"><span>Who referred this customer?</span><select id="referralReferrerSelect"></select></label>
+            <button class="button button-primary button-small" id="saveReferralReferrer" type="button">Save referrer</button>
+          </div>
+          <div class="referral-tree-stage" id="referralTreeStage"></div>
+        </div>
+        <footer class="modal-actions"><button class="button button-secondary" id="doneReferralTree" type="button">Done</button></footer>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="vendorModalBackdrop" hidden>
+      <section class="modal vendor-modal" role="dialog" aria-modal="true" aria-labelledby="vendorModalTitle">
+        <form id="vendorForm">
+          <header class="modal-header">
+            <div><span class="overline">Vendor network</span><h2 id="vendorModalTitle">New vendor</h2></div>
+            <button class="shell-icon" id="closeVendorModal" type="button" aria-label="Close new vendor"><svg><use href="#i-x" /></svg></button>
+          </header>
+          <div class="modal-body">
+            <p class="modal-intro">Add a supplier so the sales and operations teams can use it in trips and bookings.</p>
+            <label class="field"><span>Vendor name</span><input id="vendorName" name="vendorName" type="text" placeholder="e.g. Alpine Stays" required /></label>
+            <div class="field-grid">
+              <label class="field"><span>Service</span><select name="vendorService" required><option value="">Select</option><option>Accommodation</option><option>Transport</option><option>Flights</option><option>Activities</option><option>Visa services</option></select></label>
+              <label class="field"><span>City</span><input name="vendorCity" type="text" placeholder="e.g. Bengaluru" required /></label>
+            </div>
+            <div class="field-grid">
+              <label class="field"><span>Contact person</span><input name="vendorContact" type="text" autocomplete="name" /></label>
+              <label class="field"><span>Email</span><input name="vendorEmail" type="email" autocomplete="email" /></label>
+            </div>
+          </div>
+          <footer class="modal-actions">
+            <button class="button button-secondary" id="cancelVendorModal" type="button">Cancel</button>
+            <button class="button button-primary" type="submit">Add vendor</button>
+          </footer>
+        </form>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="queryTypeModalBackdrop" hidden>
+      <section class="modal query-type-modal" role="dialog" aria-modal="true" aria-labelledby="queryTypeModalTitle">
+        <header class="modal-header query-type-header">
+          <div><span class="overline">New query</span><h2 id="queryTypeModalTitle">Select a query type</h2><p>Choose the service the customer needs.</p></div>
+          <button class="shell-icon" id="closeQueryTypeModal" type="button" aria-label="Close query type selection"><svg><use href="#i-x" /></svg></button>
+        </header>
+        <div class="modal-body query-type-grid">
+          <button type="button" data-query-type="Trip"><img src="assets/query-trip.svg" alt="" width="20" height="20" /><span><strong>Trip query</strong><small>Plan a complete itinerary and travel party.</small></span><svg><use href="#i-chevron-right" /></svg></button>
+          <button type="button" data-query-type="Flight"><img src="assets/query-flight.svg" alt="" width="20" height="20" /><span><strong>Flight query</strong><small>Capture routes, dates, cabin, and passengers.</small></span><svg><use href="#i-chevron-right" /></svg></button>
+          <button type="button" data-query-type="Accommodation"><img src="assets/query-accommodation.svg" alt="" width="20" height="20" /><span><strong>Accommodation query</strong><small>Collect stay, room, rating, and meal needs.</small></span><svg><use href="#i-chevron-right" /></svg></button>
+          <button type="button" data-query-type="Visa"><img src="assets/query-visa.svg" alt="" width="20" height="20" /><span><strong>Visa query</strong><small>Track destination, applicants, and processing.</small></span><svg><use href="#i-chevron-right" /></svg></button>
+          <button type="button" data-query-type="Cruise"><img src="assets/query-cruise.svg" alt="" width="20" height="20" /><span><strong>Cruise query</strong><small>Plan sailing region, ports, dates, and cabins.</small></span><svg><use href="#i-chevron-right" /></svg></button>
+          <button type="button" data-query-type="Transport"><img src="assets/query-transport.svg" alt="" width="20" height="20" /><span><strong>Transport query</strong><small>Capture route, stops, dates, and vehicles.</small></span><svg><use href="#i-chevron-right" /></svg></button>
+        </div>
+        <footer class="modal-actions"><button class="button button-secondary" id="cancelQueryTypeModal" type="button">Cancel</button></footer>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="queryModalBackdrop" hidden>
+      <section class="modal onboarding-modal query-onboarding-modal" role="dialog" aria-modal="true" aria-labelledby="queryModalTitle">
+        <form id="queryForm">
+          <header class="onboarding-header">
+            <h2 id="queryModalTitle">New query</h2>
+            <button class="shell-icon onboarding-close" id="closeQueryModal" type="button" aria-label="Close new query"><svg><use href="#i-x" /></svg></button>
+          </header>
+
+
+          <div class="onboarding-body query-onboarding-body">
+            <section class="onboarding-step query-onboarding-step" data-query-step="0" aria-labelledby="queryDetailsTitle">
+              <header class="onboarding-step-heading">
+                <h3 id="queryDetailsTitle">Query details</h3>
+                <p id="queryDetailsDescription">Fill in the requirements for this query.</p>
+              </header>
+              <input id="queryTypeInput" name="queryType" type="hidden" value="Trip" />
+              <div class="query-customer-capture">
+                <div class="query-customer-select-row">
+                  <div class="query-customer-lookup"><label class="field"><span>Search customer</span><span class="query-customer-search"><svg><use href="#i-search" /></svg><input id="queryCustomerSearch" type="search" autocomplete="off" placeholder="Name, customer ID, phone or email" /></span></label><label class="field"><span>Customer <b aria-hidden="true">*</b></span><select id="queryCustomer" name="customer" required></select></label></div>
+                  <button class="button button-secondary button-small" id="queryCreateCustomerButton" type="button"><svg><use href="#i-plus" /></svg>Create new customer</button>
+                </div>
+                <section class="query-inline-customer" id="queryInlineCustomer" aria-labelledby="queryInlineCustomerTitle" hidden>
+                  <header><div><h4 id="queryInlineCustomerTitle">Create customer</h4><p>Add the essential contact details without leaving this query.</p></div><span class="status-badge status-draft" id="queryInlineCustomerCode"></span></header>
+                  <div class="query-inline-customer-fields">
+                    <label class="field"><span>Customer name <b aria-hidden="true">*</b></span><input id="queryNewCustomerName" type="text" autocomplete="name" /></label>
+                    <label class="field"><span>Mobile number <b aria-hidden="true">*</b></span><input id="queryNewCustomerPhone" type="tel" autocomplete="tel" placeholder="+91 98765 43210" /></label>
+                    <label class="field"><span>Email address <small>(optional)</small></span><input id="queryNewCustomerEmail" type="email" autocomplete="email" placeholder="name@example.com" /></label>
+                  </div>
+                  <footer><button class="button button-ghost button-small" id="queryCancelCustomerButton" type="button">Cancel</button><button class="button button-primary button-small" id="querySaveCustomerButton" type="button"><svg><use href="#i-check" /></svg>Save customer</button></footer>
+                </section>
+              </div>
+              <div id="queryTypeFields"></div>
+              <div id="queryRepeatFields"></div>
+            </section>
+
+            <section class="onboarding-step query-onboarding-step" data-query-step="1" aria-labelledby="queryGroupSizeTitle">
+              <header class="onboarding-step-heading">
+                <h3 id="queryGroupSizeTitle">Group size</h3>
+                <p>Party size for this query.</p>
+              </header>
+
+              <div class="query-party-grid">
+                <label class="field"><span>Adults (12+)</span><input name="adults" type="number" min="1" value="1" required /></label>
+                <label class="field"><span>Children (2–11)</span><input id="queryChildren" name="children" type="number" min="0" max="12" value="0" /></label>
+                <label class="field"><span>Infants (0–2)</span><input name="infants" type="number" min="0" value="0" /></label>
+                <label class="field"><span>Rooms</span><input name="rooms" type="number" min="0" placeholder="Optional" /></label>
+                <label class="field"><span>Extra beds</span><input name="extraBeds" type="number" min="0" placeholder="Optional" /></label>
+              </div>
+              <div class="query-child-ages" id="queryChildAges"></div>
+            </section>
+
+            <section class="onboarding-step query-onboarding-step" data-query-step="2" aria-labelledby="queryAssignmentTitle">
+              <header class="onboarding-step-heading">
+                <h3 id="queryAssignmentTitle">Assignment &amp; follow-up</h3>
+                <p>Set ownership, priority, and the next follow-up.</p>
+              </header>
+
+              <div class="field-grid">
+              <div class="field"><span id="queryAssigneeLabel">Assigned to</span><div class="assignee-multiselect" id="queryAssigneeMultiselect"><button class="filter-select-button assignee-multiselect-button" id="queryAssigneeButton" type="button" aria-expanded="false" aria-controls="queryAssigneePopover" aria-labelledby="queryAssigneeLabel queryAssigneeButtonLabel"><span id="queryAssigneeButtonLabel">Rishi Charan</span><svg><use href="#i-chevron-down" /></svg></button><div class="assignee-multiselect-popover" id="queryAssigneePopover" role="group" aria-label="Assignees" hidden><label class="assignee-option"><input type="checkbox" name="assignedTo" value="Rishi Charan" checked /><span class="assignee-check" aria-hidden="true"><svg><use href="#i-check" /></svg></span><span class="assignee-text"><strong>Rishi Charan</strong><small>Customer desk</small></span></label><label class="assignee-option"><input type="checkbox" name="assignedTo" value="Kumar Iyer" /><span class="assignee-check" aria-hidden="true"><svg><use href="#i-check" /></svg></span><span class="assignee-text"><strong>Kumar Iyer</strong><small>Operations</small></span></label><label class="assignee-option"><input type="checkbox" name="assignedTo" value="Meera Shah" /><span class="assignee-check" aria-hidden="true"><svg><use href="#i-check" /></svg></span><span class="assignee-text"><strong>Meera Shah</strong><small>Operations</small></span></label><label class="assignee-option"><input type="checkbox" name="assignedTo" value="Vikram Soni" /><span class="assignee-check" aria-hidden="true"><svg><use href="#i-check" /></svg></span><span class="assignee-text"><strong>Vikram Soni</strong><small>Sales</small></span></label></div></div></div>
+                <label class="field"><span>Priority</span><select name="priority"><option>Low</option><option selected>Medium</option><option>High</option><option>Urgent</option></select></label>
+              </div>
+              <div class="field-grid">
+                <label class="field"><span>Due date</span><input name="dueDate" type="date" /></label>
+                <label class="field"><span>Query value (₹)</span><input name="budget" type="number" min="0" placeholder="Optional" /></label>
+              </div>
+              <label class="field"><span>Notes</span><textarea name="notes" rows="5" placeholder="Anything else the team should know…"></textarea></label>
+            </section>
+          </div>
+
+          <footer class="modal-actions onboarding-actions">
+            <button class="button button-ghost" id="querySecondary" type="button"><svg><use href="#i-x" /></svg><span>Cancel</span></button>
+            <button class="button button-primary" id="queryContinue" type="button">Add query</button>
+          </footer>
+        </form>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="bookingModalBackdrop" hidden>
+      <section class="modal onboarding-modal booking-onboarding-modal" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+        <form id="bookingForm">
+          <header class="onboarding-header">
+            <h2 id="bookingModalTitle">New booking</h2>
+            <button class="shell-icon onboarding-close" id="closeBookingModal" type="button" aria-label="Close new booking"><svg><use href="#i-x" /></svg></button>
+          </header>
+
+
+          <div class="onboarding-body booking-onboarding-body">
+            <section class="onboarding-step booking-onboarding-step" data-booking-step="0" aria-labelledby="bookingDetailsTitle">
+              <header class="onboarding-step-heading">
+                <h3 id="bookingDetailsTitle">Booking details</h3>
+                <p>Name the booking and confirm who it belongs to.</p>
+              </header>
+
+              <label class="field"><span>Booking title <b aria-hidden="true">*</b></span><input name="bookingTitle" type="text" placeholder="e.g. Bali trip — Sharma family" required /></label>
+              <label class="field"><span>Customer <b aria-hidden="true">*</b></span><select id="bookingCustomer" name="customer" required></select></label>
+              <div class="field-grid">
+                <label class="field"><span>Booking type</span><select name="bookingType"><option>Trip</option><option>Flight</option><option>Accommodation</option><option>Visa</option><option>Cruise</option><option>Transport</option></select></label>
+                <label class="field"><span>Currency</span><select name="currency"><option>INR</option><option>USD</option><option>EUR</option><option>GBP</option><option>AED</option></select></label>
+              </div>
+            </section>
+
+            <section class="onboarding-step booking-onboarding-step" data-booking-step="1" aria-labelledby="bookingTravelTitle">
+              <header class="onboarding-step-heading">
+                <h3 id="bookingTravelTitle">Travel &amp; pricing</h3>
+                <p>Add the travel window, party size, and customer price.</p>
+              </header>
+
+              <div class="field-grid">
+                <label class="field"><span>Travel start date <b aria-hidden="true">*</b></span><input name="travelStartDate" type="date" required /></label>
+                <label class="field"><span>Travel end date <b aria-hidden="true">*</b></span><input name="travelEndDate" type="date" required /></label>
+              </div>
+              <div class="booking-party-price-grid">
+                <label class="field"><span>Travellers <b aria-hidden="true">*</b></span><input name="paxCount" type="number" min="1" value="1" required /></label>
+                <label class="field"><span>Total selling price</span><input name="sellingPrice" type="number" min="0" placeholder="e.g. 75,000" /></label>
+                <label class="field"><span>Tax (%)</span><input name="taxPercent" type="number" min="0" max="100" step="0.01" placeholder="e.g. 5" /></label>
+              </div>
+            </section>
+
+            <section class="onboarding-step booking-onboarding-step" data-booking-step="2" aria-labelledby="bookingOperationsTitle">
+              <header class="onboarding-step-heading">
+                <h3 id="bookingOperationsTitle">Operations setup</h3>
+                <p>Give the operations team one clear starting point.</p>
+              </header>
+
+              <fieldset class="query-scope-options booking-setup-options">
+                <legend>Start with <b aria-hidden="true">*</b></legend>
+                <label><input type="radio" name="operationsSetup" value="service" checked /><span>Service line</span></label>
+                <label><input type="radio" name="operationsSetup" value="note" /><span>Operational note</span></label>
+              </fieldset>
+
+              <div id="bookingServiceFields">
+                <div class="field-grid">
+                  <label class="field"><span>Service type</span><select name="serviceType"><option>Accommodation</option><option>Flight</option><option>Transport</option><option>Visa</option><option>Activity</option><option>Other</option></select></label>
+                  <label class="field"><span>Estimated cost</span><input name="serviceCost" type="number" min="0" placeholder="Optional" /></label>
+                </div>
+                <label class="field booking-service-description"><span>Service details <b aria-hidden="true">*</b></span><input name="serviceDescription" type="text" placeholder="e.g. 4 nights at a beachfront hotel" required /></label>
+              </div>
+
+              <div id="bookingNoteFields" hidden>
+                <label class="field"><span>Operational note <b aria-hidden="true">*</b></span><textarea name="operationalNotes" rows="5" placeholder="Add inclusions, vendor details, or fulfilment instructions…" required disabled></textarea></label>
+              </div>
+            </section>
+          </div>
+
+          <footer class="modal-actions onboarding-actions">
+            <button class="button button-ghost" id="bookingSecondary" type="button"><svg><use href="#i-x" /></svg><span>Cancel</span></button>
+            <button class="button button-primary" id="bookingContinue" type="button">Add booking</button>
+          </footer>
+        </form>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="fileModalBackdrop" hidden>
+      <section class="modal" role="dialog" aria-modal="true" aria-labelledby="fileModalTitle">
+        <header class="modal-header">
+          <div><span class="overline">Document vault</span><h2 id="fileModalTitle">Add file</h2></div>
+          <button class="shell-icon" id="closeFileModal" type="button" aria-label="Close"><svg><use href="#i-x" /></svg></button>
+        </header>
+        <form id="fileForm">
+          <div class="modal-body">
+            <label class="field"><span>Customer</span><select id="fileCustomer" name="customer"></select></label>
+            <div class="field-grid">
+              <label class="field"><span>Traveller</span><input name="traveller" type="text" placeholder="Traveller name" required /></label>
+              <label class="field"><span>Document type</span><select name="type"><option>Passport</option><option>Visa</option><option>Certificate</option><option>Insurance</option><option>Booking</option><option>Ticket</option><option>ID</option></select></label>
+            </div>
+            <label class="field"><span>Document name</span><input name="document" type="text" placeholder="Document name" required /></label>
+            <div class="field-grid">
+              <label class="field"><span>Expiry date</span><input name="expiry" type="month" required /></label>
+              <label class="field"><span>File</span><input name="file" type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required /></label>
+            </div>
+          </div>
+          <footer class="modal-actions"><button class="button button-secondary" id="cancelFileModal" type="button">Cancel</button><button class="button button-primary" type="submit">Add file</button></footer>
+        </form>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="customerEditBackdrop" hidden>
+      <section class="modal onboarding-modal customer-edit-modal" role="dialog" aria-modal="true" aria-labelledby="customerEditTitle">
+        <form id="customerEditForm">
+          <header class="onboarding-header">
+            <h2 id="customerEditTitle">Edit customer</h2>
+            <button class="shell-icon onboarding-close" id="closeCustomerEdit" type="button" aria-label="Close customer editor"><svg><use href="#i-x" /></svg></button>
+          </header>
+          <div class="onboarding-body customer-edit-body">
+            <section class="customer-edit-section">
+              <header><h3>Customer profile</h3><p>Core details shown across the customer module.</p></header>
+              <div class="field-grid">
+                <label class="field"><span>Customer name <b aria-hidden="true">*</b></span><input id="customerEditName" name="name" type="text" required /></label>
+                <label class="field"><span>Customer code</span><input id="customerEditCode" name="code" type="text" readonly /></label>
+              </div>
+              <div class="field-grid">
+                <label class="field"><span>Category</span><select id="customerEditCategory" name="category"><option>B2C</option><option>B2B</option><option>Sub-Agent</option><option>Other</option></select></label>
+                <div class="field"><span>Tier</span><div class="tier-options tier-options-edit" id="customerEditTiers" role="group" aria-label="Customer tiers"></div></div>
+              </div>
+              <div class="field-grid">
+                <label class="field"><span>Location <b aria-hidden="true">*</b></span><input id="customerEditLocation" name="location" type="text" required /></label>
+                <label class="field"><span>Group type</span><select id="customerEditGroupType" name="groupType"><option>Family</option><option>Friends</option><option>Corporate</option><option>Educational</option><option>Religious</option><option>Solo</option><option>Other</option></select></label>
+              </div>
+            </section>
+            <section class="customer-edit-section">
+              <header><h3>Contact</h3><p>Primary contact information used by the team.</p></header>
+              <div class="field-grid">
+                <label class="field"><span>Phone</span><input id="customerEditPhone" name="phone" type="tel" /></label>
+                <label class="field"><span>Email</span><input id="customerEditEmail" name="email" type="email" /></label>
+              </div>
+            </section>
+            <section class="customer-edit-section">
+              <header><h3>Account values</h3><p>Financial values displayed in the table and customer profile.</p></header>
+              <div class="field-grid">
+                <label class="field"><span>Total value (₹)</span><input id="customerEditValue" name="value" type="number" min="0" /></label>
+                <label class="field"><span>Outstanding (₹)</span><input id="customerEditOutstanding" name="outstanding" type="number" min="0" /></label>
+              </div>
+            </section>
+          </div>
+          <footer class="modal-actions onboarding-actions">
+            <button class="button button-ghost" id="cancelCustomerEdit" type="button">Cancel</button>
+            <button class="button button-primary" type="submit">Save changes</button>
+          </footer>
+        </form>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="profileEditBackdrop" hidden>
+      <section class="modal profile-edit-modal" role="dialog" aria-modal="true" aria-labelledby="profileEditTitle" aria-describedby="profileEditDescription">
+        <form id="profileEditForm">
+          <header class="modal-header">
+            <div><span class="overline">Customer details</span><h2 id="profileEditTitle">Edit details</h2><p id="profileEditDescription"></p></div>
+            <button class="shell-icon" id="closeProfileEdit" type="button" aria-label="Close editor"><svg><use href="#i-x" /></svg></button>
+          </header>
+          <div class="modal-body profile-edit-body" id="profileEditFields"></div>
+          <footer class="modal-actions">
+            <button class="button button-secondary" id="cancelProfileEdit" type="button">Cancel</button>
+            <button class="button button-primary" type="submit">Save changes</button>
+          </footer>
+        </form>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="queryPositionBackdrop" hidden>
+      <section class="modal" role="dialog" aria-modal="true" aria-labelledby="queryPositionTitle">
+        <form id="queryPositionForm">
+          <header class="modal-header">
+            <div><span class="overline">Query details</span><h2 id="queryPositionTitle">Edit current position</h2><p>Update the commercial position tracked for this query.</p></div>
+            <button class="shell-icon" id="closeQueryPosition" type="button" aria-label="Close editor"><svg><use href="#i-x" /></svg></button>
+          </header>
+          <div class="modal-body" id="queryPositionFields"></div>
+          <footer class="modal-actions">
+            <button class="button button-secondary" id="cancelQueryPosition" type="button">Cancel</button>
+            <button class="button button-primary" type="submit">Save changes</button>
+          </footer>
+        </form>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="bankModalBackdrop" hidden>
+      <section class="modal bank-modal" role="dialog" aria-modal="true" aria-labelledby="bankModalTitle">
+        <form id="bankModalForm">
+          <header class="modal-header">
+            <div><span class="overline">Bank details</span><h2 id="bankModalTitle">Add bank details</h2></div>
+            <button class="shell-icon" id="closeBankModal" type="button" aria-label="Close bank editor"><svg><use href="#i-x" /></svg></button>
+          </header>
+          <div class="modal-body">
+            <div class="field-grid">
+              <label class="field"><span>Bank name <b aria-hidden="true">*</b></span><input name="bankName" id="bankNameInput" type="text" placeholder="e.g. HDFC Bank" required /></label>
+              <label class="field"><span>Account holder name — as on bank account <b aria-hidden="true">*</b></span><input name="holderName" id="bankHolderInput" type="text" placeholder="Enter the registered account name" required /></label>
+            </div>
+            <div class="field-grid">
+              <label class="field"><span>Account number <b aria-hidden="true">*</b></span><input name="accountNumber" id="bankAccountNumberInput" type="text" inputmode="numeric" placeholder="Account number" required /></label>
+              <label class="field"><span>IFSC code <b aria-hidden="true">*</b></span><input name="ifscCode" id="bankIfscInput" type="text" placeholder="e.g. HDFC0001234" required /></label>
+            </div>
+            <div class="field-grid">
+              <label class="field"><span>Account type <small>Optional</small></span><select name="accountType" id="bankAccountTypeInput"><option value="">Select account type</option><option>Current account</option><option>Savings account</option><option>Salary account</option><option>Overdraft account</option><option>Other</option></select></label>
+              <label class="field"><span>Branch <small>Optional</small></span><input name="branch" id="bankBranchInput" type="text" placeholder="City or branch name" /></label>
+            </div>
+            <label class="bank-check"><input type="checkbox" id="bankPreferredInput" /><span></span>Mark as preferred account</label>
+          </div>
+          <footer class="modal-actions">
+            <button class="button button-secondary" id="cancelBankModal" type="button">Cancel</button>
+            <button class="button button-primary" type="submit">Save bank details</button>
+          </footer>
+        </form>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="customerDeleteBackdrop" hidden>
+      <section class="modal customer-delete-modal" role="alertdialog" aria-modal="true" aria-labelledby="customerDeleteTitle" aria-describedby="customerDeleteDescription">
+        <header class="modal-header">
+          <div><span class="overline">Customer action</span><h2 id="customerDeleteTitle">Delete customer?</h2></div>
+          <button class="shell-icon" id="closeCustomerDelete" type="button" aria-label="Close delete confirmation"><svg><use href="#i-x" /></svg></button>
+        </header>
+        <div class="modal-body customer-delete-body">
+          <span class="customer-delete-icon"><svg><use href="#i-alert" /></svg></span>
+          <div><strong id="customerDeleteName">Customer</strong><p id="customerDeleteDescription">This removes the customer profile, traveller records, documents, and related requests from this workspace.</p></div>
+        </div>
+        <footer class="modal-actions">
+          <button class="button button-secondary" id="cancelCustomerDelete" type="button">Cancel</button>
+          <button class="button button-danger" id="confirmCustomerDelete" type="button"><svg><use href="#i-trash" /></svg>Delete customer</button>
+        </footer>
+      </section>
+    </div>
+
+    <div class="customer-notes-overlay" id="customerNotesBackdrop" aria-hidden="true" hidden>
+      <aside class="customer-notes-popover" role="dialog" aria-modal="true" aria-labelledby="customerNotesTitle">
+        <header class="customer-notes-header">
+          <p class="customer-notes-eyebrow" id="customerNotesEyebrow">Customers · CUST-0001</p>
+          <div class="customer-notes-heading">
+            <h2 id="customerNotesTitle">Customer notes</h2>
+            <button class="customer-notes-mode" id="customerNotesModeButton" type="button">Write a note</button>
+            <button class="customer-notes-close" id="closeCustomerNotes" type="button" aria-label="Close customer notes"><svg><use href="#i-x" /></svg></button>
+          </div>
+        </header>
+
+        <section class="customer-notes-view is-active" id="customerNotesBrowse" aria-label="Browse customer notes">
+          <div class="customer-notes-body">
+            <label class="customer-notes-search">
+              <svg aria-hidden="true"><use href="#i-search" /></svg>
+              <input id="customerNotesSearch" type="search" placeholder="Search notes" autocomplete="off" />
+            </label>
+            <div class="customer-notes-filters" aria-label="Filter customer notes">
+              <button class="is-active" type="button" data-customer-note-filter="all">All</button>
+              <button type="button" data-customer-note-filter="pinned">Pinned</button>
+              <button type="button" data-customer-note-filter="mine">Mine</button>
+            </div>
+            <p class="customer-notes-empty" id="customerNotesEmpty" hidden>No notes match.</p>
+            <div class="customer-notes-list" id="customerNotesList" aria-live="polite"></div>
+          </div>
+        </section>
+
+        <form class="customer-notes-view customer-note-composer" id="customerNoteForm">
+          <div class="customer-notes-body">
+            <label class="sr-only" for="customerNoteText">Customer note</label>
+            <textarea id="customerNoteText" name="note" rows="5" maxlength="1000" placeholder="What should the team know about this customer?" required></textarea>
+            <div class="customer-note-field">
+              <span>Related to</span>
+              <div class="customer-note-related" id="customerNoteRelated">
+                <button class="customer-note-related-button" id="customerNoteRelatedButton" type="button" aria-haspopup="listbox" aria-expanded="false">
+                  <span id="customerNoteRelatedValue">Nothing specific</span>
+                  <svg aria-hidden="true"><use href="#i-chevron-down" /></svg>
+                </button>
+                <div class="customer-note-related-menu" id="customerNoteRelatedMenu" role="listbox" hidden>
+                  <button class="is-active" type="button" role="option" aria-selected="true" data-customer-note-related="">Nothing specific</button>
+                  <button type="button" role="option" aria-selected="false" data-customer-note-related="Profile · Travel preferences">Profile · Travel preferences</button>
+                  <button type="button" role="option" aria-selected="false" data-customer-note-related="Traveller · Primary traveller">Traveller · Primary traveller</button>
+                  <button type="button" role="option" aria-selected="false" data-customer-note-related="Document · Passport & visa">Document · Passport &amp; visa</button>
+                  <button type="button" role="option" aria-selected="false" data-customer-note-related="Query · Active query">Query · Active query</button>
+                  <button type="button" role="option" aria-selected="false" data-customer-note-related="Booking · Recent booking">Booking · Recent booking</button>
+                  <button type="button" role="option" aria-selected="false" data-customer-note-related="Payment · Account balance">Payment · Account balance</button>
+                </div>
+              </div>
+            </div>
+            <button class="customer-note-pin" id="customerNotePinned" type="button" role="checkbox" aria-checked="false">
+              <span><svg aria-hidden="true"><use href="#i-check" /></svg></span>
+              Pin to the top of this customer
+            </button>
+          </div>
+          <footer class="customer-notes-footer">
+            <button class="button button-secondary button-small" id="cancelCustomerNote" type="button"><svg><use href="#i-x" /></svg>Cancel</button>
+            <button class="button button-primary button-small" id="saveCustomerNote" type="submit"><svg><use href="#i-check" /></svg>Save note</button>
+          </footer>
+        </form>
+      </aside>
+    </div>
+
+    <div class="modal-backdrop" id="travellerModalBackdrop" hidden>
+      <section class="modal onboarding-modal traveller-modal" role="dialog" aria-modal="true" aria-labelledby="travellerModalTitle">
+        <form id="travellerForm">
+          <header class="onboarding-header">
+            <h2 id="travellerModalTitle">Traveller details</h2>
+            <button class="shell-icon onboarding-close" id="closeTravellerModal" type="button" aria-label="Close traveller details"><svg><use href="#i-x" /></svg></button>
+          </header>
+          <div class="onboarding-body traveller-modal-body">
+            <section class="traveller-form-section">
+              <header><h3>Identity</h3><p>Personal and group information for this traveller.</p></header>
+              <label class="traveller-primary-control"><input id="travellerPrimary" name="primary" type="checkbox" /><span><svg><use href="#i-check" /></svg></span><span><b>Primary traveller</b><small>Main point of contact for this customer group.</small></span></label>
+              <div class="field-grid">
+                <label class="field"><span>Full name <b aria-hidden="true">*</b></span><input id="travellerFullName" name="name" type="text" required /></label>
+                <label class="field"><span>Relationship</span><select id="travellerRelationship" name="relationship"><option>Family</option><option>Spouse</option><option>Child</option><option>Friend</option><option>Colleague</option><option>Other</option></select></label>
+              </div>
+              <div class="field-grid traveller-identity-grid">
+                <label class="field"><span>Date of birth</span><input id="travellerDateOfBirth" name="dateOfBirth" type="date" /></label>
+                <label class="field"><span>Nationality</span><input id="travellerNationality" name="nationality" type="text" /></label>
+              </div>
+            </section>
+
+            <section class="traveller-form-section">
+              <header><h3>Contact</h3><p>Direct contact details and address.</p></header>
+              <div class="field-grid">
+                <label class="field"><span>Phone</span><input id="travellerModalPhone" name="phone" type="tel" /></label>
+                <label class="field"><span>Email</span><input id="travellerModalEmail" name="email" type="email" /></label>
+              </div>
+              <label class="field"><span>Address</span><textarea id="travellerAddress" name="address" rows="2"></textarea></label>
+            </section>
+
+            <section class="traveller-form-section traveller-preferences-section">
+              <header><h3>Travel preferences</h3><p>Capture reusable defaults so every enquiry starts with the traveller’s actual needs.</p></header>
+              <dl class="traveller-modal-stats">
+                <div><dt>Documents</dt><dd id="travellerModalDocumentCount">0 uploaded</dd></div>
+                <div><dt>Trips</dt><dd id="travellerModalTripCount">0 completed</dd></div>
+                <div><dt>Preferences</dt><dd id="travellerModalPreferenceCount">0 saved</dd></div>
+              </dl>
+              <div class="traveller-preference-editor">
+                <div class="traveller-preference-toolbar">
+                  <div><strong>Travel preferences / interest</strong><small>Search and choose one or more options.</small></div>
+                  <button class="text-action" id="clearTravellerPreferences" type="button">Clear all</button>
+                </div>
+                <div class="preference-typeahead" id="travellerPreferenceTypeahead">
+                  <div class="preference-combobox">
+                    <svg aria-hidden="true"><use href="#i-search" /></svg>
+                    <input id="travellerPreferenceInput" type="text" placeholder="e.g. Beach, Boutique, Vegetarian" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="travellerPreferenceSuggestions" aria-autocomplete="list" aria-labelledby="travellerPreferenceInputLabel" />
+                  </div>
+                  <div class="themed-list preference-suggestions" id="travellerPreferenceSuggestions" role="listbox" aria-label="Matching preferences" hidden></div>
+                  <div class="preference-chips" id="travellerPreferenceChips" aria-live="polite"></div>
+                </div>
+                <span class="sr-only" id="travellerPreferenceInputLabel">Travel preferences / interest</span>
+              </div>
+            </section>
+          </div>
+          <footer class="modal-actions onboarding-actions traveller-modal-actions">
+            <button class="button button-danger" id="deleteTravellerButton" type="button"><svg><use href="#i-trash" /></svg>Delete traveller</button>
+            <span class="traveller-modal-action-spacer"></span>
+            <button class="button button-secondary" id="cancelTravellerModal" type="button">Close</button>
+            <button class="button button-tertiary" id="editTravellerButton" type="button"><svg><use href="#i-edit" /></svg>Edit traveller</button>
+            <button class="button button-primary" id="saveTravellerButton" type="submit">Save changes</button>
+          </footer>
+        </form>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="requestDocumentBackdrop" hidden>
+      <section class="modal request-document-modal" role="dialog" aria-modal="true" aria-labelledby="requestDocumentTitle">
+        <header class="modal-header">
+          <div><span class="overline">Secure upload request</span><h2 id="requestDocumentTitle">Request documents</h2></div>
+          <button class="shell-icon" id="closeRequestDocument" type="button" aria-label="Close document request"><svg><use href="#i-x" /></svg></button>
+        </header>
+        <form id="requestDocumentForm">
+          <div class="modal-body request-document-body" id="requestDocumentFormStage">
+            <p class="modal-intro">Choose the traveller and exact documents. The generated link only asks for those files.</p>
+            <label class="field"><span>Traveller</span><select id="requestTraveller" name="traveller" required></select><small>The approved document will be attached to this traveller.</small></label>
+            <fieldset class="request-option-group request-document-options">
+              <legend>Documents</legend>
+              <label class="request-check"><input name="requestType" type="checkbox" value="Passport" checked /><span><svg><use href="#i-check" /></svg></span><b>Passport</b></label>
+              <label class="request-check"><input name="requestType" type="checkbox" value="Visa" /><span><svg><use href="#i-check" /></svg></span><b>Visa</b></label>
+              <label class="request-check"><input name="requestType" type="checkbox" value="National ID" /><span><svg><use href="#i-check" /></svg></span><b>National ID</b></label>
+              <label class="request-check"><input name="requestType" type="checkbox" value="Travel insurance" /><span><svg><use href="#i-check" /></svg></span><b>Travel insurance</b></label>
+            </fieldset>
+            <label class="field"><span>Message</span><textarea id="requestDocumentMessage" name="message" rows="3">Please upload the selected documents so we can keep your file up to date.</textarea></label>
+          </div>
+          <div class="modal-body request-link-stage" id="requestDocumentLinkStage" hidden>
+            <div class="request-link-heading"><span><svg><use href="#i-check" /></svg></span><div><strong>Customer upload link is ready</strong><p>Only the selected document requests appear on this secure page.</p></div></div>
+            <div class="request-link-box">
+              <span>Customer magic link</span>
+              <p id="requestDocumentLink"></p>
+              <small>Expires in 30 days</small>
+            </div>
+            <div class="request-selection-summary"><strong>Requested for <span id="requestLinkTraveller"></span></strong><p id="requestLinkDocuments"></p></div>
+          </div>
+          <footer class="modal-actions">
+            <button class="button button-secondary" id="cancelRequestDocument" type="button">Cancel</button>
+            <button class="button button-primary" id="generateRequestLink" type="submit">Generate link</button>
+            <button class="button button-secondary" id="copyRequestLink" type="button" hidden>Copy link</button>
+            <button class="button button-tertiary" id="previewRequestUpload" type="button" hidden><svg><use href="#i-upload" /></svg>Preview upload page</button>
+            <button class="button button-primary" id="sendRequestLink" type="button" hidden><svg><use href="#i-message" /></svg>Send link</button>
+          </footer>
+        </form>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="requestUploadBackdrop" hidden>
+      <section class="modal request-upload-modal" role="dialog" aria-modal="true" aria-labelledby="requestUploadTitle">
+        <header class="modal-header">
+          <div><span class="overline">Customer view</span><h2 id="requestUploadTitle">Secure document request</h2></div>
+          <button class="shell-icon" id="closeRequestUpload" type="button" aria-label="Close upload page"><svg><use href="#i-x" /></svg></button>
+        </header>
+        <form id="requestUploadForm">
+          <div class="modal-body">
+            <div class="secure-request-note"><svg><use href="#i-file" /></svg><p>For <strong id="requestUploadCustomer"></strong>. Uploads go to the agency for review before they are added to the traveller record.</p></div>
+            <label class="field"><span>Requested document</span><select id="requestUploadType" name="requestType"></select></label>
+            <label class="field"><span>Document name</span><input id="requestUploadName" name="documentName" type="text" required /></label>
+            <button class="request-upload-dropzone" id="requestUploadDropzone" type="button"><svg><use href="#i-upload" /></svg><strong id="requestUploadPrompt">Choose a PDF or image</strong><small>JPEG or PNG up to 5 MB · PDF up to 10 MB</small></button>
+            <input class="sr-only" id="requestUploadFile" name="file" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" />
+            <p class="request-upload-error" id="requestUploadError" role="alert" hidden></p>
+            <div class="request-upload-preview" id="requestUploadPreview" hidden>
+              <div class="request-upload-preview-heading"><span>Your upload</span><button class="text-action" id="removeRequestUpload" type="button">Remove file</button></div>
+              <img id="requestUploadPreviewImage" alt="Selected document preview" hidden />
+              <iframe id="requestUploadPreviewFrame" title="Selected PDF preview" hidden></iframe>
+            </div>
+          </div>
+          <footer class="modal-actions"><button class="button button-secondary" id="cancelRequestUpload" type="button">Cancel</button><button class="button button-primary" id="submitRequestUpload" type="submit" disabled>Submit for review</button></footer>
+        </form>
+        <section class="request-upload-success" id="requestUploadSuccess" aria-live="polite" hidden>
+          <span class="request-upload-success-icon"><svg><use href="#i-check" /></svg></span>
+          <span class="overline">Submitted securely</span>
+          <h2>Documents submitted</h2>
+          <p>Your upload has been sent to the agency. It will remain marked <strong>Under review</strong> until it is approved and added to the traveller record.</p>
+          <div><span id="requestUploadSuccessDocument">Document</span><b>Under review</b></div>
+        </section>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="documentReviewBackdrop" hidden>
+      <section class="modal document-review-modal" role="dialog" aria-modal="true" aria-labelledby="documentReviewTitle">
+        <header class="modal-header">
+          <div><span class="overline">Document review</span><h2 id="documentReviewTitle">Passport</h2><p id="documentReviewSubtitle">Confirm this upload before it is added to the traveller record.</p></div>
+          <button class="shell-icon" id="closeDocumentReview" type="button" aria-label="Close document review"><svg><use href="#i-x" /></svg></button>
+        </header>
+        <div class="modal-body document-review-body">
+          <div class="document-review-viewer">
+            <div class="document-review-viewer-toolbar"><span>Document preview</span><button class="document-print-badge" id="printDocument" type="button"><svg><use href="#i-print" /></svg>Print</button></div>
+            <div class="document-preview" id="documentReviewPreview">
+              <img id="documentReviewPreviewImage" alt="Uploaded document preview" hidden />
+              <iframe id="documentReviewPreviewFrame" title="Uploaded PDF preview" hidden></iframe>
+              <div id="documentReviewPreviewFallback"><svg><use href="#i-file" /></svg><strong id="documentReviewFile">Passport copy.pdf</strong><span>Preview unavailable for this file</span></div>
+            </div>
+            <div class="document-review-file-meta"><strong id="documentReviewFileName">Passport copy.pdf</strong><span id="documentReviewFileMeta">Uploaded by customer</span></div>
+          </div>
+          <div class="document-review-inspector">
+            <div class="approval-callout" id="documentApprovalCallout"><svg><use href="#i-alert" /></svg><p><strong>Approval needed</strong><span>Validate the file against the details below. Approval makes it available across this customer’s document vault.</span></p></div>
+            <label class="field"><span>Traveller</span><select id="documentReviewTraveller"></select></label>
+            <label class="field"><span>Document type</span><select id="documentReviewType"><option>Passport</option><option>Visa</option><option>National ID</option><option>Travel insurance</option><option>Other</option></select></label>
+            <label class="field"><span>Document name</span><input id="documentReviewName" type="text" required /></label>
+            <label class="field"><span>Expiry date <small>Optional</small></span><input id="documentReviewExpiry" type="date" /></label>
+            <label class="field"><span>Reviewer note <small>Optional</small></span><textarea id="documentReviewNote" rows="3" placeholder="Add a note for the traveller record"></textarea></label>
+            <dl class="document-review-details">
+              <div><dt>Status</dt><dd id="documentReviewStatus">Pending review</dd></div>
+              <div><dt>Source</dt><dd id="documentReviewSource">Customer upload link</dd></div>
+              <div><dt>Uploaded</dt><dd id="documentReviewUploadedAt">Just now</dd></div>
+              <div><dt>File size</dt><dd id="documentReviewSize">—</dd></div>
+            </dl>
+          </div>
+        </div>
+        <footer class="modal-actions document-review-actions">
+          <input id="documentReplacementFile" type="file" accept="application/pdf,image/jpeg,image/png" hidden />
+          <div class="document-review-management-actions" id="documentReviewManagementActions">
+            <button class="button button-secondary" id="replaceDocument" type="button"><svg><use href="#i-upload" /></svg>Replace Document</button>
+            <button class="button button-danger" id="deleteDocument" type="button"><svg><use href="#i-trash" /></svg>Delete Document</button>
+          </div>
+          <div class="document-delete-confirmation" id="documentDeleteConfirmation" role="alert" hidden>
+            <p>Delete <strong id="documentDeleteName">this document</strong>? This cannot be undone.</p>
+            <div><button class="button button-secondary" id="cancelDocumentDelete" type="button">Cancel</button><button class="button button-danger" id="confirmDocumentDelete" type="button">Delete Document</button></div>
+          </div>
+          <button class="button button-primary" id="approveDocument" type="button"><svg><use href="#i-check" /></svg>Approve and add to traveller</button>
+        </footer>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="importModalBackdrop" hidden>
+      <section class="modal import-modal" role="dialog" aria-modal="true" aria-labelledby="importModalTitle">
+        <form id="importForm">
+          <div class="import-modal-body">
+            <header class="import-heading">
+              <div>
+                <h2 id="importModalTitle">Import customers</h2>
+              </div>
+              <button class="shell-icon import-close" id="closeImportModal" type="button" aria-label="Close import"><svg><use href="#i-x" /></svg></button>
+            </header>
+            <article class="import-sample" aria-label="Sample file">
+              <div class="import-sample-head">
+                <svg aria-hidden="true"><use href="#i-file" /></svg>
+                <strong>Sample file</strong>
+              </div>
+              <p>Use the sample columns exactly. Location fields must match existing region names or codes.</p>
+              <button class="button button-secondary button-small" id="downloadSampleCsv" type="button"><svg><use href="#i-download" /></svg>CSV sample</button>
+            </article>
+            <button class="import-dropzone" id="importDropzone" type="button">
+              <svg><use href="#i-folder-upload" /></svg>
+              <span>Drag and drop an CSV or XLSX file, or <strong>Browse</strong></span>
+              <small>(under 50MB)</small>
+            </button>
+            <input class="sr-only" id="importFileInput" name="file" type="file" accept=".csv,.xlsx,.xls" />
+            <article class="import-file" id="importFileCard" hidden>
+              <div>
+                <strong id="importFileName"></strong>
+                <span><i>CSV</i><span id="importFileSize"></span></span>
+              </div>
+              <button class="import-remove" id="removeImportFile" type="button" aria-label="Remove selected file"><svg><use href="#i-trash" /></svg></button>
+            </article>
+          </div>
+          <footer class="modal-actions import-actions">
+            <button class="button button-ghost" id="cancelImportModal" type="button"><svg><use href="#i-x" /></svg>Cancel</button>
+            <button class="button button-primary" id="submitImport" type="submit" disabled><svg><use href="#i-upload" /></svg>Import file</button>
+          </footer>
+        </form>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="inboxCreateBackdrop" hidden>
+      <section class="modal inbox-create-modal" role="dialog" aria-modal="true" aria-labelledby="inboxCreateTitle">
+        <header class="modal-header">
+          <div><span class="overline">New conversation</span><h2 id="inboxCreateTitle">Start a conversation</h2></div>
+          <button class="shell-icon" id="closeInboxCreate" type="button" aria-label="Close new conversation"><svg><use href="#i-x" /></svg></button>
+        </header>
+        <div class="modal-body inbox-create-body">
+          <div class="inbox-customer-heading">
+            <div><span class="overline">Customer</span><strong>Who would you like to contact?</strong></div>
+            <span id="inboxCustomerResultCount"></span>
+          </div>
+          <label class="inbox-customer-search">
+            <svg><use href="#i-search" /></svg>
+            <input id="inboxCustomerSearch" type="search" placeholder="Search by customer name, code or location" autocomplete="off" />
+          </label>
+          <div class="inbox-customer-list" id="inboxCustomerList" role="listbox" aria-label="Available customers"></div>
+        </div>
+        <footer class="modal-actions">
+          <button class="button button-secondary" id="cancelInboxCreate" type="button">Cancel</button>
+          <button class="button button-primary" id="startInboxConversation" type="button" disabled>Start conversation</button>
+        </footer>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="inboxSentBackdrop" hidden>
+      <section class="modal inbox-sent-modal" role="dialog" aria-modal="true" aria-labelledby="inboxSentTitle">
+        <div class="inbox-sent-body">
+          <span class="inbox-sent-check"><svg><use href="#i-check" /></svg></span>
+          <span class="overline">Delivered</span>
+          <h2 id="inboxSentTitle">Message sent</h2>
+          <p id="inboxSentSummary"></p>
+          <div class="inbox-sent-channel" id="inboxSentChannel"></div>
+        </div>
+        <footer class="modal-actions inbox-sent-actions">
+          <button class="button button-secondary" id="closeInboxSent" type="button">Back to inbox</button>
+          <button class="button button-primary" id="viewSentConversation" type="button">View conversation</button>
+        </footer>
+      </section>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

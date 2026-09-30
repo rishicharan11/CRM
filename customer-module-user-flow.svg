@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="1800" viewBox="0 0 2000 1800" role="img" aria-labelledby="title desc">
+  <title id="title">End-to-end travel agent user flow through the Paryatech customer module</title>
+  <desc id="desc">A flow diagram from entering the customer list through finding, creating, or importing a customer, using the profile tabs, completing operational tasks, and returning to the prioritized list.</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#173c3a" flood-opacity="0.09"/></filter>
+    <linearGradient id="header" x1="0" x2="1"><stop offset="0" stop-color="#0e4644"/><stop offset="1" stop-color="#176b67"/></linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#72918e"/></marker>
+    <marker id="arrowStrong" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#115553"/></marker>
+    <style>
+      .sans{font-family:Inter,"Public Sans",Arial,sans-serif}.head{font-family:Inter,"Onest",Arial,sans-serif;font-weight:700}.label{font:700 12px Inter,"Public Sans",Arial,sans-serif;letter-spacing:1.7px}.nodeTitle{font:700 20px Inter,"Public Sans",Arial,sans-serif;fill:#173c3a}.nodeBody{font:500 14px Inter,"Public Sans",Arial,sans-serif;fill:#536461}.tiny{font:500 12px Inter,"Public Sans",Arial,sans-serif;fill:#687a77}.flow{fill:none;stroke:#72918e;stroke-width:3;marker-end:url(#arrow)}.strongFlow{fill:none;stroke:#115553;stroke-width:4;marker-end:url(#arrowStrong)}.dashFlow{fill:none;stroke:#97aaa8;stroke-width:2.5;stroke-dasharray:8 8;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="2000" height="1800" fill="#f7fbfa"/>
+  <rect width="2000" height="142" fill="url(#header)"/>
+  <text x="70" y="60" class="head" font-size="37" fill="#ffffff">Customer module · end-to-end user flow</text>
+  <text x="70" y="100" class="sans" font-size="18" fill="#d8ecea">Primary user: 40-year-old travel agency owner / agent · operational desktop workflow</text>
+  <g transform="translate(1590 38)"><rect width="338" height="68" rx="15" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-opacity="0.25"/><circle cx="27" cy="24" r="7" fill="#ffffff"/><text x="47" y="29" class="sans" font-size="13" fill="#ffffff">Primary path</text><path d="M20 49h16" stroke="#b9d5d2" stroke-width="2.5" stroke-dasharray="5 4"/><text x="47" y="54" class="sans" font-size="13" fill="#d8ecea">Optional / return path</text></g>
+
+  <text x="70" y="190" class="label" fill="#607572">1 · ENTER AND ORIENT</text>
+  <g filter="url(#shadow)"><rect x="760" y="164" width="480" height="112" rx="22" fill="#ffffff" stroke="#cfe2df"/></g>
+  <circle cx="805" cy="220" r="25" fill="#115553"/><path d="M793 220h24M805 208v24" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+  <text x="850" y="207" class="nodeTitle">Open CRM → Customers</text>
+  <text x="850" y="233" class="nodeBody">Scan totals, outstanding value, expiring documents</text>
+  <text x="850" y="255" class="tiny">List is the daily control point</text>
+  <path d="M1000 276v62" class="strongFlow"/>
+
+  <text x="70" y="336" class="label" fill="#607572">2 · CHOOSE HOW TO START</text>
+  <g filter="url(#shadow)"><path d="M1000 316l154 88-154 88-154-88z" fill="#eef8f7" stroke="#87bcb7" stroke-width="2"/></g>
+  <text x="1000" y="398" text-anchor="middle" class="nodeTitle">Customer already exists?</text>
+  <text x="1000" y="423" text-anchor="middle" class="tiny">Choose the fastest reliable route</text>
+
+  <path d="M846 404H520v96" class="flow"/><text x="650" y="389" class="label" fill="#607572">YES</text>
+  <path d="M1000 492v8" class="flow"/><text x="1018" y="489" class="label" fill="#607572">NO</text>
+  <path d="M1154 404h326v96" class="flow"/><text x="1325" y="389" class="label" fill="#607572">BULK</text>
+
+  <g filter="url(#shadow)"><rect x="250" y="500" width="540" height="184" rx="20" fill="#ffffff" stroke="#dce8e6"/><rect x="730" y="500" width="540" height="184" rx="20" fill="#ffffff" stroke="#bcdedb"/><rect x="1210" y="500" width="540" height="184" rx="20" fill="#ffffff" stroke="#dce8e6"/></g>
+  <rect x="250" y="500" width="540" height="44" rx="20" fill="#eaf3ff"/><rect x="250" y="524" width="540" height="20" fill="#eaf3ff"/>
+  <text x="278" y="529" class="label" fill="#2872c7">FIND EXISTING</text>
+  <text x="278" y="578" class="nodeTitle">Search, filter, or browse category</text>
+  <text x="278" y="608" class="nodeBody">Name / code / location · tier · group type</text>
+  <text x="278" y="633" class="nodeBody">Outstanding balance · document expiry</text>
+  <text x="278" y="658" class="tiny">Select a row to open the customer</text>
+
+  <rect x="730" y="500" width="540" height="44" rx="20" fill="#e8f5f3"/><rect x="730" y="524" width="540" height="20" fill="#e8f5f3"/>
+  <text x="758" y="529" class="label" fill="#115553">CREATE ONE CUSTOMER</text>
+  <text x="758" y="574" class="nodeTitle">Complete the five-step wizard</text>
+  <text x="758" y="603" class="nodeBody">1 Basic info → 2 Primary contact → 3 Preferences</text>
+  <text x="758" y="628" class="nodeBody">4 Category / group → 5 Tier, credit, notes</text>
+  <text x="758" y="655" class="tiny">Save active customer or save draft</text>
+
+  <rect x="1210" y="500" width="540" height="44" rx="20" fill="#fff4df"/><rect x="1210" y="524" width="540" height="20" fill="#fff4df"/>
+  <text x="1238" y="529" class="label" fill="#9a630f">IMPORT MANY CUSTOMERS</text>
+  <text x="1238" y="578" class="nodeTitle">Quick actions → Import</text>
+  <text x="1238" y="608" class="nodeBody">Upload CSV / XLSX · up to 1,000 rows</text>
+  <text x="1238" y="633" class="nodeBody">Match by code or exact name</text>
+  <text x="1238" y="658" class="tiny">Review refreshed list and resolve records</text>
+
+  <path d="M520 684v72h430" class="flow"/><path d="M1000 684v72" class="strongFlow"/><path d="M1480 684v72h-430" class="flow"/>
+
+  <text x="70" y="753" class="label" fill="#607572">3 · CUSTOMER 360° HUB</text>
+  <g filter="url(#shadow)"><rect x="650" y="756" width="700" height="154" rx="26" fill="#173c3a"/></g>
+  <circle cx="714" cy="833" r="36" fill="#dff1ef"/><circle cx="714" cy="821" r="11" fill="#115553"/><path d="M693 856c3-19 10-29 21-29s18 10 21 29" fill="#115553"/>
+  <text x="775" y="803" class="label" fill="#a9cdca">SELECTED CUSTOMER PROFILE</text>
+  <text x="775" y="840" class="head" font-size="29" fill="#ffffff">Understand context, then act</text>
+  <text x="775" y="871" class="sans" font-size="16" fill="#d8ecea">Identity · KPIs · seven working tabs · profile actions</text>
+
+  <path d="M1000 910v58" class="strongFlow"/>
+  <text x="70" y="969" class="label" fill="#607572">4 · COMPLETE THE CUSTOMER INTENT</text>
+  <path d="M190 1008H1810" stroke="#b8ccca" stroke-width="3"/><path d="M1000 968v40" stroke="#115553" stroke-width="4"/>
+
+  <g filter="url(#shadow)">
+    <rect x="70" y="1030" width="420" height="170" rx="19" fill="#ffffff" stroke="#dce8e6"/>
+    <rect x="550" y="1030" width="420" height="170" rx="19" fill="#ffffff" stroke="#dce8e6"/>
+    <rect x="1030" y="1030" width="420" height="170" rx="19" fill="#ffffff" stroke="#bcdedb"/>
+    <rect x="1510" y="1030" width="420" height="170" rx="19" fill="#ffffff" stroke="#dce8e6"/>
+    <rect x="190" y="1260" width="420" height="170" rx="19" fill="#ffffff" stroke="#dce8e6"/>
+    <rect x="790" y="1260" width="420" height="170" rx="19" fill="#ffffff" stroke="#dce8e6"/>
+    <rect x="1390" y="1260" width="420" height="170" rx="19" fill="#ffffff" stroke="#dce8e6"/>
+  </g>
+  <path d="M280 1008v22M760 1008v22M1240 1008v22M1720 1008v22" stroke="#b8ccca" stroke-width="3"/>
+  <path d="M400 1200v60M1000 1200v60M1600 1200v60" stroke="#b8ccca" stroke-width="3"/>
+
+  <g transform="translate(70 1030)"><rect width="420" height="42" rx="19" fill="#eef8f7"/><rect y="23" width="420" height="19" fill="#eef8f7"/><text x="24" y="28" class="label" fill="#115553">OVERVIEW</text><text x="24" y="78" class="nodeTitle">Assess customer health</text><text x="24" y="107" class="nodeBody">Review spend, trips, travellers, documents</text><text x="24" y="132" class="nodeBody">Contact, profile, activity, preferences</text><text x="24" y="156" class="tiny">Review context or open the next action</text></g>
+  <g transform="translate(550 1030)"><rect width="420" height="42" rx="19" fill="#fceff4"/><rect y="23" width="420" height="19" fill="#fceff4"/><text x="24" y="28" class="label" fill="#9c5376">TRAVELLERS</text><text x="24" y="78" class="nodeTitle">Maintain the travelling party</text><text x="24" y="107" class="nodeBody">Add · view · edit · remove traveller</text><text x="24" y="132" class="nodeBody">Identity, contact, preferences, primary role</text><text x="24" y="156" class="tiny">Keep the primary traveller first</text></g>
+  <g transform="translate(1030 1030)"><rect width="420" height="42" rx="19" fill="#fff4df"/><rect y="23" width="420" height="19" fill="#fff4df"/><text x="24" y="28" class="label" fill="#9a630f">DOCUMENTS</text><text x="24" y="78" class="nodeTitle">Make the party trip-ready</text><text x="24" y="107" class="nodeBody">Check readiness / missing / expiring items</text><text x="24" y="132" class="nodeBody">Request → secure upload → review</text><text x="24" y="156" class="tiny">Approve or request replacement</text></g>
+  <g transform="translate(1510 1030)"><rect width="420" height="42" rx="19" fill="#eaf3ff"/><rect y="23" width="420" height="19" fill="#eaf3ff"/><text x="24" y="28" class="label" fill="#2872c7">PIPELINE</text><text x="24" y="78" class="nodeTitle">Move demand into delivery</text><text x="24" y="107" class="nodeBody">New query: trip → group → assignment</text><text x="24" y="132" class="nodeBody">New booking: details → price → operations</text><text x="24" y="156" class="tiny">Track queries, proposals, bookings</text></g>
+  <g transform="translate(190 1260)"><rect width="420" height="42" rx="19" fill="#f3f0ff"/><rect y="23" width="420" height="19" fill="#f3f0ff"/><text x="24" y="28" class="label" fill="#6951a8">DATES</text><text x="24" y="78" class="nodeTitle">Prevent date surprises</text><text x="24" y="107" class="nodeBody">Birthdays · anniversary · passport expiry</text><text x="24" y="132" class="nodeBody">Past trips and upcoming reminders</text><text x="24" y="156" class="tiny">Add missing important dates</text></g>
+  <g transform="translate(790 1260)"><rect width="420" height="42" rx="19" fill="#edf8ef"/><rect y="23" width="420" height="19" fill="#edf8ef"/><text x="24" y="28" class="label" fill="#287a42">FINANCE</text><text x="24" y="78" class="nodeTitle">Check commercial position</text><text x="24" y="107" class="nodeBody">Booked · credited · debited · outstanding</text><text x="24" y="132" class="nodeBody">Review ledger entries and running balance</text><text x="24" y="156" class="tiny">Continue in Operations / All finances</text></g>
+  <g transform="translate(1390 1260)"><rect width="420" height="42" rx="19" fill="#eef8f7"/><rect y="23" width="420" height="19" fill="#eef8f7"/><text x="24" y="28" class="label" fill="#115553">COMMUNICATION</text><text x="24" y="78" class="nodeTitle">Continue the conversation</text><text x="24" y="107" class="nodeBody">WhatsApp · phone · email · notes</text><text x="24" y="132" class="nodeBody">Compose or filter interaction history</text><text x="24" y="156" class="tiny">Keep contact in customer context</text></g>
+
+  <path d="M1240 1200v260h-130" class="dashFlow"/>
+  <g transform="translate(655 1470)" filter="url(#shadow)"><rect width="690" height="112" rx="20" fill="#fff" stroke="#bcdedb"/><text x="28" y="34" class="label" fill="#115553">CROSS-MODULE QUICK ACTIONS</text><text x="28" y="66" class="nodeTitle">Edit profile · open document vault · add file</text><text x="28" y="91" class="nodeBody">Delete only after explicit confirmation; removal includes travellers, documents, and requests.</text></g>
+  <path d="M1000 1430v40" class="flow"/>
+  <path d="M1000 1582v55" class="strongFlow"/>
+
+  <text x="70" y="1644" class="label" fill="#607572">5 · CLOSE THE LOOP</text>
+  <g filter="url(#shadow)"><rect x="370" y="1640" width="1260" height="104" rx="24" fill="#173c3a"/></g>
+  <circle cx="428" cy="1692" r="25" fill="#dff1ef"/><path d="M417 1692l8 8 15-18" fill="none" stroke="#115553" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="475" y="1681" class="head" font-size="24" fill="#ffffff">Outcome: the next action is owned and visible</text>
+  <text x="475" y="1713" class="sans" font-size="16" fill="#d8ecea">Save changes → confirm toast / status → return to profile or customer list → refresh priorities</text>
+  <path d="M370 1692H35v-1470h725" class="dashFlow"/>
+  <text x="47" y="1546" class="tiny">Next customer / next priority</text>
+</svg>

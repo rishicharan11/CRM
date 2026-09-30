@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100" role="img" aria-labelledby="title desc">
+  <title id="title">Empathy map for a 40-year-old travel agency owner using the Paryatech customer module</title>
+  <desc id="desc">A research-hypothesis empathy map showing what the agent says, thinks, does, and feels, plus goals, pains, and desired gains.</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="7" stdDeviation="10" flood-color="#173c3a" flood-opacity="0.10"/></filter>
+    <linearGradient id="header" x1="0" x2="1"><stop offset="0" stop-color="#0e4644"/><stop offset="1" stop-color="#176b67"/></linearGradient>
+    <linearGradient id="persona" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f0f8f7"/><stop offset="1" stop-color="#dff1ef"/></linearGradient>
+    <style>
+      .sans{font-family:Inter,"Public Sans",Arial,sans-serif}.head{font-family:Inter,"Onest",Arial,sans-serif;font-weight:700}.mono{font-family:"SFMono-Regular",Consolas,monospace}
+      .qtitle{font:700 25px Inter,"Public Sans",Arial,sans-serif;fill:#173c3a}.body{font:500 15.5px Inter,"Public Sans",Arial,sans-serif;fill:#3f4e4d}.small{font:500 14px Inter,"Public Sans",Arial,sans-serif;fill:#657371}.label{font:700 12px Inter,"Public Sans",Arial,sans-serif;letter-spacing:1.8px;fill:#657371}
+    </style>
+  </defs>
+  <rect width="1600" height="1100" fill="#f7fbfa"/>
+  <rect x="0" y="0" width="1600" height="150" fill="url(#header)"/>
+  <text x="72" y="64" class="head" font-size="37" fill="#ffffff">Customer module empathy map</text>
+  <text x="72" y="103" class="sans" font-size="18" fill="#d8ecea">Working persona · research hypothesis for design validation</text>
+  <rect x="1190" y="42" width="338" height="68" rx="16" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-opacity="0.25"/>
+  <text x="1218" y="69" class="label" fill="#d8ecea">CORE JOB</text>
+  <text x="1218" y="94" class="sans" font-size="16" font-weight="600" fill="#ffffff">Keep every traveller trip-ready</text>
+
+  <g filter="url(#shadow)">
+    <rect x="58" y="184" width="620" height="326" rx="22" fill="#ffffff" stroke="#dce8e6"/>
+    <rect x="922" y="184" width="620" height="326" rx="22" fill="#ffffff" stroke="#dce8e6"/>
+    <rect x="58" y="538" width="620" height="326" rx="22" fill="#ffffff" stroke="#dce8e6"/>
+    <rect x="922" y="538" width="620" height="326" rx="22" fill="#ffffff" stroke="#dce8e6"/>
+  </g>
+
+  <g transform="translate(88 216)">
+    <circle cx="22" cy="20" r="20" fill="#e7f3ff"/><path d="M14 16h16M14 22h11M14 28h7" fill="none" stroke="#2872c7" stroke-width="2.3" stroke-linecap="round"/>
+    <text x="56" y="28" class="qtitle">SAYS</text>
+    <line x1="0" y1="56" x2="550" y2="56" stroke="#e7efee"/>
+    <text x="0" y="91" class="body">“Show me the whole family, not separate files.”</text>
+    <text x="0" y="134" class="body">“Who owes money, and which document expires next?”</text>
+    <text x="0" y="177" class="body">“I need to open a query while the customer is on the phone.”</text>
+    <text x="0" y="220" class="body">“My team should understand the history without calling me.”</text>
+  </g>
+
+  <g transform="translate(952 216)">
+    <circle cx="22" cy="20" r="20" fill="#fceff4"/><path d="M16 25c-3-7 1-14 8-14s11 7 8 14c-1 2-3 3-3 6H19c0-3-2-4-3-6zm4 11h8" fill="none" stroke="#a56383" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="56" y="28" class="qtitle">THINKS</text>
+    <line x1="0" y1="56" x2="550" y2="56" stroke="#e7efee"/>
+    <text x="0" y="91" class="body">“Please don’t make me enter the same details twice.”</text>
+    <text x="0" y="134" class="body">“Is this record current, complete, and safe to act on?”</text>
+    <text x="0" y="177" class="body">“Will passports, visas, and payments be ready in time?”</text>
+    <text x="0" y="220" class="body">“Can someone else pick this up if I step away?”</text>
+  </g>
+
+  <g transform="translate(88 570)">
+    <circle cx="22" cy="20" r="20" fill="#eef8eb"/><path d="M14 28l7-7 5 5 10-12M29 14h7v7" fill="none" stroke="#287a42" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="56" y="28" class="qtitle">DOES</text>
+    <line x1="0" y1="56" x2="550" y2="56" stroke="#e7efee"/>
+    <text x="0" y="91" class="body">Starts in Customers; scans totals, alerts, and today’s priorities.</text>
+    <text x="0" y="134" class="body">Searches by name or code; filters outstanding and expiring records.</text>
+    <text x="0" y="177" class="body">Opens the 360° profile; checks travellers, documents, and finance.</text>
+    <text x="0" y="220" class="body">Creates a query or booking; sends document requests and follows up.</text>
+  </g>
+
+  <g transform="translate(952 570)">
+    <circle cx="22" cy="20" r="20" fill="#fff4df"/><path d="M13 22c0-8 4-12 9-12 4 0 7 2 9 6 2 5-1 13-9 18-6-4-9-8-9-12z" fill="none" stroke="#b56a00" stroke-width="2.3" stroke-linejoin="round"/><circle cx="19" cy="20" r="1.6" fill="#b56a00"/><circle cx="26" cy="20" r="1.6" fill="#b56a00"/><path d="M19 27c2-2 5-2 7 0" fill="none" stroke="#b56a00" stroke-width="1.8" stroke-linecap="round"/>
+    <text x="56" y="28" class="qtitle">FEELS</text>
+    <line x1="0" y1="56" x2="550" y2="56" stroke="#e7efee"/>
+    <text x="0" y="91" class="body">Focused when the next action is visible and close at hand.</text>
+    <text x="0" y="134" class="body">Confident when one profile shows current, trustworthy status.</text>
+    <text x="0" y="177" class="body">Anxious about missed follow-ups, expiry dates, and unpaid balances.</text>
+    <text x="0" y="220" class="body">Frustrated by duplicate records, hidden history, or repeated entry.</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <circle cx="800" cy="524" r="108" fill="url(#persona)" stroke="#b7d9d6" stroke-width="4"/>
+    <circle cx="800" cy="483" r="31" fill="#115553"/>
+    <path d="M742 582c7-46 27-69 58-69s51 23 58 69" fill="#115553"/>
+    <circle cx="800" cy="524" r="87" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="5 8" opacity="0.8"/>
+  </g>
+  <rect x="685" y="613" width="230" height="93" rx="18" fill="#173c3a" filter="url(#shadow)"/>
+  <text x="800" y="645" text-anchor="middle" class="head" font-size="21" fill="#ffffff">Arjun Mehta · 40</text>
+  <text x="800" y="674" text-anchor="middle" class="sans" font-size="14" fill="#cfe5e3">Travel agency owner / agent</text>
+  <text x="800" y="695" text-anchor="middle" class="small" font-size="12" fill="#a9cdca">Desk + phone · frequent interruptions</text>
+
+  <g transform="translate(58 904)">
+    <rect width="484" height="152" rx="20" fill="#fff7e9" stroke="#f0d7aa"/>
+    <text x="26" y="34" class="label" fill="#9a630f">PAINS TO REDUCE</text>
+    <text x="26" y="66" class="small">Scattered WhatsApp, sheets, and paper</text>
+    <text x="26" y="91" class="small">Document chasing and missed follow-ups</text>
+    <text x="26" y="116" class="small">Duplicate records and unclear balances</text>
+  </g>
+  <g transform="translate(558 904)">
+    <rect width="484" height="152" rx="20" fill="#eef8f7" stroke="#bfdfdc"/>
+    <text x="26" y="34" class="label" fill="#115553">BEHAVIOURAL NEEDS</text>
+    <text x="26" y="66" class="small">Fast scan first; detail only when needed</text>
+    <text x="26" y="91" class="small">Context preserved across every action</text>
+    <text x="26" y="116" class="small">Clear ownership, status, and next step</text>
+  </g>
+  <g transform="translate(1058 904)">
+    <rect width="484" height="152" rx="20" fill="#edf8ef" stroke="#c6e6cc"/>
+    <text x="26" y="34" class="label" fill="#287a42">GAINS TO CREATE</text>
+    <text x="26" y="66" class="small">One trustworthy customer record</text>
+    <text x="26" y="91" class="small">Trip-ready travellers and documents</text>
+    <text x="26" y="116" class="small">Quick hand-offs, fewer calls, no surprises</text>
+  </g>
+</svg>

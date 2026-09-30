@@ -1,0 +1,186 @@
+@import url("https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap");
+
+/*
+  Typography utilities — consume --type-* roles from tokens.css
+  Source: Booking SoT (TYPOGRAPHY-COMPONENT-MAPPING.md)
+*/
+
+html,
+body,
+.pt-root {
+  font-family: var(--type-body-family);
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-line);
+  letter-spacing: var(--type-body-tracking);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Legacy helpers (map onto roles) */
+.pt-title {
+  font-family: var(--type-heading-page-family);
+  font-weight: var(--type-heading-page-weight);
+  letter-spacing: var(--type-heading-page-tracking);
+  color: var(--ink);
+}
+
+.pt-label {
+  font-family: var(--type-label-table-head-family);
+  font-size: var(--type-label-table-head-size);
+  font-weight: var(--type-label-table-head-weight);
+  color: var(--ink-2);
+}
+
+.pt-mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+.pt-muted {
+  color: var(--ink-2);
+  font-size: var(--type-body-search-size);
+}
+
+/* Role utilities */
+.type-heading-page {
+  font-family: var(--type-heading-page-family);
+  font-size: var(--type-heading-page-size);
+  font-weight: var(--type-heading-page-weight);
+  line-height: var(--type-heading-page-line);
+  letter-spacing: var(--type-heading-page-tracking);
+}
+
+.type-heading-record {
+  font-family: var(--type-heading-record-family);
+  font-size: var(--type-heading-record-size);
+  font-weight: var(--type-heading-record-weight);
+  line-height: var(--type-heading-record-line);
+  letter-spacing: var(--type-heading-record-tracking);
+}
+
+.type-heading-brand {
+  font-family: var(--type-heading-brand-family);
+  font-size: var(--type-heading-brand-size);
+  font-weight: var(--type-heading-brand-weight);
+  line-height: var(--type-heading-brand-line);
+  letter-spacing: var(--type-heading-brand-tracking);
+}
+
+.type-heading-modal {
+  font-family: var(--type-heading-modal-family);
+  font-size: var(--type-heading-modal-size);
+  font-weight: var(--type-heading-modal-weight);
+  line-height: var(--type-heading-modal-line);
+  letter-spacing: var(--type-heading-modal-tracking);
+}
+
+.type-heading-panel {
+  font-family: var(--type-heading-panel-family);
+  font-size: var(--type-heading-panel-size);
+  font-weight: var(--type-heading-panel-weight);
+  line-height: var(--type-heading-panel-line);
+  letter-spacing: var(--type-heading-panel-tracking);
+}
+
+.type-heading-section {
+  font-family: var(--type-heading-section-family);
+  font-size: var(--type-heading-section-size);
+  font-weight: var(--type-heading-section-weight);
+  line-height: var(--type-heading-section-line);
+  letter-spacing: var(--type-heading-section-tracking);
+}
+
+.type-heading-block {
+  font-family: var(--type-heading-block-family);
+  font-size: var(--type-heading-block-size);
+  font-weight: var(--type-heading-block-weight);
+  line-height: var(--type-heading-block-line);
+  letter-spacing: var(--type-heading-block-tracking);
+}
+
+.type-heading-service {
+  font-family: var(--type-heading-service-family);
+  font-size: var(--type-heading-service-size);
+  font-weight: var(--type-heading-service-weight);
+  line-height: var(--type-heading-service-line);
+  letter-spacing: var(--type-heading-service-tracking);
+}
+
+.type-label-button {
+  font-family: var(--type-label-button-family);
+  font-size: var(--type-label-button-size);
+  font-weight: var(--type-label-button-weight);
+  line-height: var(--type-label-button-line);
+}
+
+.type-label-button-sm {
+  font-family: var(--type-label-button-sm-family);
+  font-size: var(--type-label-button-sm-size);
+  font-weight: var(--type-label-button-sm-weight);
+  line-height: var(--type-label-button-sm-line);
+}
+
+.type-label-button-xs {
+  font-family: var(--type-label-button-xs-family);
+  font-size: var(--type-label-button-xs-size);
+  font-weight: var(--type-label-button-xs-weight);
+  line-height: var(--type-label-button-xs-line);
+}
+
+.type-label-compact {
+  font-family: var(--type-label-compact-family);
+  font-size: var(--type-label-compact-size);
+  font-weight: var(--type-label-compact-weight);
+  line-height: var(--type-label-compact-line);
+}
+
+.type-label-status {
+  font-family: var(--type-label-status-family);
+  font-size: var(--type-label-status-size);
+  font-weight: var(--type-label-status-weight);
+  line-height: var(--type-label-status-line);
+}
+
+.type-body {
+  font-family: var(--type-body-family);
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-line);
+}
+
+.type-body-emphasis {
+  font-family: var(--type-body-emphasis-family);
+  font-size: var(--type-body-emphasis-size);
+  font-weight: var(--type-body-emphasis-weight);
+  line-height: var(--type-body-emphasis-line);
+}
+
+.type-body-secondary {
+  font-family: var(--type-body-secondary-family);
+  font-size: var(--type-body-secondary-size);
+  font-weight: var(--type-body-secondary-weight);
+}
+
+.type-body-copy {
+  font-family: var(--type-body-copy-family);
+  font-size: var(--type-body-copy-size);
+  font-weight: var(--type-body-copy-weight);
+  line-height: var(--type-body-copy-line);
+}
+
+.type-mono-money {
+  font-family: var(--type-mono-money-family);
+  font-size: var(--type-mono-money-size);
+  font-weight: var(--type-mono-money-weight);
+  letter-spacing: var(--type-mono-money-tracking);
+  font-variant-numeric: tabular-nums;
+}
+
+.type-mono-id {
+  font-family: var(--type-mono-id-family);
+  font-size: var(--type-mono-id-size);
+  font-weight: var(--type-mono-id-weight);
+  font-variant-numeric: tabular-nums;
+}
