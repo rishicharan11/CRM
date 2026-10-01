@@ -1,3 +1,8 @@
+import { paginationMarkup, observeViewportPagination } from './table-pagination.js';
+import { createServiceProposalWorkspace, serviceProposalReady } from './service-proposals.js';
+import { createReportsPage } from './reports.js';
+import { QUERY_SAMPLE_DETAILS } from './query-sample-requirements.js';
+
 import { enhanceListSheet, readLayoutPreference, saveLayoutPreference, initializeWorkspaceParity } from './workspace-parity.js';
 
 const customers = [
@@ -133,11 +138,13 @@ function notesContext(view = activeView, customer = selectedCustomer) {
     };
   }
   const moduleMeta = {
+    reports: { key: 'module-reports', title: 'Report notes', eyebrow: 'Operations · Reports' },
     inbox: { key: 'module-inbox', title: 'Inbox notes', eyebrow: 'Workspace · All inbox' },
     tasks: { key: 'module-tasks', title: 'Task notes', eyebrow: 'Workspace · All tasks' },
     queries: { key: 'module-queries', title: 'Query notes', eyebrow: 'Sales · Queries' },
     'query-detail': { key: 'module-query-detail', title: 'Query notes', eyebrow: 'Sales · Queries' },
     'new-customer': { key: 'module-customer-setup', title: 'Customer setup notes', eyebrow: 'CRM · Add customer' },
+    'new-vendor': { key: 'module-vendor-setup', title: 'Vendor setup notes', eyebrow: 'CRM · Add vendor' },
     customers: { key: 'module-customers', title: 'Customer notes', eyebrow: 'CRM · Customers' },
     vault: { key: 'module-vault', title: 'Document notes', eyebrow: 'CRM · Document vault' },
   }[view] ?? { key: `module-${view}`, eyebrow: String(view) };
@@ -304,6 +311,7 @@ const queryModuleRecords = QUERY_TYPES.flatMap((type, typeIndex) => QUERY_SAMPLE
     id: `QRY-${2001 + typeIndex * 100 + index}`,
     type,
     title,
+    details: QUERY_SAMPLE_DETAILS[`QRY-${2001 + typeIndex * 100 + index}`] ?? {},
     status: QUERY_KANBAN_STATUSES[index % QUERY_KANBAN_STATUSES.length],
     priority: ['High', 'Medium', 'Low'][index % 3],
     delay: QUERY_SAMPLE_DELAYS[index % QUERY_SAMPLE_DELAYS.length],
@@ -321,6 +329,31 @@ const customerProposalRecords = [
   { id: 'PROP-3104', customerId: 'CUST-0001', title: 'Thailand Visa Support', package: 'Tourist visa filing · 4 travellers · document review', linkedQuery: 'QRY-2301', status: 'Sent', amount: 28000, sentAt: '2026-09-18', validUntil: '2026-09-30' },
   { id: 'PROP-3201', customerId: 'CUST-0002', title: 'Dubai Express Visa', package: 'Express tourist visa · 2 travellers · document check', linkedQuery: 'QRY-2303', status: 'Sent', amount: 12000, sentAt: '2026-09-17', validUntil: '2026-09-24' },
 ];
+const SERVICE_PROPOSAL_STORAGE_KEY = 'paryatech.service-proposals.v1';
+let pendingServiceMailProposalId = null;
+try {
+  const saved = JSON.parse(localStorage.getItem(SERVICE_PROPOSAL_STORAGE_KEY) || 'null');
+  for (const customer of saved?.customers ?? []) {
+    if (typeof customer.id === 'string' && typeof customer.name === 'string' && !customers.some((item) => item.id === customer.id)) customers.push(customer);
+  }
+  for (const query of saved?.queries ?? []) {
+    if (typeof query.id !== 'string' || !QUERY_TYPES.includes(query.type) || !customers.some((customer) => customer.id === query.customerId)) continue;
+    const index = queryModuleRecords.findIndex((item) => item.id === query.id);
+    if (index >= 0) queryModuleRecords[index] = { ...query, details: Object.keys(query.details ?? {}).length ? query.details : queryModuleRecords[index].details };
+    else queryModuleRecords.unshift(query);
+  }
+  for (const proposal of saved?.proposals ?? []) {
+    if (typeof proposal.id === 'string' && Array.isArray(proposal.serviceOptions) && proposal.serviceOptions.length && queryModuleRecords.some((query) => query.id === proposal.linkedQuery)) customerProposalRecords.unshift(proposal);
+  }
+} catch { /* The in-memory workspace remains usable when storage is unavailable. */ }
+
+function saveServiceProposals() {
+  const proposals = customerProposalRecords.filter((proposal) => proposal.serviceOptions);
+  const ids = new Set(proposals.map((proposal) => proposal.linkedQuery));
+  const customerIds = new Set(proposals.map((proposal) => proposal.customerId));
+  try { localStorage.setItem(SERVICE_PROPOSAL_STORAGE_KEY, JSON.stringify({ proposals, queries: queryModuleRecords.filter((query) => ids.has(query.id)), customers: customers.filter((customer) => customerIds.has(customer.id)) })); }
+  catch { /* Keep edits available in the current session. */ }
+}
 const proposalCatalogRecords = [
   { id: 'PKG-SHIMLA-7D', type: 'package', title: 'Shimla, Manali & Chandigarh family escape', destination: 'Shimla', origin: 'Bengaluru', days: 7, amount: 77770, scope: 'Domestic', stops: [{ city: 'Shimla', nights: 3 }, { city: 'Manali', nights: 2 }, { city: 'Chandigarh', nights: 1 }], summary: 'Private transfers, three selected stays, breakfast and guided sightseeing.' },
   { id: 'PKG-SRILANKA-15D', type: 'package', title: 'Sri Lanka family discovery', destination: 'Sri Lanka', origin: 'Hyderabad', days: 15, amount: 148000, scope: 'International', stops: [{ city: 'Colombo', nights: 2 }, { city: 'Kandy', nights: 3 }, { city: 'Nuwara Eliya', nights: 3 }, { city: 'Bentota', nights: 4 }, { city: 'Colombo', nights: 2 }], summary: 'Hotels, private chauffeur, breakfast and family-friendly experiences.' },
@@ -587,11 +620,13 @@ function restoreViewEntry(entry) {
   suppressBackRecord = true;
   try {
     switch (entry.view) {
+      case 'reports':
       case 'dashboard':
       case 'inbox':
       case 'tasks':
       case 'customers':
       case 'new-customer':
+      case 'new-vendor':
       case 'notifications':
       case 'account':
         setView(entry.view);
@@ -960,6 +995,9 @@ const queryValueHeading = $('#queryValueHeading');
 const queryTypeModalBackdrop = $('#queryTypeModalBackdrop');
 const queryDetailView = $('#queryDetailView');
 const queryDetailContent = $('#queryDetailContent');
+const reportsView = $('#reportsView');
+const reportsNavLink = $('#reportsNavLink');
+let reportsPage;
 const tasksView = $('#tasksView');
 const tasksNavLink = $('#tasksNavLink');
 const tasksMobileNavButton = $('#tasksMobileNavButton');
@@ -1037,7 +1075,7 @@ const listTableScroller = $('#customerListView .table-scroller');
 const pagination = $('#pagination');
 const refreshButton = $('#refreshButton');
 const createButton = $('#createButton');
-const vendorModalBackdrop = $('#vendorModalBackdrop');
+const vendorCreateView = $('#vendorCreateView');
 const vendorForm = $('#vendorForm');
 const vendorName = $('#vendorName');
 const customerCreateView = $('#customerCreateView');
@@ -1065,7 +1103,6 @@ const addTierButton = $('#addTierButton');
 const queryModalBackdrop = $('#queryModalBackdrop');
 const queryForm = $('#queryForm');
 const queryCustomer = $('#queryCustomer');
-const queryCustomerSearch = $('#queryCustomerSearch');
 const queryCreateCustomerButton = $('#queryCreateCustomerButton');
 const queryInlineCustomer = $('#queryInlineCustomer');
 const queryInlineCustomerCode = $('#queryInlineCustomerCode');
@@ -1555,29 +1592,7 @@ function renderCustomerOverviewDetails(customer) {
     : '<p class="trio-empty">No preferences recorded.</p>';
 }
 
-let customerPageSize = 8;
-const WORKSPACE_LIST_PAGE_SIZE = 6;
-const VAULT_PAGE_SIZE = 8;
-
-function fitCustomerPage() {
-  const view = $('#customerListView');
-  if (view.hidden || listTableScroller.hidden) return;
-  const main = view.closest('.main-content');
-  const sheet = listTableScroller.querySelector('table');
-  const rowHeight = parseFloat(getComputedStyle(view).getPropertyValue('--sheet-row-height'));
-  const footerHeight = pagination.getBoundingClientRect().height || 59;
-  const scrollbarHeight = listTableScroller.offsetHeight - listTableScroller.clientHeight;
-  const available = main.getBoundingClientRect().bottom - listTableScroller.getBoundingClientRect().top
-    - sheet.tHead.getBoundingClientRect().height - footerHeight - scrollbarHeight;
-  const nextSize = Math.max(1, Math.min(8, Math.floor(available / rowHeight)));
-  if (nextSize === customerPageSize) return;
-  const firstRecord = (currentPage - 1) * customerPageSize;
-  customerPageSize = nextSize;
-  currentPage = Math.floor(firstRecord / customerPageSize) + 1;
-  setCustomerRowActionMenu();
-  renderCustomers();
-  renderPagination();
-}
+const pageSizes = { customers: 8, queries: 6, tasks: 6, profileTasks: 5, queryTasks: 5, vault: 8 };
 
 function filteredCustomerPool() {
   const query = customerSearch.value.trim().toLocaleLowerCase();
@@ -1605,15 +1620,15 @@ function customerResultCount() {
 }
 
 function customerTotalPages() {
-  return Math.max(1, Math.ceil(customerResultCount() / customerPageSize));
+  return Math.max(1, Math.ceil(customerResultCount() / pageSizes.customers));
 }
 
 function filteredCustomers() {
   const pool = filteredCustomerPool();
-  const totalPages = Math.max(1, Math.ceil(pool.length / customerPageSize));
+  const totalPages = Math.max(1, Math.ceil(pool.length / pageSizes.customers));
   currentPage = Math.min(currentPage, totalPages);
-  const start = (currentPage - 1) * customerPageSize;
-  return pool.slice(start, start + customerPageSize);
+  const start = (currentPage - 1) * pageSizes.customers;
+  return pool.slice(start, start + pageSizes.customers);
 }
 
 function renderAppliedFilters() {
@@ -1657,38 +1672,20 @@ function renderCustomers() {
   enhanceListSheet(customerRows.closest('table'), 'customers', customers.map(item => item.id));
   emptyState.hidden = rows.length > 0;
   listTableScroller.hidden = rows.length === 0;
-  pagination.hidden = customerResultCount() === 0;
+  pagination.hidden = false;
   syncSelectAll();
   renderAppliedFilters();
   syncFilterControls();
 }
 
 
-function paginationMarkup(page, totalPages, totalItems, pageSize = customerPageSize, pageKey = 'page', entityLabel = 'customers') {
-  const activePage = Math.max(1, Math.min(page, totalPages));
-  const firstItem = ((activePage - 1) * pageSize) + 1;
-  const lastItem = Math.min(activePage * pageSize, totalItems);
-  const previousBlocked = activePage === 1;
-  const nextBlocked = activePage === totalPages;
-  const pageNumbers = pageKey === 'page'
-    ? [...new Set([1, activePage - 1, activePage, activePage + 1, totalPages])].filter((number) => number >= 1 && number <= totalPages).sort((a, b) => a - b)
-    : [activePage];
-  const numberedButtons = pageNumbers.map((number, index) => `${index && number - pageNumbers[index - 1] > 1 ? '<span aria-hidden="true">…</span>' : ''}<button class="page-button${number === activePage ? ' is-active' : ''}" type="button" data-${pageKey}="${number}" aria-label="Page ${number}"${number === activePage ? ' aria-current="page"' : ''}>${number}</button>`).join('');
-  return `
-    <span class="pagination-range">Showing ${totalItems ? firstItem : 0}–${lastItem} of ${totalItems} ${entityLabel}</span>
-    <span class="pagination-pages">
-      <button class="page-button page-button-nav${previousBlocked ? ' is-blocked' : ''}" type="button" data-${pageKey}="prev" aria-label="Previous page"${previousBlocked ? ' disabled aria-disabled="true" data-pagination-blocked' : ''}><svg aria-hidden="true"><use href="#i-chevron-left" /></svg></button>
-      ${numberedButtons}
-      <button class="page-button page-button-nav${nextBlocked ? ' is-blocked' : ''}" type="button" data-${pageKey}="next" aria-label="Next page"${nextBlocked ? ' disabled aria-disabled="true" data-pagination-blocked' : ''}><svg aria-hidden="true"><use href="#i-chevron-right" /></svg></button>
-    </span>`;
-}
 
 function renderPagination() {
   const totalPages = customerTotalPages();
   const totalItems = customerResultCount();
   currentPage = Math.max(1, Math.min(currentPage, totalPages));
-  pagination.innerHTML = totalItems > 0 ? paginationMarkup(currentPage, totalPages, totalItems) : '';
-  pagination.hidden = totalItems === 0;
+  pagination.innerHTML = paginationMarkup(currentPage, totalPages, totalItems, pageSizes.customers);
+  pagination.hidden = false;
 }
 
 function setCategory(category) {
@@ -3218,6 +3215,7 @@ function openQueryMailReader(index) {
 }
 
 function openQueryMailComposer(templateKey = '') {
+  pendingServiceMailProposalId = null;
   const scope = queryMailScope();
   const customer = queryDetailCustomer();
   if (!scope || !customer) return;
@@ -3246,6 +3244,7 @@ function openQueryMailComposer(templateKey = '') {
 }
 
 function closeQueryMailComposer(silent = false) {
+  pendingServiceMailProposalId = null;
   const scope = queryMailScope();
   if (!scope) {
     queryMailAttachments = [];
@@ -3286,7 +3285,11 @@ function submitQueryMail() {
   const subject = $('[data-query-mail-subject]', scope).value.trim();
   const body = $('[data-query-mail-body]', scope).value.trim();
   if (!subject || !body) return;
-  const sharedProposal = customerProposalRecords.find((proposal) => queryMailAttachments.some((attachment) => attachment.name.startsWith(proposal.id)));
+  const sharedProposal = customerProposalRecords.find((proposal) => proposal.id === pendingServiceMailProposalId || queryMailAttachments.some((attachment) => attachment.name.startsWith(proposal.id)));
+  if (sharedProposal?.serviceOptions && !serviceProposalReady(sharedProposal, selectedQuery)) {
+    showToast('Reconfirm the supplier quotes before sharing these options');
+    return;
+  }
   conversation.messages.push({
     direction: 'outgoing',
     subject,
@@ -3297,7 +3300,9 @@ function submitQueryMail() {
   if (sharedProposal) {
     sharedProposal.status = 'Sent';
     sharedProposal.sentAt = taskDateOffset(0);
+    if (sharedProposal.serviceOptions) saveServiceProposals();
   }
+  pendingServiceMailProposalId = null;
   conversation.time = 'Now';
   moveInboxConversationToTop(conversation);
   queryMailFilter = 'all';
@@ -3319,7 +3324,7 @@ function queryCategoryRecords() {
     const customer = queryCustomerRecord(query);
     const matchesCategory = query.type === activeQueryCategory;
     const matchesScope = activeQueryScope === 'all' || queryOwnerMatches(query, TASK_CURRENT_USER);
-    const matchesSearch = !search || [query.title, query.delay, query.pendingOn, ...queryOwnerList(query), query.status, customer?.name, customer?.id]
+    const matchesSearch = !search || [query.title, query.delay, query.pendingOn, `Pending on ${query.pendingOn}`, ...queryOwnerList(query), query.status, customer?.name, customer?.id]
       .some((value) => String(value ?? '').toLocaleLowerCase().includes(search));
     const matchesPriority = queryFilters.priority === 'all' || query.priority === queryFilters.priority;
     const matchesPending = queryFilters.pendingOn === 'all' || query.pendingOn === queryFilters.pendingOn;
@@ -3344,7 +3349,7 @@ function queryCardMarkup(query) {
     <h3 class="query-card-title">${escapeHTML(query.title)}</h3>
     <p class="query-card-customer">${escapeHTML(customerName)} <b>(${escapeHTML(customerId)})</b></p>
     <footer class="query-card-footer">
-      <span class="query-delay"><svg><use href="#i-hourglass" /></svg>${escapeHTML(query.delay)}</span>
+      <span class="query-delay" title="Pending on ${escapeHTML(query.pendingOn)}">Pending on ${escapeHTML(query.pendingOn)}</span>
       <time class="query-activity">${escapeHTML(query.activity)}</time>
       <span class="query-avatar" title="${escapeHTML(assigneeDisplayNames(queryOwnerList(query)))}" aria-label="Assigned to ${escapeHTML(assigneeDisplayNames(queryOwnerList(query)))}">${escapeHTML(ownerInitials)}</span>
     </footer>
@@ -3402,10 +3407,10 @@ function renderQueryModule() {
   });
 
   const hasRecords = records.length > 0;
-  queryEmptyState.hidden = hasRecords;
+  queryEmptyState.hidden = hasRecords || activeQueryLayout === 'list';
   $('#queryEmptyTitle').textContent = `No ${activeQueryCategory.toLocaleLowerCase()} queries yet`;
   queryKanbanShell.hidden = !hasRecords || activeQueryLayout !== 'kanban';
-  queryListShell.hidden = !hasRecords || activeQueryLayout !== 'list';
+  queryListShell.hidden = activeQueryLayout !== 'list';
 
   if (activeQueryLayout === 'kanban') {
     queryKanban.innerHTML = QUERY_KANBAN_STATUSES.map((status) => {
@@ -3420,16 +3425,14 @@ function renderQueryModule() {
     }).join('');
   } else {
     const statusRecords = activeQueryStatus === 'All' ? records : records.filter((query) => query.status === activeQueryStatus);
-    const totalPages = Math.max(1, Math.ceil(statusRecords.length / WORKSPACE_LIST_PAGE_SIZE));
+    const totalPages = Math.max(1, Math.ceil(statusRecords.length / pageSizes.queries));
     queryListPage = Math.max(1, Math.min(queryListPage, totalPages));
-    const start = (queryListPage - 1) * WORKSPACE_LIST_PAGE_SIZE;
+    const start = (queryListPage - 1) * pageSizes.queries;
     queryListBody.innerHTML = statusRecords.length
-      ? statusRecords.slice(start, start + WORKSPACE_LIST_PAGE_SIZE).map(queryListRowMarkup).join('')
+      ? statusRecords.slice(start, start + pageSizes.queries).map(queryListRowMarkup).join('')
       : `<tr><td colspan="6"><div class="query-column-empty">No ${escapeHTML(activeQueryStatus.toLocaleLowerCase())} queries</div></td></tr>`;
-    queryListPagination.innerHTML = statusRecords.length
-      ? paginationMarkup(queryListPage, totalPages, statusRecords.length, WORKSPACE_LIST_PAGE_SIZE, 'query-list-page', 'queries')
-      : '';
-    queryListPagination.hidden = statusRecords.length === 0;
+    queryListPagination.innerHTML = paginationMarkup(queryListPage, totalPages, statusRecords.length, pageSizes.queries, 'query-list-page', 'queries');
+    queryListPagination.hidden = false;
     enhanceListSheet(queryListBody.closest('table'), 'queries', queryModuleRecords.map(item => item.id));
   }
 }
@@ -3938,14 +3941,18 @@ function proposalCreatorMarkup(query, customer) {
 }
 
 function queryDetailProposalsMarkup(query, customer) {
+  if (query.type !== 'Trip' && ['create', 'builder'].includes(proposalWorkspaceView)) {
+    const proposal = activeItineraryProposal(query);
+    if (proposalWorkspaceView === 'create' || proposal?.serviceOptions) return serviceProposalWorkspace.markup(query, customer, proposalWorkspaceView, proposal);
+  }
   if (query.type === 'Trip' && proposalWorkspaceView === 'builder') return queryItineraryMarkup(query, customer);
   if (query.type === 'Trip' && proposalWorkspaceView === 'create') return proposalCreatorMarkup(query, customer);
   const proposals = queryDetailProposals(query);
   return `<section class="query-detail-section query-proposals-workspace">
-    <header><div><h2>Proposals</h2><p>${proposals.length ? `${proposals.length} linked ${proposals.length === 1 ? 'proposal' : 'proposals'}.` : 'Build the first customer-ready proposal from this trip query.'}</p></div>${query.type === 'Trip' ? '<div class="query-proposal-actions"><button class="button button-secondary button-small" type="button" data-proposal-action="send-package"><svg><use href="#i-package" /></svg>Send a package</button><button class="button button-primary button-small" type="button" data-proposal-action="build-itinerary"><svg><use href="#i-plus" /></svg>Build itinerary</button></div>' : '<button class="button button-primary button-small" type="button" data-query-detail-action="build-proposal"><svg><use href="#i-plus" /></svg>Build proposal</button>'}</header>
-    ${proposals.length ? `<div class="customer-pipeline-table-wrap"><table class="customer-pipeline-table customer-proposal-table"><thead><tr><th>Proposal and source</th><th>Mode</th><th>Created</th><th>Status</th><th>Amount</th>${query.type === 'Trip' ? '<th class="col-action">Action</th>' : ''}</tr></thead>
-      <tbody>${proposals.map((proposal) => `<tr><td><strong>${escapeHTML(proposal.title)}</strong><small>${escapeHTML(proposal.id)} · ${escapeHTML(proposal.package)}</small></td><td>${escapeHTML(proposal.itineraryMode === 'advanced' ? 'Advanced' : 'Simple')}</td><td>${escapeHTML(pipelineDateLabel(proposal.sentAt))}</td><td><span class="status-badge ${pipelineStatusClass(proposal.status)}">${escapeHTML(proposal.status)}</span></td><td class="pipeline-money">${formatCurrency(proposal.amount)}</td>${query.type === 'Trip' ? `<td><button class="button button-secondary button-small" type="button" data-itinerary-open="${escapeHTML(proposal.id)}">Open proposal</button></td>` : ''}</tr>`).join('')}</tbody>
-    </table></div>` : queryDetailEmpty('No proposals yet', 'Use a package, choose a saved itinerary or build from scratch.')}
+    <header><div><h2>Proposals</h2><p>${proposals.length ? `${proposals.length} linked ${proposals.length === 1 ? 'proposal' : 'proposals'}.` : query.type === 'Trip' ? 'Build the first customer-ready proposal from this trip query.' : 'Choose matching services and vendor options for this query.'}</p></div>${query.type === 'Trip' ? '<div class="query-proposal-actions"><button class="button button-secondary button-small" type="button" data-proposal-action="send-package"><svg><use href="#i-package" /></svg>Send a package</button><button class="button button-primary button-small" type="button" data-proposal-action="build-itinerary"><svg><use href="#i-plus" /></svg>Build itinerary</button></div>' : '<button class="button button-primary button-small" type="button" data-query-detail-action="build-proposal"><svg><use href="#i-plus" /></svg>Build proposal</button>'}</header>
+    ${proposals.length ? `<div class="customer-pipeline-table-wrap"><table class="customer-pipeline-table customer-proposal-table"><thead><tr><th>Proposal and source</th><th>Mode</th><th>Created</th><th>Status</th><th>Amount</th><th class="col-action">Action</th></tr></thead>
+      <tbody>${proposals.map((proposal) => `<tr><td><strong>${escapeHTML(proposal.title)}</strong><small>${escapeHTML(proposal.id)} · ${escapeHTML(proposal.package)}</small></td><td>${escapeHTML(proposal.serviceOptions ? `${proposal.serviceOptions.length} ${proposal.serviceOptions.length === 1 ? 'option' : 'options'}` : proposal.itineraryMode === 'advanced' ? 'Advanced' : 'Simple')}</td><td>${escapeHTML(pipelineDateLabel(proposal.sentAt))}</td><td><span class="status-badge ${pipelineStatusClass(proposal.status)}">${escapeHTML(proposal.status)}</span></td><td class="pipeline-money">${proposal.serviceOptions && !proposal.amount ? 'Not quoted' : `${proposal.serviceOptions?.length > 1 ? 'From ' : ''}${formatCurrency(proposal.amount)}`}</td><td>${query.type === 'Trip' || proposal.serviceOptions ? `<button class="button button-secondary button-small" type="button" data-itinerary-open="${escapeHTML(proposal.id)}">Open proposal</button>` : ''}</td></tr>`).join('')}</tbody>
+    </table></div>` : queryDetailEmpty('No proposals yet', query.type === 'Trip' ? 'Use a package, choose a saved itinerary or build from scratch.' : 'Select a service from the vendor catalogue to build the first proposal.')}
   </section>`;
 }
 
@@ -4144,6 +4151,7 @@ function openQueryDetail(query, updateHistory = true) {
   queryMailFilter = 'all';
   selectedQueryMailIndex = null;
   queryMailAttachments = [];
+  pendingServiceMailProposalId = null;
   setView('query-detail', queryDetailCustomer(query) ?? selectedCustomer, updateHistory);
 }
 
@@ -4157,25 +4165,46 @@ function buildQueryProposal(query = selectedQuery) {
     renderQueryDetail();
     return;
   }
-  let proposal = queryDetailProposals(query)[0];
-  if (!proposal) {
-    proposal = {
-      id: `PROP-${Date.now().toString(36).slice(-6).toUpperCase()}`,
-      customerId: query.customerId,
-      title: `${query.title} proposal`,
-      package: query.summary || query.type,
-      linkedQuery: query.id,
-      status: 'Draft',
-      amount: Number(query.value || 0),
-      sentAt: taskDateOffset(0),
-      validUntil: taskDateOffset(7),
-    };
-    customerProposalRecords.unshift(proposal);
-    showToast('Draft proposal created');
-  }
+  serviceProposalWorkspace.reset(query);
+  proposalWorkspaceView = 'create';
   activeQueryDetailTab = 'proposals';
   renderQueryDetail();
 }
+
+const serviceProposalWorkspace = createServiceProposalWorkspace({
+  escapeHTML, formatCurrency,
+  render: (view) => { if (view) proposalWorkspaceView = view; renderQueryDetail(); },
+  create: (draft, lookupId) => {
+    if (!draft) return customerProposalRecords.find((proposal) => proposal.id === lookupId && proposal.linkedQuery === selectedQuery.id);
+    let proposal = draft.editId ? customerProposalRecords.find((item) => item.id === draft.editId && item.linkedQuery === selectedQuery.id) : null;
+    if (!proposal) {
+      proposal = { id: `PROP-${crypto.randomUUID().slice(0, 8).toUpperCase()}`, customerId: selectedQuery.customerId, linkedQuery: selectedQuery.id };
+      customerProposalRecords.unshift(proposal);
+    }
+    const quoted = draft.options.map((option) => option.amountMinor).filter((amount) => amount > 0);
+    Object.assign(proposal, {
+      title: draft.title, package: draft.options.map((option) => option.serviceName).join(' · '),
+      serviceOptions: draft.options, status: 'Draft', amount: quoted.length ? Math.min(...quoted) / 100 : 0,
+      sentAt: taskDateOffset(0), validUntil: draft.options.map((option) => option.validUntil).filter(Boolean).sort()[0] || '',
+    });
+    saveServiceProposals(); activeItineraryProposalId = proposal.id; proposalWorkspaceView = 'builder'; renderQueryDetail(); showToast('Service proposal saved');
+    return proposal;
+  },
+  share: (id) => {
+    const proposal = customerProposalRecords.find((item) => item.id === id && item.linkedQuery === selectedQuery.id);
+    if (!proposal || !serviceProposalReady(proposal, selectedQuery)) { showToast('Confirm current supplier quotes before sharing'); return; }
+    activeQueryDetailTab = 'communication'; renderQueryDetail(); openQueryMailComposer();
+    const scope = queryMailScope();
+    const options = proposal.serviceOptions.map((option, index) => {
+      const req = option.requirements;
+      return `Option ${index + 1}: ${option.serviceName}\n${option.description}\n${[req.origin, req.destination].filter(Boolean).join(' → ')}\n${req.startDate}${req.endDate ? ` to ${req.endDate}` : ''} · ${req.adults} adults · ${req.children} children · ${req.infants} infants\nTotal: ${formatCurrency(option.amountMinor / 100)}\nQuote valid until ${option.validUntil}${option.inclusions.length ? `\nIncludes: ${option.inclusions.join('; ')}` : ''}${option.exclusions.length ? `\nExcludes: ${option.exclusions.join('; ')}` : ''}`;
+    }).join('\n\n');
+    $('[data-query-mail-subject]', scope).value = proposal.title;
+    $('[data-query-mail-body]', scope).value = `Hello ${queryDetailCustomer()?.contactName || queryDetailCustomer()?.name},\n\nHere are the ${selectedQuery.type.toLowerCase()} options for your query:\n\n${options}\n\nPlease reply with your preferred option. Availability will be reconfirmed before booking.`;
+    pendingServiceMailProposalId = proposal.id; queryMailAttachments = []; renderQueryMailComposerAttachments(); $('[data-query-mail-send]', scope).disabled = false;
+    showToast('Service options added to Communication');
+  },
+});
 
 function taskCategoryPool(view = activeTaskView) {
   const today = taskDateOffset(0);
@@ -4320,7 +4349,6 @@ function openCustomerTaskModal(trigger, task = null) {
   });
 }
 
-const PROFILE_TASKS_PAGE_SIZE = 5;
 const PROFILE_TASK_PRIORITY_WEIGHT = { High: 3, Medium: 2, Low: 1 };
 
 function filteredProfileTasks(customer = selectedCustomer) {
@@ -4400,10 +4428,10 @@ function closeProfileTaskFilterPopover() {
 function renderProfileTasks(customer = selectedCustomer) {
   if (!profileTaskRows) return;
   const tasks = filteredProfileTasks(customer);
-  const totalPages = Math.max(1, Math.ceil(tasks.length / PROFILE_TASKS_PAGE_SIZE));
+  const totalPages = Math.max(1, Math.ceil(tasks.length / pageSizes.profileTasks));
   if (profileTaskPage > totalPages) profileTaskPage = totalPages;
-  const start = (profileTaskPage - 1) * PROFILE_TASKS_PAGE_SIZE;
-  const pageTasks = tasks.slice(start, start + PROFILE_TASKS_PAGE_SIZE);
+  const start = (profileTaskPage - 1) * pageSizes.profileTasks;
+  const pageTasks = tasks.slice(start, start + pageSizes.profileTasks);
 
   syncProfileTaskFilterControls(customer);
   profileTaskRows.innerHTML = pageTasks.length
@@ -4422,10 +4450,8 @@ function renderProfileTasks(customer = selectedCustomer) {
     }).join('')
     : `<tr class="profile-task-empty-row"><td colspan="6">No tasks found for this customer.</td></tr>`;
 
-  profileTaskPagination.innerHTML = tasks.length
-    ? paginationMarkup(profileTaskPage, totalPages, tasks.length, PROFILE_TASKS_PAGE_SIZE, 'profile-task-page', 'tasks')
-    : '';
-  profileTaskPagination.hidden = tasks.length === 0;
+  profileTaskPagination.innerHTML = paginationMarkup(profileTaskPage, totalPages, tasks.length, pageSizes.profileTasks, 'profile-task-page', 'tasks');
+  profileTaskPagination.hidden = false;
   enhanceListSheet(profileTaskRows.closest('table'), 'tasks', taskRecords.map(item => item.id));
 }
 
@@ -4555,10 +4581,10 @@ function renderQueryTasks(query = selectedQuery) {
   const pagination = queryTaskField('queryTaskPagination');
   if (!rows || !pagination || !query) return;
   const tasks = filteredQueryTasks(query);
-  const totalPages = Math.max(1, Math.ceil(tasks.length / PROFILE_TASKS_PAGE_SIZE));
+  const totalPages = Math.max(1, Math.ceil(tasks.length / pageSizes.queryTasks));
   if (queryTaskPage > totalPages) queryTaskPage = totalPages;
-  const start = (queryTaskPage - 1) * PROFILE_TASKS_PAGE_SIZE;
-  const pageTasks = tasks.slice(start, start + PROFILE_TASKS_PAGE_SIZE);
+  const start = (queryTaskPage - 1) * pageSizes.queryTasks;
+  const pageTasks = tasks.slice(start, start + pageSizes.queryTasks);
 
   syncQueryTaskFilterControls(query);
   rows.innerHTML = pageTasks.length
@@ -4577,10 +4603,8 @@ function renderQueryTasks(query = selectedQuery) {
     }).join('')
     : `<tr class="profile-task-empty-row"><td colspan="6">No tasks found for this query.</td></tr>`;
 
-  pagination.innerHTML = tasks.length
-    ? paginationMarkup(queryTaskPage, totalPages, tasks.length, PROFILE_TASKS_PAGE_SIZE, 'query-task-page', 'tasks')
-    : '';
-  pagination.hidden = tasks.length === 0;
+  pagination.innerHTML = paginationMarkup(queryTaskPage, totalPages, tasks.length, pageSizes.queryTasks, 'query-task-page', 'tasks');
+  pagination.hidden = false;
   enhanceListSheet(rows.closest('table'), 'tasks', taskRecords.map(item => item.id));
 }
 
@@ -4752,8 +4776,8 @@ function renderTaskBoard() {
   });
 
   taskBoardShell.hidden = !hasRecords || activeTaskLayout !== 'kanban';
-  taskListShell.hidden = !hasRecords || activeTaskLayout !== 'list';
-  tasksEmptyState.hidden = hasRecords;
+  taskListShell.hidden = activeTaskLayout !== 'list';
+  tasksEmptyState.hidden = hasRecords || activeTaskLayout === 'list';
 
   if (activeTaskLayout === 'kanban') {
     taskBoard.innerHTML = TASK_STATUSES.map((status) => {
@@ -4768,16 +4792,14 @@ function renderTaskBoard() {
     }).join('');
   } else {
     const statusTasks = activeTaskStatus === 'All' ? tasks : taskStatusRecords(tasks, activeTaskStatus);
-    const totalPages = Math.max(1, Math.ceil(statusTasks.length / WORKSPACE_LIST_PAGE_SIZE));
+    const totalPages = Math.max(1, Math.ceil(statusTasks.length / pageSizes.tasks));
     taskListPage = Math.max(1, Math.min(taskListPage, totalPages));
-    const start = (taskListPage - 1) * WORKSPACE_LIST_PAGE_SIZE;
+    const start = (taskListPage - 1) * pageSizes.tasks;
     taskListBody.innerHTML = statusTasks.length
-      ? statusTasks.slice(start, start + WORKSPACE_LIST_PAGE_SIZE).map(taskListRowMarkup).join('')
+      ? statusTasks.slice(start, start + pageSizes.tasks).map(taskListRowMarkup).join('')
       : `<tr><td colspan="6"><div class="task-column-empty">No ${escapeHTML(activeTaskStatus.toLocaleLowerCase())} tasks</div></td></tr>`;
-    taskListPagination.innerHTML = statusTasks.length
-      ? paginationMarkup(taskListPage, totalPages, statusTasks.length, WORKSPACE_LIST_PAGE_SIZE, 'task-list-page', 'tasks')
-      : '';
-    taskListPagination.hidden = statusTasks.length === 0;
+    taskListPagination.innerHTML = paginationMarkup(taskListPage, totalPages, statusTasks.length, pageSizes.tasks, 'task-list-page', 'tasks');
+    taskListPagination.hidden = false;
     enhanceListSheet(taskListBody.closest('table'), 'tasks', taskRecords.map(item => item.id));
   }
 }
@@ -4858,6 +4880,7 @@ function closeTaskDetails(restoreFocus = true) {
   closeModal(taskDetailsBackdrop, null, restoreFocus && taskDetailsReturnFocus?.isConnected ? taskDetailsReturnFocus : null);
   taskDetailsId = null;
   taskDetailsReturnFocus = null;
+  if (activeView === 'reports') reportsPage?.render();
 }
 
 function openTaskModal({
@@ -4915,6 +4938,7 @@ function closeTaskModalDialog() {
 }
 
 function refreshTaskViews(task) {
+  if (activeView === 'reports') reportsPage?.render();
   renderTaskBoard();
   renderCustomerTasks(selectedCustomer);
   renderProfileTasks(selectedCustomer);
@@ -5216,7 +5240,8 @@ function navigateGlobalSearchTarget(rawTarget) {
     else showToast('That query is unavailable');
     return;
   }
-  if (normalized === 'dashboard' || normalized === 'home') setView('dashboard');
+  if (normalized === 'reports' || normalized === 'report') setView('reports');
+  else if (normalized === 'dashboard' || normalized === 'home') setView('dashboard');
   else if (normalized === 'inbox') setView('inbox');
   else if (normalized === 'customers' || normalized.startsWith('customer')) setView('customers');
   else if (normalized === 'queries' || normalized.startsWith('query')) setView('queries');
@@ -5232,6 +5257,8 @@ function navigateGlobalSearchTarget(rawTarget) {
 
 function setSidebarCurrent(view) {
   if (view === 'notifications' || view === 'account') return;
+  const reportsActive = view === 'reports';
+  reportsNavLink.classList.toggle('is-active', reportsActive);
   const dashboardActive = view === 'dashboard';
   const inboxActive = view === 'inbox';
   const tasksActive = view === 'tasks';
@@ -5242,7 +5269,9 @@ function setSidebarCurrent(view) {
   tasksNavLink.classList.toggle('is-active', tasksActive);
   queryNavLink.classList.toggle('is-active', queriesActive);
   customersNavLink.classList.toggle('is-active', customersActive);
-  [[dashboardNavLink, dashboardActive], [inboxNavLink, inboxActive], [tasksNavLink, tasksActive], [queryNavLink, queriesActive], [customersNavLink, customersActive]]
+  const vendorsNavLink = $('#vendorsNavLink');
+  vendorsNavLink.classList.toggle('is-active', view === 'new-vendor');
+  [[reportsNavLink, reportsActive], [dashboardNavLink, dashboardActive], [inboxNavLink, inboxActive], [tasksNavLink, tasksActive], [queryNavLink, queriesActive], [customersNavLink, customersActive], [vendorsNavLink, view === 'new-vendor']]
     .forEach(([item, active]) => {
       if (active) item.setAttribute('aria-current', 'page');
       else item.removeAttribute('aria-current');
@@ -5275,6 +5304,7 @@ function navigateToAllFinances(event) {
 
 
 function viewHash(view, customer) {
+  if (view === 'reports') return '#reports';
   if (view === 'dashboard') return '#dashboard';
   if (view === 'inbox') return '#inbox';
   if (view === 'tasks') return '#tasks';
@@ -5283,13 +5313,14 @@ function viewHash(view, customer) {
   if (view === 'queries') return `#${activeQueryCategory.toLocaleLowerCase()}`;
   if (view === 'query-detail') return `#query-${selectedQuery.id}`;
   if (view === 'new-customer') return '#new-customer';
+  if (view === 'new-vendor') return '#new-vendor';
   if (view === 'customers') return '#customers';
   if (view === 'detail') return `#customer-${customer.id}`;
   return '#document-vault';
 }
 
 function navigateBack() {
-  if (['customers', 'queries', 'inbox', 'tasks', 'notifications', 'account'].includes(activeView)) {
+  if (['customers', 'queries', 'inbox', 'tasks', 'reports', 'notifications', 'account'].includes(activeView)) {
     setView('dashboard');
     return;
   }
@@ -5313,6 +5344,7 @@ function navigateBack() {
   setView(fallbackView);
 }
 const shellViewMeta = {
+  reports: { root: 'Operations', current: 'Reports', rootView: 'dashboard' },
   dashboard: { root: 'Workspace', current: 'Home', rootView: 'dashboard' },
   inbox: { root: 'Workspace', current: 'All inbox', rootView: 'dashboard' },
   tasks: { root: 'Workspace', current: 'All tasks', rootView: 'dashboard' },
@@ -5321,6 +5353,7 @@ const shellViewMeta = {
   queries: { root: 'Sales', current: 'Queries', rootView: 'dashboard' },
   'query-detail': { root: 'Sales', current: 'Queries', rootView: 'dashboard' },
   'new-customer': { root: 'CRM', current: 'Customers', rootView: 'customers' },
+  'new-vendor': { root: 'CRM', current: 'Vendors', rootView: 'dashboard' },
   customers: { root: 'CRM', current: 'Customers', rootView: 'customers' },
   detail: { root: 'CRM', current: 'Customers', rootView: 'customers' },
   vault: { root: 'CRM', current: 'Customers', rootView: 'customers' },
@@ -5329,7 +5362,7 @@ const shellViewMeta = {
 
 function updateShellTopbar(view, customer) {
   const meta = shellViewMeta[view] ?? shellViewMeta.dashboard;
-  const showsDetailCrumb = ['detail', 'vault', 'query-detail', 'new-customer'].includes(view);
+  const showsDetailCrumb = ['detail', 'vault', 'query-detail', 'new-customer', 'new-vendor'].includes(view);
   const showsVaultCustomer = view === 'vault' && Boolean(vaultSourceCustomer);
   const isWorkspaceRoot = view === 'dashboard';
   shellBreadcrumbRoot.textContent = meta.root;
@@ -5343,7 +5376,7 @@ function updateShellTopbar(view, customer) {
   shellCustomerCrumb.hidden = !showsVaultCustomer;
   shellBreadcrumbCustomer.textContent = showsVaultCustomer ? vaultSourceCustomer.name : '';
   shellDetailCrumb.hidden = !showsDetailCrumb;
-  shellBreadcrumbDetail.textContent = view === 'new-customer' ? 'Add customer' : view === 'detail' ? customer.name : view === 'vault' ? 'Document vault' : view === 'query-detail' ? selectedQuery.id : '';
+  shellBreadcrumbDetail.textContent = view === 'new-vendor' ? 'Add vendor' : view === 'new-customer' ? 'Add customer' : view === 'detail' ? customer.name : view === 'vault' ? 'Document vault' : view === 'query-detail' ? selectedQuery.id : '';
   if (showsDetailCrumb) shellBreadcrumbDetail.setAttribute('aria-current', 'page');
   else shellBreadcrumbDetail.removeAttribute('aria-current');
   const breadcrumbTrack = shellBreadcrumbRoot.closest('.topbar-breadcrumbs');
@@ -5362,6 +5395,7 @@ function setView(view, customer = selectedCustomer, updateHistory = true) {
   activeView = view;
   if (view === 'detail' && customer) selectedCustomer = customer;
   const pageTitles = {
+    reports: 'Paryatech — Reports',
     dashboard: 'Paryatech — Dashboard',
     inbox: 'Paryatech — Inbox',
     tasks: 'Paryatech — Tasks',
@@ -5370,10 +5404,12 @@ function setView(view, customer = selectedCustomer, updateHistory = true) {
     queries: 'Paryatech — Queries',
     'query-detail': 'Paryatech — Query',
     'new-customer': 'Paryatech — Add customer',
+    'new-vendor': 'Paryatech — Add vendor',
     customers: 'Paryatech — Customers',
     vault: 'Paryatech — Document vault',
   };
   document.title = view === 'detail' ? `${customer.name} — Paryatech` : view === 'query-detail' ? `${selectedQuery.title} — Paryatech` : pageTitles[view];
+  reportsView.hidden = view !== 'reports';
   dashboardView.hidden = view !== 'dashboard';
   inboxView.hidden = view !== 'inbox';
   queriesView.hidden = view !== 'queries';
@@ -5381,6 +5417,7 @@ function setView(view, customer = selectedCustomer, updateHistory = true) {
   tasksView.hidden = view !== 'tasks';
   customerListView.hidden = view !== 'customers';
   customerCreateView.hidden = view !== 'new-customer';
+  vendorCreateView.hidden = view !== 'new-vendor';
   customerDetailView.hidden = view !== 'detail';
   documentVaultView.hidden = view !== 'vault';
   notificationsView.hidden = view !== 'notifications';
@@ -5388,6 +5425,7 @@ function setView(view, customer = selectedCustomer, updateHistory = true) {
   customerNotesShortcut.hidden = view === 'notifications' || view === 'account';
   if (!customerNotesShortcut.hidden) renderCustomerNotesShortcut(view === 'detail' ? customer : selectedCustomer);
   setSidebarCurrent(view);
+  if (view === 'reports') reportsPage?.render();
   if (view === 'dashboard') updateDashboardClock();
   if (view === 'inbox') {
     renderInboxList();
@@ -5752,10 +5790,10 @@ function renderVault() {
     vaultSearchVisible.value = vaultSearch.value;
   }
   const matchingCustomers = filteredVaultCustomers();
-  const totalPages = Math.max(1, Math.ceil(matchingCustomers.length / VAULT_PAGE_SIZE));
+  const totalPages = Math.max(1, Math.ceil(matchingCustomers.length / pageSizes.vault));
   vaultPage = Math.max(1, Math.min(vaultPage, totalPages));
-  const start = (vaultPage - 1) * VAULT_PAGE_SIZE;
-  const rows = matchingCustomers.slice(start, start + VAULT_PAGE_SIZE);
+  const start = (vaultPage - 1) * pageSizes.vault;
+  const rows = matchingCustomers.slice(start, start + pageSizes.vault);
   const summaries = vaultCustomers.map(vaultCustomerSummary);
   const vaultTotalDocuments = $('#vaultTotalDocuments');
   if (vaultTotalDocuments) vaultTotalDocuments.textContent = summaries.reduce((sum, item) => sum + item.documents, 0);
@@ -5783,10 +5821,8 @@ function renderVault() {
   vaultEmptyState.hidden = hasRows;
   vaultList.hidden = !hasRows;
   vaultTableHead.hidden = !hasRows;
-  vaultPagination.innerHTML = totalPages > 1
-    ? paginationMarkup(vaultPage, totalPages, matchingCustomers.length, VAULT_PAGE_SIZE, 'vault-page')
-    : '';
-  vaultPagination.hidden = !hasRows || totalPages <= 1;
+  vaultPagination.innerHTML = paginationMarkup(vaultPage, totalPages, matchingCustomers.length, pageSizes.vault, 'vault-page');
+  vaultPagination.hidden = false;
 }
 
 function openModal(backdrop, focusTarget) {
@@ -5944,20 +5980,14 @@ function setCustomerNotesMode(mode, moveFocus = true) {
 }
 
 function positionCustomerNotes() {
-  const anchor = customerNotesShortcut.getBoundingClientRect();
-  const width = customerNotesPopover.offsetWidth;
-  const height = customerNotesPopover.offsetHeight;
-  const gap = 10;
-  const pad = 12;
-  let left = anchor.right + gap;
-  if (left + width > window.innerWidth - pad) left = anchor.left - width - gap;
-  left = Math.max(pad, Math.min(left, window.innerWidth - pad - width));
-  let top = anchor.top;
-  if (top + height > window.innerHeight - pad) top = window.innerHeight - pad - height;
-  top = Math.max(pad, top);
-  customerNotesPopover.style.left = `${Math.round(left)}px`;
-  customerNotesPopover.style.top = `${Math.round(top)}px`;
-  customerNotesPopover.style.transformOrigin = left > anchor.left ? 'top left' : 'top right';
+  const shell = $('.workspace-shell').getBoundingClientRect();
+  const top = $('#designTopbar').getBoundingClientRect().bottom;
+  const zoom = Number.parseFloat(getComputedStyle(document.body).zoom) || 1;
+  customerNotesPopover.style.left = `${shell.left / zoom}px`;
+  customerNotesPopover.style.top = `${top / zoom}px`;
+  customerNotesPopover.style.width = `${Math.min(388, shell.width / zoom)}px`;
+  customerNotesPopover.style.maxHeight = `${Math.max(0, Math.min(600, (Math.min(shell.bottom, window.innerHeight) - top) / zoom))}px`;
+  customerNotesPopover.style.transformOrigin = 'top left';
 }
 
 function openCustomerNotes(mode, trigger) {
@@ -6448,13 +6478,63 @@ function closeCustomerOnboarding() {
 
 function openVendorOnboarding(returnFocus = document.activeElement) {
   vendorReturnFocus = returnFocus;
-  vendorForm.reset();
-  openModal(vendorModalBackdrop, vendorName);
+  resetVendorOnboarding();
+  setView('new-vendor');
+  if (mobileSidebarQuery.matches) setMobileSidebarOpen(false);
+  $('.vendor-onboarding-body', vendorCreateView).scrollTop = 0;
+  vendorName.focus({ preventScroll: true });
 }
 
 function closeVendorOnboarding() {
-  closeModal(vendorModalBackdrop, vendorForm, vendorReturnFocus);
+  closeThemedPops();
+  setView('dashboard');
+  resetVendorOnboarding();
+  vendorReturnFocus?.focus({ preventScroll: true });
   vendorReturnFocus = null;
+}
+
+const VENDOR_DRAFTS_STORAGE_KEY = 'paryatech-vendor-drafts-v1';
+
+function readVendorDrafts() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(VENDOR_DRAFTS_STORAGE_KEY) || '[]');
+    return Array.isArray(saved) ? saved.filter((item) => item && typeof item.vendorCode === 'string') : [];
+  } catch { return []; }
+}
+
+function updateVendorCreationState() {
+  const services = $$('input[name="vendorService"]:checked', vendorForm);
+  const name = vendorName.value.trim();
+  const baseCode = `V-${name.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 24) || 'NEWVENDOR'}`;
+  const existingCodes = new Set(readVendorDrafts().map((item) => item.vendorCode));
+  let code = baseCode;
+  let suffix = 2;
+  while (existingCodes.has(code)) code = `${baseCode}-${suffix++}`;
+  $('#vendorCode').value = code;
+  $('#vendorDmcFields').hidden = !services.some((field) => field.value === 'DMC/Ground handling');
+  const sameAsPhone = $('#vendorSameAsPhone').checked;
+  const phoneCode = $('[name="phoneCountry"]', vendorForm);
+  const whatsappCode = $('[name="whatsappCountry"]', vendorForm);
+  const phone = $('#vendorPhone');
+  const whatsapp = $('#vendorWhatsapp');
+  if (sameAsPhone) {
+    whatsapp.value = phone.value;
+    whatsappCode.value = phoneCode.value;
+  }
+  whatsapp.disabled = sameAsPhone;
+  whatsappCode.disabled = sameAsPhone;
+  syncThemedControls(vendorForm);
+  vendorName.setCustomValidity(name ? '' : 'Enter the vendor or business name.');
+  $('[name="vendorService"]', vendorForm).setCustomValidity(services.length ? '' : 'Select at least one service category.');
+  phone.setCustomValidity(phone.value.trim() || $('#vendorEmail').value.trim() ? '' : 'Add a phone number or email address.');
+  const city = $('[name="vendorCity"]', vendorForm);
+  city.setCustomValidity(city.value.trim() ? '' : 'Enter the vendor’s city.');
+  $('#vendorCreateSubmit').disabled = !vendorForm.checkValidity();
+}
+
+function resetVendorOnboarding() {
+  vendorForm.reset();
+  updateVendorCreationState();
 }
 
 function customerFormIsValid() {
@@ -7060,17 +7140,13 @@ function setQueryAssigneeOpen(open) {
   queryAssigneeButton.setAttribute('aria-expanded', String(open));
 }
 
-function populateQueryCustomerOptions(selectedId = queryCustomer.value, searchTerm = queryCustomerSearch.value) {
-  const normalizedSearch = String(searchTerm || '').trim().toLocaleLowerCase();
-  const matchingCustomers = customers.filter((item) => {
-    if (!normalizedSearch) return true;
+function populateQueryCustomerOptions(selectedId = queryCustomer.value) {
+  queryCustomer.innerHTML = customers.map((item) => {
     const details = customerContactDetails(item);
-    return [item.name, item.id, details.phone, details.email].some((value) => String(value || '').toLocaleLowerCase().includes(normalizedSearch));
-  });
-  queryCustomer.innerHTML = matchingCustomers.length
-    ? matchingCustomers.map((item) => `<option value="${escapeHTML(item.id)}">${escapeHTML(item.name)} · ${escapeHTML(item.id)}</option>`).join('')
-    : '<option value="" disabled>No customers match this search</option>';
-  queryCustomer.value = matchingCustomers.some((item) => item.id === selectedId) ? selectedId : matchingCustomers[0]?.id ?? '';
+    const searchText = [item.name, item.id, details.phone, details.email].filter(Boolean).join(' ');
+    return `<option value="${escapeHTML(item.id)}" data-search-text="${escapeHTML(searchText)}">${escapeHTML(item.name)} · ${escapeHTML(item.id)}</option>`;
+  }).join('');
+  queryCustomer.value = customers.some((item) => item.id === selectedId) ? selectedId : customers[0]?.id ?? '';
   queryCustomer.dispatchEvent(new Event('change', { bubbles: true }));
 }
 
@@ -7119,7 +7195,6 @@ function saveInlineQueryCustomer() {
   ensureCustomerDetailData(customer);
   totalCustomerCount = customers.length;
   if (totalCustomers) totalCustomers.textContent = totalCustomerCount;
-  queryCustomerSearch.value = '';
   populateQueryCustomerOptions(customer.id);
   renderCustomers();
   renderVault();
@@ -7139,15 +7214,15 @@ function resetQueryOnboarding(type = currentQueryType, customer = null) {
   queryTypeFields.innerHTML = queryTypeFieldsMarkup(currentQueryType);
   queryRepeatFields.innerHTML = queryRepeatFieldsMarkup(currentQueryType);
   const customerId = customer?.id && customers.some((item) => item.id === customer.id) ? customer.id : customers[0]?.id;
-  queryCustomerSearch.value = '';
   populateQueryCustomerOptions(customerId);
   setQueryInlineCustomerOpen(false);
   queryChildren.value = '0';
   queryChildAges.replaceChildren();
-  const isVisaQuery = currentQueryType === 'Visa';
+  const hideRoomFields = ['Flight', 'Visa', 'Transport'].includes(currentQueryType);
   $$('[name="rooms"], [name="extraBeds"]', queryForm).forEach((field) => {
-    field.closest('label.field').hidden = isVisaQuery;
-    if (isVisaQuery) field.value = '';
+    field.closest('label.field').hidden = hideRoomFields;
+    field.disabled = hideRoomFields;
+    if (hideRoomFields) field.value = '';
   });
   queryInitialSnapshot = queryFormSnapshot();
   setQueryAssigneeOpen(false);
@@ -7281,6 +7356,7 @@ function queryFromForm(draft = false) {
     details: Object.fromEntries([...values.entries()].filter(([key]) => !['childAge', 'starRating', 'queryCity', 'queryCityDays', 'vehicleType', 'vehicleUnits'].includes(key))),
     tripCities: values.getAll('queryCity').map((city, index) => ({ city: String(city).trim(), nights: Number(values.getAll('queryCityDays')[index] || 1) })).filter((stop) => stop.city),
     tripVehicles: values.getAll('vehicleType').map((vehicle, index) => ({ type: String(vehicle), units: Number(values.getAll('vehicleUnits')[index] || 1) })),
+    routeStops: values.getAll('routeStop').map((location, index) => ({ location: String(location).trim(), wait: String(values.getAll('stopWait')[index] || '') })).filter((stop) => stop.location),
     childAges: values.getAll('childAge').map(Number).filter(Boolean),
     starRatings: values.getAll('starRating'),
   };
@@ -7788,6 +7864,7 @@ function setMobileSidebarOpen(open) {
   appShell.classList.toggle('is-mobile-open', isOpen);
   document.body.classList.toggle('sidebar-open', isOpen);
   [mobileNavButton, dashboardMobileNavButton, inboxMobileNavButton, queriesMobileNavButton, tasksMobileNavButton].forEach((button) => button.setAttribute('aria-expanded', String(isOpen)));
+  reportsView.querySelector('.reports-mobile-nav')?.setAttribute('aria-expanded', String(isOpen));
   sidebar.inert = mobileSidebarQuery.matches && !isOpen;
   collapseButton.setAttribute('aria-expanded', String(isOpen));
   if (mobileSidebarQuery.matches) {
@@ -7865,10 +7942,7 @@ queryNavLink.addEventListener('click', (event) => {
 });
 $('#createQueryButton').addEventListener('click', (event) => openQueryTypeSelector(null, event.currentTarget));
 $('#queryEmptyCreate').addEventListener('click', (event) => openQueryTypeSelector(null, event.currentTarget));
-$('#queriesRefreshButton').addEventListener('click', () => {
-  renderQueryModule();
-  showToast('Queries refreshed');
-});
+$('#queriesRefreshButton').addEventListener('click', () => refreshControl($('#queriesRefreshButton'), 'Query list is up to date', renderQueryModule));
 queriesSearch.addEventListener('input', () => {
   queryListPage = 1;
   renderQueryModule();
@@ -8012,6 +8086,7 @@ queryListBody.addEventListener('keydown', (event) => {
 });
 
 queryDetailContent.addEventListener('click', (event) => {
+  if (selectedQuery?.type !== 'Trip' && serviceProposalWorkspace.handle(event, selectedQuery, queryDetailCustomer())) return;
   const tab = event.target.closest('[data-query-detail-tab]');
   if (tab) {
     activeQueryDetailTab = tab.dataset.queryDetailTab;
@@ -8115,7 +8190,7 @@ queryDetailContent.addEventListener('click', (event) => {
   }
   const queryTaskPageButton = event.target.closest('[data-query-task-page]');
   if (queryTaskPageButton && !queryTaskPageButton.disabled && !queryTaskPageButton.hasAttribute('data-pagination-blocked')) {
-    const totalPages = Math.max(1, Math.ceil(filteredQueryTasks(selectedQuery).length / PROFILE_TASKS_PAGE_SIZE));
+    const totalPages = Math.max(1, Math.ceil(filteredQueryTasks(selectedQuery).length / pageSizes.queryTasks));
     const key = queryTaskPageButton.dataset.queryTaskPage;
     if (key === 'prev') queryTaskPage = Math.max(1, queryTaskPage - 1);
     else if (key === 'next') queryTaskPage = Math.min(totalPages, queryTaskPage + 1);
@@ -8380,6 +8455,7 @@ queryDetailContent.addEventListener('keydown', (event) => {
   if (task) openTaskModal({ task, returnFocus: card });
 });
 queryDetailContent.addEventListener('change', (event) => {
+  if (selectedQuery?.type !== 'Trip' && serviceProposalWorkspace.handle(event, selectedQuery, queryDetailCustomer())) return;
   if (event.target.hasAttribute?.('data-query-mail-attachment-input')) {
     queryMailAttachments = [...event.target.files].map((file) => ({
       name: file.name,
@@ -8433,6 +8509,7 @@ queryDetailContent.addEventListener('change', (event) => {
 });
 
 queryDetailContent.addEventListener('input', (event) => {
+  if (selectedQuery?.type !== 'Trip' && serviceProposalWorkspace.handle(event, selectedQuery, queryDetailCustomer())) return;
   if (event.target.hasAttribute?.('data-query-mail-subject') || event.target.hasAttribute?.('data-query-mail-body')) {
     const scope = queryMailScope();
     if (!scope) return;
@@ -8465,6 +8542,7 @@ queryDetailContent.addEventListener('input', (event) => {
 
 queryDetailContent.addEventListener('submit', (event) => {
   event.preventDefault();
+  if (selectedQuery?.type !== 'Trip' && serviceProposalWorkspace.handle(event, selectedQuery, queryDetailCustomer())) return;
   if (event.target.hasAttribute?.('data-query-mail-composer')) {
     submitQueryMail();
     return;
@@ -8665,15 +8743,24 @@ refreshButton.addEventListener('click', () => refreshControl(refreshButton, 'Cus
   renderPagination();
 }));
 $('#vaultRefreshButton').addEventListener('click', () => refreshControl($('#vaultRefreshButton'), 'Document vault is up to date', () => renderVault()));
-$('#closeVendorModal').addEventListener('click', closeVendorOnboarding);
-$('#cancelVendorModal').addEventListener('click', closeVendorOnboarding);
-vendorModalBackdrop.addEventListener('click', (event) => { if (event.target === vendorModalBackdrop) closeVendorOnboarding(); });
+$('#vendorCreateCancel').addEventListener('click', closeVendorOnboarding);
+vendorForm.addEventListener('input', updateVendorCreationState);
+vendorForm.addEventListener('change', updateVendorCreationState);
 vendorForm.addEventListener('submit', (event) => {
   event.preventDefault();
+  updateVendorCreationState();
   if (!vendorForm.reportValidity()) return;
   const name = vendorName.value.trim();
+  const data = new FormData(vendorForm);
+  const draft = { ...Object.fromEntries(data), vendorName: name, vendorService: data.getAll('vendorService'), vendorWhatsapp: $('#vendorWhatsapp').value, whatsappCountry: $('[name="whatsappCountry"]', vendorForm).value, status: 'Draft', createdAt: new Date().toISOString() };
+  try {
+    localStorage.setItem(VENDOR_DRAFTS_STORAGE_KEY, JSON.stringify([...readVendorDrafts(), draft]));
+  } catch {
+    showToast('Could not save this vendor draft. Please try again.');
+    return;
+  }
   closeVendorOnboarding();
-  showToast(`${name} added to vendors`);
+  showToast(`${name} saved as a draft vendor`);
 });
 createButton.addEventListener('click', () => openCustomerOnboarding(createButton));
 $('#customerCreateCancel').addEventListener('click', closeCustomerOnboarding);
@@ -9071,6 +9158,11 @@ customerNotesBackdrop.addEventListener('click', (event) => {
 document.addEventListener('click', (event) => {
   if (!customerNoteRelatedMenu.hidden && !event.target.closest('#customerNoteRelated')) closeCustomerNoteRelatedMenu();
 });
+const notesShellObserver = new ResizeObserver(() => {
+  if (!customerNotesBackdrop.hidden) positionCustomerNotes();
+});
+notesShellObserver.observe($('.workspace-shell'));
+notesShellObserver.observe($('#designTopbar'));
 window.addEventListener('resize', () => {
   if (!customerNotesBackdrop.hidden) positionCustomerNotes();
 });
@@ -9248,7 +9340,6 @@ queryForm.addEventListener('change', () => {
   updateQuerySecondaryAction();
   updateQueryContinueState();
 });
-queryCustomerSearch.addEventListener('input', () => populateQueryCustomerOptions(queryCustomer.value, queryCustomerSearch.value));
 queryCreateCustomerButton.addEventListener('click', () => setQueryInlineCustomerOpen(true));
 queryCancelCustomerButton.addEventListener('click', () => {
   setQueryInlineCustomerOpen(false);
@@ -9665,7 +9756,7 @@ vaultList.addEventListener('click', (event) => {
 vaultPagination.addEventListener('click', (event) => {
   const button = event.target.closest('[data-vault-page]');
   if (!button || button.disabled || button.hasAttribute('data-pagination-blocked')) return;
-  const totalPages = Math.max(1, Math.ceil(filteredVaultCustomers().length / VAULT_PAGE_SIZE));
+  const totalPages = Math.max(1, Math.ceil(filteredVaultCustomers().length / pageSizes.vault));
   if (button.dataset.vaultPage === 'prev') vaultPage = Math.max(1, vaultPage - 1);
   else if (button.dataset.vaultPage === 'next') vaultPage = Math.min(totalPages, vaultPage + 1);
   else vaultPage = Number(button.dataset.vaultPage);
@@ -9713,7 +9804,7 @@ queryListPagination.addEventListener('click', (event) => {
   if (!button || button.disabled || button.hasAttribute('data-pagination-blocked')) return;
   const queryRecords = queryCategoryRecords();
   const statusRecords = activeQueryStatus === 'All' ? queryRecords : queryRecords.filter((query) => query.status === activeQueryStatus);
-  const totalPages = Math.max(1, Math.ceil(statusRecords.length / WORKSPACE_LIST_PAGE_SIZE));
+  const totalPages = Math.max(1, Math.ceil(statusRecords.length / pageSizes.queries));
   if (button.dataset.queryListPage === 'prev') queryListPage = Math.max(1, queryListPage - 1);
   else if (button.dataset.queryListPage === 'next') queryListPage = Math.min(totalPages, queryListPage + 1);
   else queryListPage = Number(button.dataset.queryListPage);
@@ -9726,7 +9817,7 @@ taskListPagination.addEventListener('click', (event) => {
   if (!button || button.disabled || button.hasAttribute('data-pagination-blocked')) return;
   const taskRecordsInView = filteredTaskRecords();
   const statusTasks = activeTaskStatus === 'All' ? taskRecordsInView : taskStatusRecords(taskRecordsInView, activeTaskStatus);
-  const totalPages = Math.max(1, Math.ceil(statusTasks.length / WORKSPACE_LIST_PAGE_SIZE));
+  const totalPages = Math.max(1, Math.ceil(statusTasks.length / pageSizes.tasks));
   if (button.dataset.taskListPage === 'prev') taskListPage = Math.max(1, taskListPage - 1);
   else if (button.dataset.taskListPage === 'next') taskListPage = Math.min(totalPages, taskListPage + 1);
   else taskListPage = Number(button.dataset.taskListPage);
@@ -10001,7 +10092,7 @@ document.addEventListener('keydown', (event) => {
 profileTaskPagination.addEventListener('click', (event) => {
   const pageButton = event.target.closest('[data-profile-task-page]');
   if (!pageButton || pageButton.disabled || pageButton.hasAttribute('data-pagination-blocked')) return;
-  const totalPages = Math.max(1, Math.ceil(filteredProfileTasks(selectedCustomer).length / PROFILE_TASKS_PAGE_SIZE));
+  const totalPages = Math.max(1, Math.ceil(filteredProfileTasks(selectedCustomer).length / pageSizes.profileTasks));
   const key = pageButton.dataset.profileTaskPage;
   if (key === 'prev') profileTaskPage = Math.max(1, profileTaskPage - 1);
   else if (key === 'next') profileTaskPage = Math.min(totalPages, profileTaskPage + 1);
@@ -10061,10 +10152,7 @@ referralTreeStage.addEventListener('click', (event) => {
   setView('detail', customer);
 });
 $('#tasksEmptyCreate').addEventListener('click', (event) => openTaskModal({ returnFocus: event.currentTarget }));
-tasksRefreshButton.addEventListener('click', () => {
-  renderTaskBoard();
-  showToast('Tasks refreshed');
-});
+tasksRefreshButton.addEventListener('click', () => refreshControl(tasksRefreshButton, 'Task list is up to date', renderTaskBoard));
 taskDueDate.addEventListener('change', syncTaskDueTime);
 taskForm.addEventListener('submit', saveTask);
 $('#closeTaskDetails').addEventListener('click', () => closeTaskDetails());
@@ -10256,7 +10344,6 @@ document.addEventListener('keydown', (event) => {
   }
   if (event.key !== 'Escape') return;
   if (!customerNotesBackdrop.hidden) closeCustomerNotes();
-  if (!vendorModalBackdrop.hidden) closeVendorOnboarding();
   if (!queryTypeModalBackdrop.hidden) closeQueryTypeSelector(true);
   if (!queryModalBackdrop.hidden) closeQueryOnboarding();
   if (!bookingModalBackdrop.hidden) closeBookingOnboarding();
@@ -10282,7 +10369,7 @@ window.addEventListener('popstate', (event) => {
   const hashCategory = QUERY_TYPES.find((type) => location.hash === `#${type.toLocaleLowerCase()}`);
   const hashQueryId = location.hash.match(/^#query-(QRY-[A-Z0-9-]+)$/)?.[1];
   const hashQuery = queryModuleRecords.find((query) => query.id === hashQueryId);
-  const fallbackView = hashQuery ? 'query-detail' : hashCategory ? 'queries' : location.hash === '#dashboard' ? 'dashboard' : location.hash === '#inbox' ? 'inbox' : location.hash === '#tasks' ? 'tasks' : location.hash === '#notifications' ? 'notifications' : location.hash === '#account' ? 'account' : location.hash === '#document-vault' ? 'vault' : location.hash === '#new-customer' ? 'new-customer' : 'customers';
+  const fallbackView = hashQuery ? 'query-detail' : hashCategory ? 'queries' : location.hash === '#dashboard' ? 'dashboard' : location.hash === '#reports' ? 'reports' : location.hash === '#inbox' ? 'inbox' : location.hash === '#tasks' ? 'tasks' : location.hash === '#notifications' ? 'notifications' : location.hash === '#account' ? 'account' : location.hash === '#document-vault' ? 'vault' : location.hash === '#new-customer' ? 'new-customer' : location.hash === '#new-vendor' ? 'new-vendor' : 'customers';
   const view = event.state?.view ?? fallbackView;
   pruneViewBackStackForArrival(event.state, fallbackView);
   if (view === 'queries') activeQueryCategory = event.state?.queryCategory ?? hashCategory ?? activeQueryCategory;
@@ -10489,6 +10576,12 @@ inboxNavLink.addEventListener('click', (event) => {
   if (mobileSidebarQuery.matches) setMobileSidebarOpen(false);
 });
 
+reportsNavLink.addEventListener('click', event => {
+  event.preventDefault();
+  setView('reports');
+  if (mobileSidebarQuery.matches) setMobileSidebarOpen(false);
+});
+
 tasksNavLink.addEventListener('click', (event) => {
   event.preventDefault();
   setView('tasks');
@@ -10497,7 +10590,7 @@ tasksNavLink.addEventListener('click', (event) => {
 $('#financeFullLedgerLink').addEventListener('click', navigateToAllFinances);
 
 
-$$('.sidebar a:not(#brandHomeLink):not(#dashboardNavLink):not(#inboxNavLink):not(#tasksNavLink):not(#queryNavLink):not(#customersNavLink), .signout-button').forEach((item) => item.addEventListener('click', (event) => {
+$$('.sidebar a:not(#reportsNavLink):not(#brandHomeLink):not(#dashboardNavLink):not(#inboxNavLink):not(#tasksNavLink):not(#queryNavLink):not(#customersNavLink), .signout-button').forEach((item) => item.addEventListener('click', (event) => {
   event.preventDefault();
   const queryCategory = QUERY_TYPES.find((type) => item.matches(`a[href="#${type.toLocaleLowerCase()}"]`));
   if (queryCategory) {
@@ -10566,16 +10659,34 @@ function themedSvg(symbol) {
 
 function positionThemedPop(pop, anchor) {
   pop.classList.remove('is-align-right', 'is-drop-up');
+  const pickList = pop.querySelector('.themed-pick-list');
+  pickList?.style.removeProperty('max-height');
   if (window.matchMedia('(max-width: 650px)').matches) return;
   const anchorRect = anchor.getBoundingClientRect();
   const popRect = pop.getBoundingClientRect();
   const gutter = 12;
   const modalRect = pop.closest('.modal')?.getBoundingClientRect();
-  const boundary = modalRect ?? { top: gutter, right: window.innerWidth - gutter, bottom: window.innerHeight - gutter, left: gutter };
+  const boundary = {
+    top: modalRect?.top ?? gutter,
+    right: modalRect?.right ?? window.innerWidth - gutter,
+    bottom: modalRect?.bottom ?? window.innerHeight - gutter,
+    left: modalRect?.left ?? gutter,
+  };
+  const scrollRect = pickList ? pop.closest('.onboarding-body')?.getBoundingClientRect() : null;
+  if (scrollRect) {
+    boundary.top = Math.max(boundary.top, scrollRect.top);
+    boundary.bottom = Math.min(boundary.bottom, scrollRect.bottom);
+  }
   const below = boundary.bottom - anchorRect.bottom - 8;
   const above = anchorRect.top - boundary.top - 8;
   if (anchorRect.left + popRect.width > boundary.right) pop.classList.add('is-align-right');
-  if (popRect.height > below && above > below) pop.classList.add('is-drop-up');
+  const dropUp = popRect.height > below && above > below;
+  if (dropUp) pop.classList.add('is-drop-up');
+  if (pickList) {
+    const availableHeight = dropUp ? above : below;
+    const chromeHeight = popRect.height - pickList.getBoundingClientRect().height;
+    pickList.style.maxHeight = `${Math.max(0, Math.min(248, availableHeight - chromeHeight))}px`;
+  }
 }
 
 function closeThemedPops() {
@@ -10583,6 +10694,7 @@ function closeThemedPops() {
   if (pop) {
     pop.hidden = true;
     pop.classList.remove('is-align-right', 'is-drop-up');
+    pop.querySelector('.themed-pick-list')?.style.removeProperty('max-height');
   }
   if (anchor) anchor.setAttribute('aria-expanded', 'false');
   themedPopoverState.pop = null;
@@ -10993,7 +11105,7 @@ function renderSelectOptions(wrap, term = '') {
   if (!select || !list) return;
   const query = term.trim().toLowerCase();
   list.innerHTML = '';
-  const options = [...select.options].filter((option) => !query || selectOptionText(option).toLowerCase().includes(query));
+  const options = [...select.options].filter((option) => !query || (option.dataset.searchText || selectOptionText(option)).toLowerCase().includes(query));
   if (!options.length) {
     const empty = document.createElement('p');
     empty.className = 'themed-empty';
@@ -11015,23 +11127,11 @@ function renderSelectOptions(wrap, term = '') {
       optionLabel.className = 'themed-option-label';
       optionLabel.textContent = selectOptionText(option) || '(Blank)';
       item.append(avatar, optionLabel);
-  } else if (activeProfileEditSection === 'dates') {
-    const dateKeys = values.getAll('dateKey');
-    const dateTypes = values.getAll('dateType');
-    const dateLabels = values.getAll('dateLabel');
-    const dateValues = values.getAll('dateValue');
-    let labelIndex = 0;
-    customer.importantDates = dateKeys.map((key, index) => {
-      const previous = customer.importantDates.find((item) => item.key === key);
-      const type = dateTypes[index] ?? previous?.type ?? 'Custom date';
-      const isCustom = type === 'Custom date';
-      const label = isCustom
-        ? (String(dateLabels[labelIndex++] ?? '').trim() || 'Custom date')
-        : (previous?.label ?? type);
-      return { key, type, label, date: dateValues[index] ?? '' };
-    });
-  } else {
-      item.textContent = selectOptionText(option) || '(Blank)';
+    } else {
+      const optionLabel = document.createElement('span');
+      optionLabel.className = 'themed-option-label';
+      optionLabel.textContent = selectOptionText(option) || '(Blank)';
+      item.append(optionLabel);
     }
     const dot = document.createElement('span');
     dot.className = 'themed-option-dot';
@@ -11102,8 +11202,8 @@ function enhanceSelect(select) {
   searchRow.append(themedSvg('i-search'));
   const search = document.createElement('input');
   search.type = 'search';
-  search.placeholder = 'Search options';
-  search.setAttribute('aria-label', 'Search options');
+  search.placeholder = select.dataset.searchPlaceholder || 'Search options';
+  search.setAttribute('aria-label', search.placeholder);
   search.autocomplete = 'off';
   searchRow.append(search);
   const list = document.createElement('div');
@@ -11390,12 +11490,48 @@ const homeViewParam = new URLSearchParams(location.search).get('view');
 setDashboardHomeMode(homeViewParam === 'new-user' || homeViewParam === 'new' ? 'new' : 'returning');
 setDashboardDensity('normal');
 
+reportsPage = createReportsPage({
+  root: reportsView,
+  getData: () => ({
+    customers: customers.map(customer => ({ ...customer, reportOutstanding: customerFinanceSummary(customer).outstanding, reportBooked: customerFinanceSummary(customer).bookingValue })),
+    queries: queryModuleRecords,
+    proposals: customerProposalRecords,
+    tasks: taskRecords,
+    inbox: inboxConversations,
+    documents: customers.flatMap(customer => vaultDocumentRecords(customer).map((document, index) => ({ ...document, id: document.id || `${customer.id}-DOC-${index+1}`, customerId: customer.id, customerName: customer.name, status: documentStatus(document) }))),
+    vouchers: customerVoucherRecords,
+    requests: [...documentRequests].map(([customerId, request]) => ({ ...request, id: `REQ-${customerId}`, customerId, customerName: customers.find(customer => customer.id === customerId)?.name || customerId })),
+    ledger: [...customerFinanceEntries].flatMap(([customerId, entries]) => entries.map(entry => ({ ...entry, customerId, customerName: customers.find(customer => customer.id === customerId)?.name || customerId }))),
+  }),
+  onNavigate: row => {
+    if (row.kind === 'customer') { const customer = customers.find(item => item.id === row.id); if (customer) setView('detail', customer); }
+    else if (row.kind === 'query') { const query = queryModuleRecords.find(item => item.id === row.id); if (query) openQueryDetail(query); }
+    else if (row.kind === 'task') { const task = taskRecords.find(item => item.id === row.id); if (task) openTaskDetails(task, document.activeElement); }
+    else if (row.kind === 'inbox') { setView('inbox'); selectInboxConversation(row.id, true); }
+    else if (row.kind === 'document') { const customer = customers.find(item => item.id === row.customerId); if (customer) openCustomerDocuments(customer); }
+  },
+  onMobileNav: () => {
+    mobileNavReturnFocus = reportsView.querySelector('.reports-mobile-nav');
+    setMobileSidebarOpen(true);
+    collapseButton.focus();
+  },
+  onToast: showToast,
+  onRefresh: refreshControl,
+});
+
 const initialCustomerId = location.hash.match(/^#customer-(CUST-\d+)$/)?.[1];
 const initialCustomer = customers.find((customer) => customer.id === initialCustomerId);
 const initialQueryId = location.hash.match(/^#query-(QRY-[A-Z0-9-]+)$/)?.[1];
 const initialQuery = queryModuleRecords.find((query) => query.id === initialQueryId);
 const initialQueryCategory = QUERY_TYPES.find((type) => location.hash === `#${type.toLocaleLowerCase()}`);
-if (location.hash === '#new-customer') {
+if (location.hash === '#reports') {
+  history.replaceState({ view: 'reports', canGoBack: false }, '', '#reports');
+  setView('reports', selectedCustomer, false);
+} else if (location.hash === '#new-vendor') {
+  resetVendorOnboarding();
+  history.replaceState({ view: 'new-vendor', canGoBack: false }, '', '#new-vendor');
+  setView('new-vendor', selectedCustomer, false);
+} else if (location.hash === '#new-customer') {
   resetCustomerOnboarding();
   history.replaceState({ view: 'new-customer', canGoBack: false }, '', '#new-customer');
   setView('new-customer', selectedCustomer, false);
@@ -11461,17 +11597,27 @@ if (publicRequestToken && publicRequestCustomer) {
   openModal(requestUploadBackdrop, requestUploadType);
 }
 
-// Recalculate pagination when the viewport, filters or selection bar use space.
-const customerPageObserver = new ResizeObserver(() => requestAnimationFrame(fitCustomerPage));
-for (const element of [
-  $('#customerListView'),
-  $('#customerListView').closest('.main-content'),
-  $('#customerListView .page-header'),
-  $('#customerListView .customer-controls'),
-  $('#customerListView .workspace-bulk-bar'),
-]) {
-  if (element) customerPageObserver.observe(element);
-}
+// The query pagination layout and viewport capacity apply to every paged list.
+observeViewportPagination([
+  { footer: '#pagination', scroller: '#customerListView .table-scroller', rowSelector: 'tbody tr[data-customer-id]',
+    getSize: () => pageSizes.customers, setSize: size => { pageSizes.customers = size; },
+    getPage: () => currentPage, setPage: page => { currentPage = page; }, render: () => { setCustomerRowActionMenu(); renderCustomers(); renderPagination(); } },
+  { footer: '#queryListPagination', scroller: '#queryListShell .query-table-scroller', rowSelector: 'tbody tr[data-query-id]',
+    getSize: () => pageSizes.queries, setSize: size => { pageSizes.queries = size; },
+    getPage: () => queryListPage, setPage: page => { queryListPage = page; }, render: renderQueryModule },
+  { footer: '#taskListPagination', scroller: '#taskListShell .query-table-scroller', rowSelector: 'tbody tr[data-task-id]',
+    getSize: () => pageSizes.tasks, setSize: size => { pageSizes.tasks = size; },
+    getPage: () => taskListPage, setPage: page => { taskListPage = page; }, render: renderTaskBoard },
+  { footer: '#profileTaskPagination', scroller: '#profilePanelTasks .profile-tasks-scroller', rowSelector: 'tbody tr[data-profile-task-id]',
+    getSize: () => pageSizes.profileTasks, setSize: size => { pageSizes.profileTasks = size; },
+    getPage: () => profileTaskPage, setPage: page => { profileTaskPage = page; }, render: renderProfileTasks },
+  { footer: '#queryTaskPagination', scroller: '.query-tasks-section .profile-tasks-scroller', rowSelector: 'tbody tr[data-query-task-id]',
+    getSize: () => pageSizes.queryTasks, setSize: size => { pageSizes.queryTasks = size; },
+    getPage: () => queryTaskPage, setPage: page => { queryTaskPage = page; }, render: renderQueryTasks },
+  { footer: '#vaultPagination', scroller: '#vaultList', rowSelector: '.vault-customer-head',
+    getSize: () => pageSizes.vault, setSize: size => { pageSizes.vault = size; },
+    getPage: () => vaultPage, setPage: page => { vaultPage = page; }, render: renderVault },
+]);
 
 initializeWorkspaceParity({
   queryActions: (id, trigger) => {

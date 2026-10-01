@@ -1,105 +1,127 @@
-/* Customer creation uses the full-page New Vendor form language. */
-.main-content:has(#customerCreateView:not([hidden])) {
+/* Customer and vendor creation share the full-page form layout. */
+.main-content:has(:is(#customerCreateView, #vendorCreateView):not([hidden])) {
   display: flex; flex-direction: column; overflow: hidden; padding-top: 0; padding-bottom: 0;
 }
-#customerCreateView:not([hidden]) {
+:is(#customerCreateView, #vendorCreateView):not([hidden]) {
   display: flex; flex: 1 1 auto; min-height: 0; width: auto;
   margin-inline: calc(var(--page-pad) * -1); color: var(--ink); background: var(--surface);
 }
-#customerForm { display: flex; flex: 1 1 auto; min-width: 0; min-height: 0; flex-direction: column; }
-.new-customer-form-head {
+:is(#customerForm, #vendorForm) { display: flex; flex: 1 1 auto; min-width: 0; min-height: 0; flex-direction: column; }
+:is(.new-customer-form-head, .new-vendor-form-head) {
   display: flex; align-items: center; flex: none; min-height: 64px; padding: 0 var(--page-pad);
   border-bottom: 1px solid var(--line); background: var(--side);
 }
-.new-customer-form-head h1 {
+:is(.new-customer-form-head, .new-vendor-form-head) h1 {
   margin: 0; font-family: var(--font-display); font-size: clamp(19px, .45vw + 16px, 21px);
   line-height: 1.18; font-weight: 700; letter-spacing: -.025em;
 }
-#customerCreateView .customer-onboarding-body {
+:is(#customerCreateView, #vendorCreateView) .onboarding-body {
   display: block; flex: 1 1 auto; min-height: 0; max-height: none; padding: 0;
   overflow-y: auto; overscroll-behavior: contain; background: var(--surface);
 }
-#customerCreateView .onboarding-step {
+:is(#customerCreateView, #vendorCreateView) .onboarding-step {
   display: grid; grid-template-columns: minmax(220px, 270px) minmax(0, 1fr);
   padding: 0; margin: 0; border: 0; border-bottom: 1px solid var(--line); animation: none;
 }
-#customerCreateView .onboarding-step:last-child { border-bottom: 0; }
-#customerCreateView .onboarding-step-heading {
+:is(#customerCreateView, #vendorCreateView) .onboarding-step:last-child { border-bottom: 0; }
+:is(#customerCreateView, #vendorCreateView) .onboarding-step-heading {
   display: flex; min-width: 0; align-items: flex-start; gap: 12px; margin: 0;
   padding: 26px 24px 28px var(--page-pad); border-right: 1px solid var(--line);
   background: linear-gradient(118deg, #f5faf9 0%, var(--side) 72%);
 }
-.new-customer-section-icon {
+:is(.new-customer-section-icon, .new-vendor-section-icon) {
   display: grid; flex: none; width: 34px; height: 34px; place-items: center;
   border: 1px solid var(--pt-teal-200, #d8ebe7); border-radius: var(--radius-sm);
   color: var(--accent-ink); background: var(--accent-soft);
 }
-.new-customer-section-icon svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-#customerCreateView .onboarding-step-heading h3 {
+:is(.new-customer-section-icon, .new-vendor-section-icon) svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+:is(#customerCreateView, #vendorCreateView) .onboarding-step-heading h3 {
   margin: 1px 0 0; font-family: var(--font-display); font-size: 15px; font-weight: 700;
   line-height: 1.3; letter-spacing: -.01em; text-transform: none; text-wrap: balance;
 }
-#customerCreateView .onboarding-step-heading p {
+:is(#customerCreateView, #vendorCreateView) .onboarding-step-heading p {
   max-width: 190px; margin: 7px 0 0; color: var(--ink-3); font-size: 12.5px; line-height: 1.5; text-wrap: pretty;
 }
-.new-customer-section-content {
+:is(.new-customer-section-content, .new-vendor-section-content) {
   display: flex; min-width: 0; flex-direction: column; gap: 20px;
   padding: 26px var(--page-pad) 30px 30px; background: var(--surface);
 }
-#customerCreateView .field { display: flex; min-width: 0; flex-direction: column; gap: 8px; margin: 0; }
-#customerCreateView .field > span:first-child, #customerCreateView .tier-options legend {
+:is(#customerCreateView, #vendorCreateView) .field { display: flex; min-width: 0; flex-direction: column; gap: 8px; margin: 0; }
+:is(#customerCreateView, #vendorCreateView) .field > span:first-child, :is(#customerCreateView, #vendorCreateView) .tier-options legend {
   color: var(--ink); font-family: var(--font-sans); font-size: 13.5px; font-weight: 650;
   line-height: 1.35; letter-spacing: 0; text-transform: none;
 }
-#customerCreateView .field input, #customerCreateView .field select, #customerCreateView .field textarea,
-#customerCreateView .themed-btn, #customerCreateView .themed-country-btn, #customerCreateView .date-field-button {
+:is(#customerCreateView, #vendorCreateView) .field input, :is(#customerCreateView, #vendorCreateView) .field select, :is(#customerCreateView, #vendorCreateView) .field textarea,
+:is(#customerCreateView, #vendorCreateView) .themed-btn, :is(#customerCreateView, #vendorCreateView) .themed-country-btn, :is(#customerCreateView, #vendorCreateView) .date-field-button {
   border-radius: var(--radius-sm); font-family: var(--font-sans); font-size: 14.5px;
 }
-#customerCreateView .field input, #customerCreateView .field select,
-#customerCreateView .themed-btn, #customerCreateView .themed-country-btn, #customerCreateView .date-field-button {
+:is(#customerCreateView, #vendorCreateView) .field input, :is(#customerCreateView, #vendorCreateView) .field select,
+:is(#customerCreateView, #vendorCreateView) .themed-btn, :is(#customerCreateView, #vendorCreateView) .themed-country-btn, :is(#customerCreateView, #vendorCreateView) .date-field-button {
   height: 46px; min-height: 46px;
 }
-#customerCreateView .field input, #customerCreateView .field select { padding-inline: 13px; }
-#customerCreateView .field input[readonly] { color: var(--ink-2); background: var(--surface-2); }
-#customerCreateView #customerCode { font-family: var(--font-mono); font-size: 12.5px; }
-#customerCreateView .field textarea { min-height: 86px; padding: 12px 13px; line-height: 1.5; }
-#customerCreateView .onboarding-basic-grid { grid-template-columns: 96px minmax(0, 1fr); gap: 22px; align-items: start; }
-#customerCreateView .onboarding-basic-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
-#customerCreateView .customer-photo-upload { width: 96px; height: 96px; min-height: 96px; border: 1px solid var(--line); border-radius: var(--radius-sm); }
-#customerCreateView .contact-name-grid { grid-template-columns: 96px minmax(0, 1fr); gap: 22px; margin: 0; }
-#customerCreateView .field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; margin: 0; }
-#customerCreateView .whatsapp-row { width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: end; gap: 22px; }
-#customerCreateView .whatsapp-row .check-control { min-height: 46px; }
-#customerCreateView .field > .compound-field { gap: 0; grid-template-columns: 112px minmax(0, 1fr); }
-#customerCreateView .compound-field > .themed-country, #customerCreateView .compound-field > .themed-select { min-width: 0; }
-#customerCreateView .compound-field .themed-country-btn, #customerCreateView .compound-field .themed-btn { border-radius: var(--radius-sm) 0 0 var(--radius-sm); border-right: 0; }
-#customerCreateView .compound-field > input { border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
-#customerCreateView .category-options { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 0; }
-#customerCreateView .category-options label > span { min-height: 58px; border-radius: var(--radius-sm); }
-#customerCreateView .category-options strong { color: var(--ink); font-size: 13px; text-transform: none; }
-#customerCreateView .category-options small { color: var(--ink-3); font-size: 12px; }
-#customerCreateView .tier-options { margin: 0; }
-#customerCreateView .preference-combobox { height: 46px; min-height: 46px; gap: 10px; padding-inline: 14px; border-radius: var(--radius-sm); }
-#customerCreateView .field .preference-combobox > input { height: 100%; min-height: 0; padding: 0; border-radius: 0; }
-.new-customer-actions {
+:is(#customerCreateView, #vendorCreateView) .field input, :is(#customerCreateView, #vendorCreateView) .field select { padding-inline: 13px; }
+:is(#customerCreateView, #vendorCreateView) .field input[readonly] { color: var(--ink-2); background: var(--surface-2); }
+:is(#customerCreateView, #vendorCreateView) #customerCode { font-family: var(--font-mono); font-size: 12.5px; }
+:is(#customerCreateView, #vendorCreateView) .field textarea { min-height: 86px; padding: 12px 13px; line-height: 1.5; }
+:is(#customerCreateView, #vendorCreateView) .onboarding-basic-grid { grid-template-columns: 96px minmax(0, 1fr); gap: 22px; align-items: start; }
+:is(#customerCreateView, #vendorCreateView) .onboarding-basic-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+:is(#customerCreateView, #vendorCreateView) .customer-photo-upload { width: 96px; height: 96px; min-height: 96px; border: 1px solid var(--line); border-radius: var(--radius-sm); }
+:is(#customerCreateView, #vendorCreateView) .contact-name-grid { grid-template-columns: 96px minmax(0, 1fr); gap: 22px; margin: 0; }
+:is(#customerCreateView, #vendorCreateView) .field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; margin: 0; }
+:is(#customerCreateView, #vendorCreateView) .whatsapp-row { width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: end; gap: 22px; }
+:is(#customerCreateView, #vendorCreateView) .whatsapp-row .check-control { min-height: 46px; }
+:is(#customerCreateView, #vendorCreateView) .field > .compound-field { gap: 0; grid-template-columns: 84px minmax(0, 1fr); }
+:is(#customerCreateView, #vendorCreateView) .compound-field > .themed-country, :is(#customerCreateView, #vendorCreateView) .compound-field > .themed-select { min-width: 0; }
+:is(#customerCreateView, #vendorCreateView) .compound-field .themed-country-btn, :is(#customerCreateView, #vendorCreateView) .compound-field .themed-btn { border-radius: var(--radius-sm) 0 0 var(--radius-sm); border-right: 0; }
+:is(#customerCreateView, #vendorCreateView) .compound-field .themed-country .themed-btn { justify-content: center; gap: 8px; padding-inline: 10px; }
+:is(#customerCreateView, #vendorCreateView) .compound-field .themed-country .themed-btn-label { flex: none; }
+:is(#customerCreateView, #vendorCreateView) .compound-field > input { border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+:is(#customerCreateView, #vendorCreateView) .category-options { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 0; }
+:is(#customerCreateView, #vendorCreateView) .category-options label > span { min-height: 58px; border-radius: var(--radius-sm); }
+:is(#customerCreateView, #vendorCreateView) .category-options strong { color: var(--ink); font-size: 13px; text-transform: none; }
+:is(#customerCreateView, #vendorCreateView) .category-options small { color: var(--ink-3); font-size: 12px; }
+:is(#customerCreateView, #vendorCreateView) .tier-options { margin: 0; }
+:is(#customerCreateView, #vendorCreateView) .preference-combobox { height: 46px; min-height: 46px; gap: 10px; padding-inline: 14px; border-radius: var(--radius-sm); }
+:is(#customerCreateView, #vendorCreateView) .field .preference-combobox > input { height: 100%; min-height: 0; padding: 0; border-radius: 0; }
+:is(.new-customer-actions, .new-vendor-actions) {
   display: flex; flex: none; min-height: 72px; align-items: center; justify-content: flex-end; gap: 10px;
   padding: 14px var(--page-pad); border-top: 1px solid var(--line); background: var(--surface);
   box-shadow: 0 -8px 18px rgba(20, 26, 33, .045); z-index: 2;
 }
-.new-customer-actions .button { height: 32px; min-height: 32px; font-size: 12.5px; padding-inline: 11px; border-radius: var(--radius-sm); }
+:is(.new-customer-actions, .new-vendor-actions) .button { height: 32px; min-height: 32px; font-size: 12.5px; padding-inline: 11px; border-radius: var(--radius-sm); }
 @media (max-width: 1000px) {
-  .main-content:has(#customerCreateView:not([hidden])) { padding-top: 0; }
+  .main-content:has(:is(#customerCreateView, #vendorCreateView):not([hidden])) { padding-top: 0; }
 }
 @media (max-width: 760px) {
-  #customerCreateView .onboarding-step { display: block; }
-  #customerCreateView .onboarding-step-heading { padding: 18px 16px; border-right: 0; border-bottom: 1px solid var(--line); }
-  #customerCreateView .onboarding-step-heading p { max-width: 36rem; }
-  .new-customer-section-content { padding: 18px 16px 22px; }
-  #customerCreateView .onboarding-basic-fields, #customerCreateView .field-grid,
-  #customerCreateView .whatsapp-row { grid-template-columns: minmax(0, 1fr); gap: 14px; }
-  #customerCreateView .onboarding-basic-grid { grid-template-columns: minmax(0, 1fr); gap: 14px; }
-  #customerCreateView .contact-name-grid { grid-template-columns: 80px minmax(0, 1fr); gap: 12px; }
-  #customerCreateView .category-options { grid-template-columns: minmax(0, 1fr); }
-  .new-customer-form-head, .new-customer-actions { padding-inline: 16px; }
-  .new-customer-actions { flex-wrap: wrap; gap: 8px; }
+  :is(#customerCreateView, #vendorCreateView) .onboarding-step { display: block; }
+  :is(#customerCreateView, #vendorCreateView) .onboarding-step-heading { padding: 18px 16px; border-right: 0; border-bottom: 1px solid var(--line); }
+  :is(#customerCreateView, #vendorCreateView) .onboarding-step-heading p { max-width: 36rem; }
+  :is(.new-customer-section-content, .new-vendor-section-content) { padding: 18px 16px 22px; }
+  :is(#customerCreateView, #vendorCreateView) .onboarding-basic-fields, :is(#customerCreateView, #vendorCreateView) .field-grid,
+  :is(#customerCreateView, #vendorCreateView) .whatsapp-row { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  :is(#customerCreateView, #vendorCreateView) .onboarding-basic-grid { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  :is(#customerCreateView, #vendorCreateView) .contact-name-grid { grid-template-columns: 80px minmax(0, 1fr); gap: 12px; }
+  :is(#customerCreateView, #vendorCreateView) .category-options { grid-template-columns: minmax(0, 1fr); }
+  :is(.new-customer-form-head, .new-vendor-form-head), :is(.new-customer-actions, .new-vendor-actions) { padding-inline: 16px; }
+  :is(.new-customer-actions, .new-vendor-actions) { flex-wrap: wrap; gap: 8px; }
+}
+
+/* Vendor-specific fields use the same spacing and controls as customer creation. */
+#vendorCreateView .vendor-three-column-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) minmax(0, 1.2fr); }
+#vendorCreateView #vendorCode { font-family: var(--font-mono); font-size: 12.5px; }
+#vendorCreateView .vendor-service-field { min-width: 0; margin: 0; padding: 0; border: 0; }
+#vendorCreateView .vendor-service-field legend { margin-bottom: 8px; padding: 0; color: var(--ink); font-size: 13.5px; font-weight: 650; }
+#vendorCreateView .vendor-service-field legend b { color: var(--bad); }
+.vendor-service-options { display: flex; flex-wrap: wrap; gap: 8px; }
+.vendor-service-options label { position: relative; display: flex; cursor: pointer; }
+.vendor-service-options input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.vendor-service-options label > span { display: flex; min-height: 38px; align-items: center; padding: 8px 12px; border: 1px solid var(--line); border-radius: var(--radius-sm); color: var(--ink-2); background: var(--surface); font-size: 12px; font-weight: 600; }
+.vendor-service-options input:checked + span { border-color: var(--accent); color: var(--accent-ink); background: var(--accent-soft); }
+.vendor-service-options input:focus-visible + span { outline: 2px solid var(--focus); outline-offset: 2px; }
+.vendor-field-hint { margin: 0; color: var(--ink-3); font-size: 12px; line-height: 1.5; }
+.vendor-dmc-fields:not([hidden]) { display: grid; gap: 20px; }
+#vendorCreateView .vendor-short-field { max-width: 320px; }
+#vendorCreateView .field > .themed-anchor { margin-bottom: 0; text-transform: none; letter-spacing: normal; }
+@media (max-width: 1200px) {
+  #vendorCreateView .vendor-three-column-grid { grid-template-columns: minmax(0, 1fr); }
 }

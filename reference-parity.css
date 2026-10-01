@@ -169,7 +169,6 @@
 .workspace-data-sheet .workspace-sheet-fill { flex: 1 0 0; min-height: 0; pointer-events: none; }
 .workspace-data-sheet .workspace-sheet-fill td { height: 100%; min-height: 0; padding-block: 0; border-bottom: 0; }
 .workspace-data-sheet tbody tr:hover:not(.workspace-sheet-fill) > td { background: var(--surface-2); }
-.workspace-data-sheet tbody tr.is-selected > td { background: var(--pink-soft); }
 .workspace-data-sheet tbody tr:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
 .workspace-data-sheet .customer-cell { min-width: 0; width: 100%; gap: 10px; }
 .workspace-data-sheet .avatar { width: 40px; height: 40px; flex: 0 0 40px; border-radius: 10px; }
@@ -185,9 +184,24 @@
 .workspace-bulk-bar {
   display: flex; flex: none; align-items: center; justify-content: space-between; gap: 12px;
   padding: 11px var(--page-pad); border-block: 1px solid var(--line); background: var(--pink-soft);
-  color: var(--pink-ink); font-size: 12.5px; font-weight: 600;
+  min-width: 0;
+}
+.workspace-bulk-bar > [role="status"] {
+  color: var(--pink-ink); font-family: var(--type-label-compact-family);
+  font-size: var(--type-label-compact-size); font-weight: var(--type-label-compact-weight);
+  line-height: 1.5;
 }
 .workspace-bulk-bar > div { display: flex; gap: 7px; }
+.workspace-bulk-bar .button {
+  height: 32px; min-height: 32px; padding: 0 11px; gap: 6px; border-radius: 8px;
+  font-family: var(--type-label-button-sm-family); font-size: var(--type-label-button-sm-size);
+  font-weight: var(--type-label-button-sm-weight); line-height: var(--type-label-button-sm-line);
+}
+.workspace-bulk-bar [data-sheet-export] { border-color: var(--accent); color: var(--accent); background: var(--surface); }
+.workspace-bulk-bar [data-sheet-export]:hover { border-color: var(--accent-ink); color: var(--accent-ink); background: var(--accent-soft); }
+.workspace-bulk-bar [data-sheet-export]:active { background: var(--accent-soft-pressed); }
+.workspace-bulk-bar [data-sheet-clear]:active { background: var(--surface-2); }
+.workspace-bulk-bar .button svg { width: 14px; height: 14px; stroke-width: 1.9; }
 #customerListView .pagination, #queryListPagination, #taskListPagination {
   display: flex; flex: none; min-height: 59px; margin: 0; padding: 12px var(--page-pad) 16px;
   border-top: 1px solid var(--line); background: var(--surface);
@@ -222,7 +236,8 @@
 #customerDetailView .contact-actions svg { width: 14px; height: 14px; }
 #customerDetailView .profile-customer-header { margin-bottom: 0; }
 #customerDetailView .detail-tabs { margin-top: calc(var(--space-5) + 8px); margin-bottom: 32px; }
-#customerDetailView .detail-tabs:has(+ #profilePanelOverview:not([hidden])) { margin-bottom: 40px; }
+/* Keep panel spacing identical in both scrolling and viewport-filling tabs. */
+#customerDetailView > .profile-tab-panel { margin-top: 0; animation: none; }
 #customerDetailView .detail-tab { gap: 6px; margin-bottom: -1px; }
 #customerDetailView .detail-tab .category-tab-count {
   display: inline-grid; place-items: center; min-width: 18px; height: 18px; padding: 0 5px;
@@ -267,7 +282,12 @@
   #customerDetailView .customer-summary .metric-card:nth-child(n + 2) { border-top: 1px solid var(--line); }
 }
 .query-detail-tabs { margin-top: 8px; }
-.query-detail-header { margin-bottom: 8px; }
+/* Use one margin: adjacent margins collapse in block layouts but add in flex. */
+.query-detail-header { margin-bottom: 0; }
+
+/* Show the complete pending party, even when the activity time needs two lines. */
+.queries-view .query-card-footer > .query-delay { flex: none; }
+.queries-view .query-card-footer > .query-activity { min-width: 0; white-space: normal; text-align: right; }
 
 /* Finance uses the Vendor SummaryStrip's label, icon/value and note rows. */
 #profilePanelFinance { display: flow-root; margin-top: 0; }
@@ -399,6 +419,7 @@
 .inbox-conversation.is-active .inbox-avatar.avatar-email { color: var(--pink-ink); border-color: var(--pink-line); background: var(--pink-avatar); }
 
 /* Home uses the same section and KPI tones as Finance and Vendor overview. */
+.main-content:has(#dashboardView:not([hidden])) { padding-bottom: var(--page-pad); }
 .dashboard-panel { border-radius: 12px; box-shadow: none; }
 .home-module-value { font-family: var(--font-display); font-size: 24px; font-weight: 700; color: var(--ink); }
 .home-module-card .home-module-foot .button { width: auto; height: 32px; min-height: 32px; }
@@ -523,13 +544,27 @@
 .customer-filter-option input:focus-visible, .customer-filter-head button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 #customerListView .pagination { margin-inline: var(--page-pad); padding-inline: 24px; }
 
-/* Customer records are paged; the sheet ends at its last actual row. */
+/* All paged lists fill the available viewport, including short last pages. */
 #customerListView .page-header, #customerListView .customer-controls { flex: none; }
-#customerListView .customer-table-panel { flex: 0 0 auto; }
-#customerListView .table-scroller { flex: none; overflow-y: hidden; }
+#customerListView .customer-table-panel { flex: 1 1 auto; }
+#customerListView .table-scroller { flex: 1 1 auto; overflow: auto; }
 #customerListView .workspace-data-sheet,
-#customerListView .workspace-data-sheet tbody { flex: none; }
-#customerListView .pagination { margin-inline: 0; border-top: 0; }
+#customerListView .workspace-data-sheet tbody { flex: 1 0 auto; }
+#customerListView .pagination { margin-inline: 0; border-top: 1px solid var(--line); }
+#customerListView .empty-state { flex: 1 1 auto; min-height: 0; }
+#profilePanelTasks { animation: none; }
+
+.main-content:has(#documentVaultView:not([hidden])) { display: flex; flex-direction: column; overflow: hidden; padding-bottom: 0; }
+#documentVaultView { display: flex; flex-direction: column; flex: 1 1 auto; min-height: 0; height: 100%; }
+#documentVaultView .page-header, #documentVaultView .vault-controls, #vaultTableHead { flex: none; }
+#documentVaultView .vault-panel { display: flex; flex-direction: column; flex: 1 1 auto; min-height: 0; border-bottom: 0; }
+#vaultList { flex: 1 1 auto; min-height: 0; overflow: auto; overscroll-behavior: contain; }
+#vaultList .vault-customer { flex: none; }
+#vaultEmptyState { flex: 1 1 auto; min-height: 0; }
+
+/* Footers stay outside the scrolling records and share the query controls. */
+.pagination { display: flex; flex: none; flex-direction: row; align-items: center; justify-content: space-between; gap: 8px; min-height: 59px; margin: 0; padding: 12px var(--page-pad) 16px; border-top: 1px solid var(--line); background: var(--surface); }
+.pagination .pagination-pages { flex: none; }
 
 @media (max-width: 760px) {
   #customerListView .customer-search-anchor { grid-template-columns: minmax(0, 1fr) auto; }
@@ -545,4 +580,33 @@
 #importModalBackdrop .import-dropzone span { font-size: 12.5px; }
 @media (max-width: 650px) {
   #customerListView .header-actions .button:not(.button-icon) { width: auto; flex: none; }
+}
+
+/* Query customer selection: one selector, with its creation action aligned to it. */
+#queryModalBackdrop .query-customer-select-row {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 10px;
+}
+#queryModalBackdrop .query-customer-lookup { display: block; min-width: 0; }
+#queryModalBackdrop .query-customer-lookup .field > .themed-anchor {
+  margin-bottom: 0; font-weight: 400; letter-spacing: normal; text-transform: none;
+}
+#queryCreateCustomerButton { height: 36px; min-height: 36px; margin: 0; align-self: end; white-space: nowrap; }
+
+/* The shared filter-options rule clips content; select pickers need a scrolling list. */
+.themed-select-pop .themed-pick-list {
+  max-height: 248px; min-height: 0; overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain;
+}
+.themed-select-pop .themed-pick-list button { gap: 12px; }
+.themed-pick-list .themed-option-label {
+  flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.themed-pick-list .themed-option-dot { flex: none; }
+.themed-select-pop .themed-search { padding: 8px 12px; gap: 10px; }
+.themed-select-pop .themed-search input {
+  height: 32px; min-height: 32px; padding: 0 4px; border: 0; border-radius: 6px; box-shadow: none;
+  font-size: 13.5px; line-height: normal;
+}
+@media (max-width: 650px) {
+  #queryModalBackdrop .query-customer-select-row { grid-template-columns: minmax(0, 1fr); }
+  #queryCreateCustomerButton { justify-self: stretch; }
 }

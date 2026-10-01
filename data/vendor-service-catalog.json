@@ -1,0 +1,671 @@
+{
+  "services": [
+    {
+      "id": "taj-exotica",
+      "serviceId": "svc-taj-exotica",
+      "profileVendorId": "exhosp",
+      "name": "Taj Exotica Resort & Spa",
+      "category": "Accommodation",
+      "location": "Goa",
+      "status": "Active",
+      "imageUrl": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=640&h=480&q=80",
+      "description": "A beach resort supplied through direct, DMC, and wholesale contracts, each with its own products and rate card.",
+      "inclusions": [
+        "Products listed on the linked rate card",
+        "Vendor confirmation and support"
+      ],
+      "exclusions": [
+        "Items not listed in the confirmed rate card",
+        "Personal expenses"
+      ],
+      "queryProducts": []
+    },
+    {
+      "id": "taj-lake-palace",
+      "serviceId": "svc-taj-lake-palace",
+      "profileVendorId": "kerala-heritage",
+      "name": "Taj Lake Palace",
+      "category": "Accommodation",
+      "location": "Udaipur",
+      "status": "Active",
+      "imageUrl": "https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=640&h=480&q=80",
+      "description": "Lake-front palace accommodation with direct and DMC supply options.",
+      "inclusions": [
+        "Products listed on the linked rate card",
+        "Vendor confirmation and support"
+      ],
+      "exclusions": [
+        "Items not listed in the confirmed rate card",
+        "Personal expenses"
+      ],
+      "queryProducts": []
+    },
+    {
+      "id": "taj-bekal",
+      "serviceId": "svc-taj-bekal",
+      "profileVendorId": "coastal",
+      "name": "Taj Bekal Resort & Spa",
+      "category": "Accommodation",
+      "location": "Kerala",
+      "status": "Active",
+      "imageUrl": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=640&h=480&q=80",
+      "description": "A Kerala coastal resort available through direct, DMC, and wholesale supplier relationships.",
+      "inclusions": [
+        "Products listed on the linked rate card",
+        "Vendor confirmation and support"
+      ],
+      "exclusions": [
+        "Items not listed in the confirmed rate card",
+        "Personal expenses"
+      ],
+      "queryProducts": []
+    },
+    {
+      "id": "example-lake",
+      "serviceId": "svc-lake",
+      "profileVendorId": "exhosp",
+      "name": "Example Lake Resort",
+      "category": "Accommodation",
+      "location": "Alleppey",
+      "status": "Active",
+      "imageUrl": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=96&h=96&q=80",
+      "description": "Lakeside resort on Vembanad with garden and lake-view rooms. Soft check-in from 14:00; pool and jetty access included for staying guests.",
+      "inclusions": [
+        "Garden View and Lake View room categories",
+        "Breakfast options on meal plans",
+        "Pool and jetty access for in-house guests",
+        "Early check-in subject to availability"
+      ],
+      "exclusions": [
+        "Transfers unless included in the package",
+        "Meals outside the selected plan",
+        "Personal expenses"
+      ],
+      "queryProducts": []
+    },
+    {
+      "id": "example-hill",
+      "serviceId": "svc-hill",
+      "profileVendorId": "exhosp",
+      "name": "Example Hill Retreat",
+      "category": "Accommodation",
+      "location": "Munnar",
+      "status": "Draft",
+      "imageUrl": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=96&h=96&q=80",
+      "description": "Valley-facing hill resort with deluxe, premium, and family suites. Winter rates still open — treat unpriced seasons as blocked.",
+      "inclusions": [
+        "Deluxe, Premium, and Family Suite categories",
+        "Valley views on premium stock",
+        "Bonfire on request",
+        "Airport SUV transfer add-on"
+      ],
+      "exclusions": [
+        "Airport transfers",
+        "Bonfire unless confirmed",
+        "Meals outside the selected plan"
+      ],
+      "queryProducts": []
+    },
+    {
+      "id": "kochi-transfer",
+      "serviceId": "svc-transfer-cok",
+      "profileVendorId": "trailmakers",
+      "name": "Kochi Airport Transfer",
+      "category": "Transport",
+      "location": "Kochi",
+      "status": "Active",
+      "imageUrl": "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=96&h=96&q=80",
+      "description": "Meet-and-greet transfers from Cochin airport. Sedan and tempo options; waiting charge after 45 minutes.",
+      "inclusions": [
+        "Meet and greet at arrivals",
+        "Sedan or tempo as booked",
+        "Toll and parking as quoted",
+        "45 min free waiting"
+      ],
+      "exclusions": [
+        "Waiting beyond 45 minutes",
+        "Unscheduled route changes",
+        "Driver gratuity"
+      ],
+      "queryProducts": []
+    },
+    {
+      "id": "munnar-trek",
+      "serviceId": "svc-trek-munnar",
+      "profileVendorId": "trailmakers",
+      "name": "Munnar Ridge Trek",
+      "category": "Activities",
+      "location": "Munnar",
+      "status": "Active",
+      "imageUrl": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=96&h=96&q=80",
+      "description": "Guided ridge trek above the tea estates. Half-day outing with a hard cap of 12 guests; tea overlook stop included.",
+      "inclusions": [
+        "Local guide",
+        "Safety briefing",
+        "Tea estate overlook stop",
+        "Bottled water"
+      ],
+      "exclusions": [
+        "Hotel transfers",
+        "Meals",
+        "Personal trekking equipment"
+      ],
+      "queryProducts": []
+    },
+    {
+      "id": "backwater-kayak",
+      "serviceId": "svc-kayak",
+      "profileVendorId": "trailmakers",
+      "name": "Backwater Kayak",
+      "category": "Activities",
+      "location": "Alleppey",
+      "status": "Active",
+      "imageUrl": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=96&h=96&q=80",
+      "description": "Kayak through quiet Alleppey canals. Soft launch near the lake resorts; 2–3 hour outing for couples and small groups.",
+      "inclusions": [
+        "Kayak and paddle",
+        "Life jacket",
+        "Local pilot for first-timers",
+        "Canal launch point pickup when bundled"
+      ],
+      "exclusions": [
+        "Meals",
+        "Hotel transfer when booked separately",
+        "Waterproof personal storage"
+      ],
+      "queryProducts": []
+    },
+    {
+      "id": "cardamom-tour",
+      "serviceId": "svc-cardamom",
+      "profileVendorId": "exhosp",
+      "name": "Cardamom Plantation Tour",
+      "category": "Activities",
+      "location": "Thekkady",
+      "status": "Active",
+      "imageUrl": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=96&h=96&q=80",
+      "description": "Guided walk through working cardamom estates with drying-yard stop. Usually bundled with Hill Retreat stays; half-day timing.",
+      "inclusions": [
+        "Guided plantation walk",
+        "Drying-yard visit",
+        "Bottled water",
+        "Transfer from Hill Retreat when bundled"
+      ],
+      "exclusions": [
+        "Meals",
+        "Personal purchases",
+        "Transfer when booked separately"
+      ],
+      "queryProducts": []
+    },
+    {
+      "id": "uae-visa",
+      "serviceId": "svc-uae-visa",
+      "profileVendorId": "atlas-visa",
+      "name": "UAE Tourist Visa",
+      "category": "Visa",
+      "location": "UAE",
+      "status": "Active",
+      "imageUrl": "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=640&h=480&q=80",
+      "description": "Tourist visa processing products with government, centre, and vendor fee components.",
+      "inclusions": [
+        "Products listed on the linked rate card",
+        "Vendor confirmation and support"
+      ],
+      "exclusions": [
+        "Items not listed in the confirmed rate card",
+        "Personal expenses"
+      ],
+      "queryProducts": []
+    },
+    {
+      "id": "kerala-flights",
+      "serviceId": "svc-kerala-flights",
+      "profileVendorId": "trailmakers",
+      "name": "Kerala Flight Ticketing",
+      "category": "Flights",
+      "location": "India",
+      "status": "Active",
+      "imageUrl": "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=640&h=480&q=80",
+      "description": "Managed air-ticketing support for domestic and international itineraries.",
+      "inclusions": [
+        "Products listed on the linked rate card",
+        "Vendor confirmation and support"
+      ],
+      "exclusions": [
+        "Items not listed in the confirmed rate card",
+        "Personal expenses"
+      ],
+      "queryProducts": []
+    }
+  ],
+  "vendors": [
+    {
+      "id": "trailmakers",
+      "code": "V-TRAILMAKERS",
+      "name": "Trailmakers Experiences",
+      "initials": "TE",
+      "status": "Active",
+      "location": "Kochi, India",
+      "imageUrl": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=160&h=160&q=80"
+    },
+    {
+      "id": "exhosp",
+      "code": "V-EXHOSP",
+      "name": "Example Hospitality",
+      "initials": "EH",
+      "status": "Active",
+      "location": "Kochi, India",
+      "imageUrl": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=160&h=160&q=80"
+    },
+    {
+      "id": "wanderlust",
+      "code": "V-WANDERLUST",
+      "name": "Wanderlust Trails",
+      "initials": "WT",
+      "status": "Active",
+      "location": "Kochi, India",
+      "imageUrl": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=160&h=160&q=80"
+    },
+    {
+      "id": "atlas-visa",
+      "code": "V-ATLASVISA",
+      "name": "Atlas Visa Services",
+      "initials": "AV",
+      "status": "Active",
+      "location": "Kochi, India",
+      "imageUrl": "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=160&h=160&q=80"
+    },
+    {
+      "id": "summit",
+      "code": "V-SUMMIT",
+      "name": "Summit Adventures",
+      "initials": "SA",
+      "status": "Active",
+      "location": "Kochi, India",
+      "imageUrl": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=160&h=160&q=80"
+    },
+    {
+      "id": "coastal",
+      "code": "V-COASTAL",
+      "name": "Coastal Stay Properties",
+      "initials": "CS",
+      "status": "Active",
+      "location": "Kochi, India",
+      "imageUrl": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=160&h=160&q=80"
+    },
+    {
+      "id": "horizon",
+      "code": "V-HORIZON",
+      "name": "Horizon DMC Partners",
+      "initials": "HD",
+      "status": "Active",
+      "location": "Kochi, India",
+      "imageUrl": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=160&h=160&q=80"
+    },
+    {
+      "id": "bluewave",
+      "code": "V-BLUEWAVE",
+      "name": "BlueWave Transfers",
+      "initials": "BT",
+      "status": "Active",
+      "location": "Kochi, India",
+      "imageUrl": "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=160&h=160&q=80"
+    },
+    {
+      "id": "kerala-heritage",
+      "code": "V-KHERITAGE",
+      "name": "Kerala Heritage Hotels",
+      "initials": "KH",
+      "status": "Active",
+      "location": "Kochi, India",
+      "imageUrl": "https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=160&h=160&q=80"
+    },
+    {
+      "id": "spice-route",
+      "code": "V-SPICEROUTE",
+      "name": "Spice Route Experiences",
+      "initials": "SR",
+      "status": "Active",
+      "location": "Kochi, India",
+      "imageUrl": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=160&h=160&q=80"
+    },
+    {
+      "id": "harbour-light-stays",
+      "code": "V-HARBOURLIGHT",
+      "name": "Harbour Light Stays",
+      "initials": "HL",
+      "status": "Draft",
+      "location": "Alappuzha, India"
+    },
+    {
+      "id": "malabar-transit",
+      "code": "V-MALABARTRANSIT",
+      "name": "Malabar Transit Co.",
+      "initials": "MT",
+      "status": "Draft",
+      "location": "Kozhikode, India"
+    }
+  ],
+  "connections": [
+    {
+      "id": "taj-exotica-exhosp",
+      "vendorId": "exhosp",
+      "serviceId": "taj-exotica",
+      "supplierType": "Direct supplier",
+      "productsCovered": "12 room types",
+      "rateCardId": "rc-acc-2627",
+      "rateCardName": "Accommodation tariff 2026–27",
+      "validity": "01 Apr 26–31 Mar 27",
+      "status": "Active"
+    },
+    {
+      "id": "taj-exotica-wanderlust",
+      "vendorId": "wanderlust",
+      "serviceId": "taj-exotica",
+      "supplierType": "DMC",
+      "productsCovered": "8 room types",
+      "rateCardId": "rc-acc-2526",
+      "rateCardName": "Taj Goa contracted rates",
+      "validity": "01 Oct 26–30 Sep 27",
+      "status": "Active"
+    },
+    {
+      "id": "taj-exotica-coastal",
+      "vendorId": "coastal",
+      "serviceId": "taj-exotica",
+      "supplierType": "Wholesaler",
+      "productsCovered": "5 room types",
+      "rateCardId": "rc-hill-2627",
+      "rateCardName": "Winter FIT tariff",
+      "validity": "01 Oct 26–31 Mar 27",
+      "status": "Expiring soon"
+    },
+    {
+      "id": "taj-lake-heritage",
+      "vendorId": "kerala-heritage",
+      "serviceId": "taj-lake-palace",
+      "supplierType": "Direct supplier",
+      "productsCovered": "9 room types",
+      "rateCardId": "rc-acc-2627",
+      "rateCardName": "Palace stay tariff 2026–27",
+      "validity": "01 Apr 26–31 Mar 27",
+      "status": "Active"
+    },
+    {
+      "id": "taj-lake-horizon",
+      "vendorId": "horizon",
+      "serviceId": "taj-lake-palace",
+      "supplierType": "DMC",
+      "productsCovered": "6 room types",
+      "rateCardId": "rc-acc-2526",
+      "rateCardName": "Rajasthan DMC rates",
+      "validity": "01 Apr 26–31 Mar 27",
+      "status": "Active"
+    },
+    {
+      "id": "taj-bekal-coastal",
+      "vendorId": "coastal",
+      "serviceId": "taj-bekal",
+      "supplierType": "Direct supplier",
+      "productsCovered": "10 room types",
+      "rateCardId": "rc-acc-2627",
+      "rateCardName": "Bekal direct tariff",
+      "validity": "01 Apr 26–31 Mar 27",
+      "status": "Active"
+    },
+    {
+      "id": "taj-bekal-exhosp",
+      "vendorId": "exhosp",
+      "serviceId": "taj-bekal",
+      "supplierType": "Wholesaler",
+      "productsCovered": "7 room types",
+      "rateCardId": "rc-acc-2526",
+      "rateCardName": "North Kerala FIT rates",
+      "validity": "01 Oct 26–31 Mar 27",
+      "status": "Active"
+    },
+    {
+      "id": "taj-bekal-wanderlust",
+      "vendorId": "wanderlust",
+      "serviceId": "taj-bekal",
+      "supplierType": "DMC",
+      "productsCovered": "6 room types",
+      "rateCardId": "rc-hill-2627",
+      "rateCardName": "Bekal contracted rates",
+      "validity": "01 Apr 26–31 Mar 27",
+      "status": "Active"
+    },
+    {
+      "id": "taj-bekal-horizon",
+      "vendorId": "horizon",
+      "serviceId": "taj-bekal",
+      "supplierType": "Wholesaler",
+      "productsCovered": "4 room types",
+      "rateCardId": "rc-acc-2526",
+      "rateCardName": "Seasonal hotel allotment",
+      "validity": "01 Oct 26–31 Mar 27",
+      "status": "Expiring soon"
+    },
+    {
+      "id": "lake-exhosp",
+      "vendorId": "exhosp",
+      "serviceId": "example-lake",
+      "supplierType": "Direct supplier",
+      "productsCovered": "2 room types",
+      "rateCardId": "rc-acc-2627",
+      "rateCardName": "Accommodation tariff 2026–27",
+      "validity": "01 Apr 26–31 Mar 27",
+      "status": "Active"
+    },
+    {
+      "id": "lake-wanderlust",
+      "vendorId": "wanderlust",
+      "serviceId": "example-lake",
+      "supplierType": "DMC",
+      "productsCovered": "2 room types",
+      "rateCardId": "rc-acc-2526",
+      "rateCardName": "Backwater stay rates",
+      "validity": "01 Apr 26–31 Mar 27",
+      "status": "Active"
+    },
+    {
+      "id": "hill-exhosp",
+      "vendorId": "exhosp",
+      "serviceId": "example-hill",
+      "supplierType": "Direct supplier",
+      "productsCovered": "3 room types",
+      "rateCardId": "rc-hill-2627",
+      "rateCardName": "Hill Retreat tariff 2026–27",
+      "validity": "01 Apr 26–31 Mar 27",
+      "status": "Draft"
+    },
+    {
+      "id": "hill-horizon",
+      "vendorId": "horizon",
+      "serviceId": "example-hill",
+      "supplierType": "DMC",
+      "productsCovered": "3 room types",
+      "rateCardId": "rc-hill-2627",
+      "rateCardName": "Munnar winter rates",
+      "validity": "01 Oct 26–31 Mar 27",
+      "status": "Draft"
+    },
+    {
+      "id": "transfer-bluewave",
+      "vendorId": "bluewave",
+      "serviceId": "kochi-transfer",
+      "supplierType": "Direct supplier",
+      "productsCovered": "Sedan · SUV · Tempo",
+      "rateCardId": "rc-air-2026",
+      "rateCardName": "Airport transfer rates 2026",
+      "validity": "01 Jan–31 Dec 26",
+      "status": "Active"
+    },
+    {
+      "id": "transfer-trailmakers",
+      "vendorId": "trailmakers",
+      "serviceId": "kochi-transfer",
+      "supplierType": "DMC",
+      "productsCovered": "Sedan · Tempo",
+      "rateCardId": "rc-air-2026",
+      "rateCardName": "Kerala transfers 2026",
+      "validity": "01 Jan–31 Dec 26",
+      "status": "Active"
+    },
+    {
+      "id": "transfer-wanderlust",
+      "vendorId": "wanderlust",
+      "serviceId": "kochi-transfer",
+      "supplierType": "DMC",
+      "productsCovered": "Sedan · SUV",
+      "rateCardId": "rc-air-2026",
+      "rateCardName": "Kochi ground rates",
+      "validity": "01 Jan–31 Dec 26",
+      "status": "Active"
+    },
+    {
+      "id": "transfer-spice",
+      "vendorId": "spice-route",
+      "serviceId": "kochi-transfer",
+      "supplierType": "Wholesaler",
+      "productsCovered": "Sedan",
+      "rateCardId": "rc-air-2026",
+      "rateCardName": "Airport FIT transfers",
+      "validity": "01 Jan–31 Dec 26",
+      "status": "Active"
+    },
+    {
+      "id": "trek-trailmakers",
+      "vendorId": "trailmakers",
+      "serviceId": "munnar-trek",
+      "supplierType": "Direct supplier",
+      "productsCovered": "Half day · max 12",
+      "rateCardId": "rc-acc-2627",
+      "rateCardName": "Activity tariff 2026",
+      "validity": "01 Jan–31 Dec 26",
+      "status": "Active"
+    },
+    {
+      "id": "trek-summit",
+      "vendorId": "summit",
+      "serviceId": "munnar-trek",
+      "supplierType": "Direct supplier",
+      "productsCovered": "Half day · max 10",
+      "rateCardId": "rc-acc-2526",
+      "rateCardName": "Guided trek rates",
+      "validity": "01 Oct 26–31 Mar 27",
+      "status": "Active"
+    },
+    {
+      "id": "trek-spice",
+      "vendorId": "spice-route",
+      "serviceId": "munnar-trek",
+      "supplierType": "DMC",
+      "productsCovered": "Private groups",
+      "rateCardId": "rc-hill-2627",
+      "rateCardName": "Munnar experiences",
+      "validity": "01 Oct 26–31 Mar 27",
+      "status": "Active"
+    },
+    {
+      "id": "kayak-trailmakers",
+      "vendorId": "trailmakers",
+      "serviceId": "backwater-kayak",
+      "supplierType": "Direct supplier",
+      "productsCovered": "Single · tandem kayak",
+      "rateCardId": "rc-acc-2627",
+      "rateCardName": "Activity tariff 2026",
+      "validity": "01 Jan–31 Dec 26",
+      "status": "Active"
+    },
+    {
+      "id": "kayak-spice",
+      "vendorId": "spice-route",
+      "serviceId": "backwater-kayak",
+      "supplierType": "DMC",
+      "productsCovered": "Private groups",
+      "rateCardId": "rc-acc-2526",
+      "rateCardName": "Backwater experiences",
+      "validity": "01 Oct 26–31 Mar 27",
+      "status": "Active"
+    },
+    {
+      "id": "cardamom-exhosp",
+      "vendorId": "exhosp",
+      "serviceId": "cardamom-tour",
+      "supplierType": "DMC",
+      "productsCovered": "Half day tour",
+      "rateCardId": "rc-hill-2627",
+      "rateCardName": "Hill Retreat tariff 2026–27",
+      "validity": "01 Apr 26–31 Mar 27",
+      "status": "Active"
+    },
+    {
+      "id": "cardamom-spice",
+      "vendorId": "spice-route",
+      "serviceId": "cardamom-tour",
+      "supplierType": "Direct supplier",
+      "productsCovered": "Private · shared",
+      "rateCardId": "rc-acc-2627",
+      "rateCardName": "Spice plantation rates",
+      "validity": "01 Jan–31 Dec 26",
+      "status": "Active"
+    },
+    {
+      "id": "visa-atlas",
+      "vendorId": "atlas-visa",
+      "serviceId": "uae-visa",
+      "supplierType": "Direct supplier",
+      "productsCovered": "30 · 60 · 90 days",
+      "rateCardId": "rc-visa-uae",
+      "rateCardName": "Visa services tariff · UAE",
+      "validity": "01 Apr–30 Sep 26",
+      "status": "Active"
+    },
+    {
+      "id": "visa-horizon",
+      "vendorId": "horizon",
+      "serviceId": "uae-visa",
+      "supplierType": "DMC",
+      "productsCovered": "30 · 60 days",
+      "rateCardId": "rc-visa-uae",
+      "rateCardName": "UAE visa handling",
+      "validity": "01 Apr–30 Sep 26",
+      "status": "Expiring soon"
+    },
+    {
+      "id": "flights-trailmakers",
+      "vendorId": "trailmakers",
+      "serviceId": "kerala-flights",
+      "supplierType": "Wholesaler",
+      "productsCovered": "Domestic · international",
+      "rateCardId": "rc-air-2026",
+      "rateCardName": "Air ticketing fees 2026",
+      "validity": "01 Jan–31 Dec 26",
+      "status": "Active"
+    },
+    {
+      "id": "flights-wanderlust",
+      "vendorId": "wanderlust",
+      "serviceId": "kerala-flights",
+      "supplierType": "Direct supplier",
+      "productsCovered": "Domestic · regional",
+      "rateCardId": "rc-air-2026",
+      "rateCardName": "Flight desk contract 2026",
+      "validity": "01 Jan–31 Dec 26",
+      "status": "Active"
+    },
+    {
+      "id": "flights-horizon",
+      "vendorId": "horizon",
+      "serviceId": "kerala-flights",
+      "supplierType": "DMC",
+      "productsCovered": "Domestic · international",
+      "rateCardId": "rc-air-2026",
+      "rateCardName": "Air consolidation rates 2026",
+      "validity": "01 Jan–31 Dec 26",
+      "status": "Active"
+    }
+  ]
+}

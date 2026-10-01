@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="design-system-03.css" />
     <link rel="stylesheet" href="reference-parity.css" />
     <link rel="stylesheet" href="new-customer.css" />
+    <link rel="stylesheet" href="reports.css" />
   </head>
   <body>
     <svg class="svg-sprite" aria-hidden="true">
@@ -56,6 +57,7 @@
       <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9Z"/></symbol>
       <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.5"/></symbol>
       <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/></symbol>
+      <symbol id="i-export" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" /></symbol>
       <symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3h10v6M7 18H5a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M7 14h10v7H7z"/><path d="M17 12h.01"/></symbol>
       <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 21V9M7 14l5-5 5 5"/><path d="M5 3h14"/></symbol>
       <symbol id="i-x" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
@@ -125,14 +127,14 @@
           <nav class="nav-group pt-nav-group" aria-labelledby="crmLabel">
             <p class="nav-label pt-nav-group__label" id="crmLabel">CRM</p>
             <a class="nav-item pt-nav-item" id="customersNavLink" href="#customers"><svg><use href="#i-nav-customer" /></svg><span>Customers</span></a>
-            <a class="nav-item pt-nav-item" href="#vendors"><svg><use href="#i-nav-vendor" /></svg><span>Vendors</span></a>
+            <a class="nav-item pt-nav-item" id="vendorsNavLink" href="#vendors"><svg><use href="#i-nav-vendor" /></svg><span>Vendors</span></a>
           </nav>
           <nav class="nav-group pt-nav-group" aria-labelledby="operationsLabel">
             <p class="nav-label pt-nav-group__label" id="operationsLabel">Operations</p>
             <a class="nav-item pt-nav-item" href="#finance"><svg><use href="#i-nav-finance" /></svg><span>All finances</span></a>
             <a class="nav-item pt-nav-item" href="#team"><svg><use href="#i-team" /></svg><span>Team</span></a>
             <a class="nav-item pt-nav-item" href="#automation"><svg><use href="#i-nav-automation" /></svg><span>Automations</span></a>
-            <a class="nav-item pt-nav-item" href="#reports"><svg><use href="#i-chart" /></svg><span>Reports</span></a>
+            <a class="nav-item pt-nav-item" id="reportsNavLink" href="#reports"><svg><use href="#i-chart" /></svg><span>Reports</span></a>
             <a class="nav-item pt-nav-item" href="#account"><svg><use href="#i-settings" /></svg><span>Settings</span></a>
           </nav>
         </div>
@@ -189,6 +191,7 @@
         </header>
 
       <main class="main-content" id="mainContent">
+        <section class="view" id="reportsView" aria-label="Reports" hidden></section>
         <section class="view inbox-view" id="inboxView" aria-labelledby="inboxTitle" hidden>
           <div class="inbox-shell">
             <aside class="inbox-list-panel" aria-label="Conversations">
@@ -1077,6 +1080,77 @@
             </div>
           </div>
         </section>
+        <section class="view new-vendor-page" id="vendorCreateView" aria-labelledby="vendorCreateTitle" hidden>
+          <form id="vendorForm">
+            <header class="new-vendor-form-head"><h1 id="vendorCreateTitle">Add vendor</h1></header>
+            <div class="onboarding-body vendor-onboarding-body">
+              <section class="onboarding-step" aria-labelledby="vendorIdentityTitle">
+                <header class="onboarding-step-heading"><span class="new-vendor-section-icon" aria-hidden="true"><svg><use href="#i-nav-vendor" /></svg></span><div><h3 id="vendorIdentityTitle">Identity</h3><p>Name the business and define the services it provides.</p></div></header>
+                <div class="new-vendor-section-content">
+                  <div class="field-grid">
+                    <label class="field"><span>Vendor or business name <b aria-hidden="true">*</b></span><input id="vendorName" name="vendorName" type="text" placeholder="e.g. Coral Bay Hospitality…" autocomplete="organization" required /></label>
+                    <label class="field"><span>Vendor code</span><input id="vendorCode" name="vendorCode" type="text" value="V-NEWVENDOR" readonly /></label>
+                  </div>
+                  <fieldset class="vendor-service-field"><legend>Service categories <b aria-hidden="true">*</b></legend><div class="vendor-service-options">
+                    <label><input name="vendorService" type="checkbox" value="Accommodation" /><span>Accommodation</span></label>
+                    <label><input name="vendorService" type="checkbox" value="DMC/Ground handling" /><span>DMC</span></label>
+                    <label><input name="vendorService" type="checkbox" value="Transport" /><span>Transport</span></label>
+                    <label><input name="vendorService" type="checkbox" value="Activities" /><span>Activities</span></label>
+                    <label><input name="vendorService" type="checkbox" value="Flights" /><span>Flights</span></label>
+                    <label><input name="vendorService" type="checkbox" value="Visa" /><span>Visa</span></label>
+                    <label><input name="vendorService" type="checkbox" value="Cruise" /><span>Cruise</span></label>
+                    <label><input name="vendorService" type="checkbox" value="Other" /><span>Other</span></label>
+                  </div></fieldset>
+                  <label class="field"><span>Labels</span><input name="vendorLabels" type="text" placeholder="Preferred, premium, Kerala…" /><small class="vendor-field-hint">Separate labels with commas.</small></label>
+                  <div class="vendor-dmc-fields" id="vendorDmcFields" hidden>
+                    <label class="field"><span>DMC scope</span><select name="vendorDmcScope"><option>Domestic</option><option>International</option><option>Both</option></select></label>
+                    <label class="field"><span>Specializations</span><textarea name="vendorSpecializations" rows="3" placeholder="Regions, trip styles, or supplier strengths…"></textarea></label>
+                  </div>
+                </div>
+              </section>
+              <section class="onboarding-step" aria-labelledby="vendorContactTitle">
+                <header class="onboarding-step-heading"><span class="new-vendor-section-icon" aria-hidden="true"><svg><use href="#i-users" /></svg></span><div><h3 id="vendorContactTitle">Primary contact</h3><p>Add the person your team should contact first.</p></div></header>
+                <div class="new-vendor-section-content">
+                  <div class="field-grid vendor-three-column-grid">
+                    <label class="field"><span>Contact name</span><input name="vendorContact" type="text" placeholder="Full name…" autocomplete="name" /></label>
+                    <label class="field"><span>Phone</span><span class="compound-field"><select name="phoneCountry" aria-label="Vendor phone country code"><option>+91</option><option>+1</option><option>+44</option><option>+971</option><option>+65</option><option>+66</option><option>+94</option></select><input id="vendorPhone" name="vendorPhone" type="tel" placeholder="81234 56789…" autocomplete="tel-national" /></span></label>
+                    <label class="field"><span>Email</span><input id="vendorEmail" name="vendorEmail" type="email" placeholder="contact@vendor.com…" autocomplete="email" /></label>
+                  </div>
+                  <div class="whatsapp-row">
+                    <label class="field"><span>WhatsApp number</span><span class="compound-field"><select name="whatsappCountry" aria-label="Vendor WhatsApp country code"><option>+91</option><option>+1</option><option>+44</option><option>+971</option><option>+65</option><option>+66</option><option>+94</option></select><input id="vendorWhatsapp" name="vendorWhatsapp" type="tel" placeholder="81234 56789…" autocomplete="tel-national" /></span></label>
+                    <label class="check-control"><input id="vendorSameAsPhone" type="checkbox" /><span><svg><use href="#i-check" /></svg></span>Same as phone</label>
+                  </div>
+                  <p class="vendor-field-hint">Add a phone number or email address so your team can contact this vendor.</p>
+                </div>
+              </section>
+              <section class="onboarding-step" aria-labelledby="vendorLocationTitle">
+                <header class="onboarding-step-heading"><span class="new-vendor-section-icon" aria-hidden="true"><svg><use href="#i-map-pin" /></svg></span><div><h3 id="vendorLocationTitle">Location</h3><p>Record the vendor’s operating and mailing location.</p></div></header>
+                <div class="new-vendor-section-content">
+                  <div class="field-grid vendor-three-column-grid">
+                    <label class="field"><span>City <b aria-hidden="true">*</b></span><input name="vendorCity" type="text" placeholder="Search city…" autocomplete="address-level2" required /></label>
+                    <label class="field"><span>State or region</span><input name="vendorState" type="text" placeholder="Kerala…" autocomplete="address-level1" /></label>
+                    <label class="field"><span>Country <b aria-hidden="true">*</b></span><select name="vendorCountry" autocomplete="country-name" required><option>India</option><option>United Arab Emirates</option><option>Maldives</option><option>Sri Lanka</option><option>Thailand</option><option>Singapore</option><option>United Kingdom</option><option>United States</option><option>Other</option></select></label>
+                  </div>
+                  <label class="field"><span>Street address</span><textarea name="vendorAddress" rows="3" placeholder="Building, street, and district…" autocomplete="street-address"></textarea></label>
+                  <label class="field vendor-short-field"><span>Postal code</span><input name="vendorPostalCode" type="text" placeholder="682001…" autocomplete="postal-code" /></label>
+                </div>
+              </section>
+              <section class="onboarding-step" aria-labelledby="vendorBusinessTitle">
+                <header class="onboarding-step-heading"><span class="new-vendor-section-icon" aria-hidden="true"><svg><use href="#i-vendor" /></svg></span><div><h3 id="vendorBusinessTitle">Business details</h3><p>Add ownership, compliance, and internal context.</p></div></header>
+                <div class="new-vendor-section-content">
+                  <div class="field-grid">
+                    <label class="field"><span>Legal business name</span><input name="vendorLegalName" type="text" placeholder="Name shown on contracts and invoices…" autocomplete="organization" /></label>
+                    <label class="field"><span>Internal owner <b aria-hidden="true">*</b></span><select name="vendorOwner" required><option>Rishi Charan</option><option>Anjali Menon</option><option>Priya Nair</option><option>Rahul Iyer</option><option>Sneha Rao</option><option>Dev Krishnan</option></select></label>
+                    <label class="field"><span>GSTIN</span><input name="vendorGstin" type="text" placeholder="GST registration number…" spellcheck="false" /></label>
+                    <label class="field"><span>PAN</span><input name="vendorPan" type="text" placeholder="Permanent account number…" spellcheck="false" /></label>
+                  </div>
+                  <label class="field"><span>Internal notes</span><textarea name="vendorNotes" rows="3" placeholder="Commercial context, contracting notes, or known constraints…"></textarea></label>
+                </div>
+              </section>
+            </div>
+            <footer class="new-vendor-actions"><button class="button button-secondary" id="vendorCreateCancel" type="button">Cancel</button><button class="button button-primary" id="vendorCreateSubmit" type="submit" disabled>Create draft vendor</button></footer>
+          </form>
+        </section>
         <section class="view new-customer-page" id="customerCreateView" aria-labelledby="customerCreateTitle" hidden>
         <form id="customerForm">
           <header class="new-customer-form-head"><h1 id="customerCreateTitle">Add customer</h1></header>
@@ -1330,33 +1404,6 @@
       </section>
     </div>
 
-    <div class="modal-backdrop" id="vendorModalBackdrop" hidden>
-      <section class="modal vendor-modal" role="dialog" aria-modal="true" aria-labelledby="vendorModalTitle">
-        <form id="vendorForm">
-          <header class="modal-header">
-            <div><span class="overline">Vendor network</span><h2 id="vendorModalTitle">New vendor</h2></div>
-            <button class="shell-icon" id="closeVendorModal" type="button" aria-label="Close new vendor"><svg><use href="#i-x" /></svg></button>
-          </header>
-          <div class="modal-body">
-            <p class="modal-intro">Add a supplier so the sales and operations teams can use it in trips and bookings.</p>
-            <label class="field"><span>Vendor name</span><input id="vendorName" name="vendorName" type="text" placeholder="e.g. Alpine Stays" required /></label>
-            <div class="field-grid">
-              <label class="field"><span>Service</span><select name="vendorService" required><option value="">Select</option><option>Accommodation</option><option>Transport</option><option>Flights</option><option>Activities</option><option>Visa services</option></select></label>
-              <label class="field"><span>City</span><input name="vendorCity" type="text" placeholder="e.g. Bengaluru" required /></label>
-            </div>
-            <div class="field-grid">
-              <label class="field"><span>Contact person</span><input name="vendorContact" type="text" autocomplete="name" /></label>
-              <label class="field"><span>Email</span><input name="vendorEmail" type="email" autocomplete="email" /></label>
-            </div>
-          </div>
-          <footer class="modal-actions">
-            <button class="button button-secondary" id="cancelVendorModal" type="button">Cancel</button>
-            <button class="button button-primary" type="submit">Add vendor</button>
-          </footer>
-        </form>
-      </section>
-    </div>
-
     <div class="modal-backdrop" id="queryTypeModalBackdrop" hidden>
       <section class="modal query-type-modal" role="dialog" aria-modal="true" aria-labelledby="queryTypeModalTitle">
         <header class="modal-header query-type-header">
@@ -1393,7 +1440,7 @@
               <input id="queryTypeInput" name="queryType" type="hidden" value="Trip" />
               <div class="query-customer-capture">
                 <div class="query-customer-select-row">
-                  <div class="query-customer-lookup"><label class="field"><span>Search customer</span><span class="query-customer-search"><svg><use href="#i-search" /></svg><input id="queryCustomerSearch" type="search" autocomplete="off" placeholder="Name, customer ID, phone or email" /></span></label><label class="field"><span>Customer <b aria-hidden="true">*</b></span><select id="queryCustomer" name="customer" required></select></label></div>
+                  <div class="query-customer-lookup"><label class="field"><span>Customer <b aria-hidden="true">*</b></span><select id="queryCustomer" name="customer" data-search-placeholder="Search customers" required></select></label></div>
                   <button class="button button-secondary button-small" id="queryCreateCustomerButton" type="button"><svg><use href="#i-plus" /></svg>Create new customer</button>
                 </div>
                 <section class="query-inline-customer" id="queryInlineCustomer" aria-labelledby="queryInlineCustomerTitle" hidden>

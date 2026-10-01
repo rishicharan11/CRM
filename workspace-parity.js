@@ -1,4 +1,4 @@
-// Shared list behavior, matching the finalized Packages / Booking data sheets.
+// Shared list selection and actions, matching the Vendor data sheets.
 const sheets = new WeakMap();
 
 export function enhanceListSheet(table, entity, recordIds = []) {
@@ -11,8 +11,8 @@ export function enhanceListSheet(table, entity, recordIds = []) {
     const bar = document.createElement('div');
     bar.className = 'workspace-bulk-bar';
     bar.hidden = true;
-    bar.innerHTML = '<span role="status"></span><div><button class="button button-secondary button-small" type="button" data-sheet-export>Export selected</button><button class="button button-secondary button-small" type="button" data-sheet-clear>Clear selection</button></div>';
-    table.closest('.table-scroller, .query-table-scroller, .profile-tasks-scroller').before(bar);
+    bar.innerHTML = '<span role="status"></span><div><button class="button button-tertiary button-small" type="button" data-sheet-export><svg aria-hidden="true"><use href="#i-export" /></svg>Export</button><button class="button button-ghost button-small" type="button" data-sheet-clear>Clear</button></div>';
+    table.closest('.table-scroller, .query-table-scroller, .profile-tasks-scroller').after(bar);
     state.bar = bar;
     // Capture before row navigation. Space on a checkbox must select the record.
     for (const type of ['click', 'keydown']) {
@@ -31,6 +31,7 @@ export function enhanceListSheet(table, entity, recordIds = []) {
     bar.querySelector('[data-sheet-clear]').addEventListener('click', () => {
       state.selected.clear();
       syncSelection(table, state);
+      table.querySelector('[data-sheet-check="all"]').focus({ preventScroll: true });
     });
     bar.querySelector('[data-sheet-export]').addEventListener('click', () => {
       const cell = text => '"' + text.replaceAll('"', '""') + '"';
@@ -58,13 +59,11 @@ export function enhanceListSheet(table, entity, recordIds = []) {
   for (const row of table.tBodies[0].rows) {
     if (!rowId(row) && row.cells.length === 1) row.cells[0].colSpan = head.cells.length;
   }
-  if (entity !== 'customers') {
-    const fill = document.createElement('tr');
-    fill.className = 'workspace-sheet-fill';
-    fill.setAttribute('aria-hidden', 'true');
-    for (let index = 0; index < head.cells.length; index++) fill.append(document.createElement('td'));
-    table.tBodies[0].append(fill);
-  }
+  const fill = document.createElement('tr');
+  fill.className = 'workspace-sheet-fill';
+  fill.setAttribute('aria-hidden', 'true');
+  for (let index = 0; index < head.cells.length; index++) fill.append(document.createElement('td'));
+  table.tBodies[0].append(fill);
   syncSelection(table, state);
 }
 
@@ -86,6 +85,7 @@ function syncSelection(table, state) {
     const checked = state.selected.has(rowId(row));
     row.querySelector('[data-sheet-check]').checked = checked;
     row.classList.toggle('is-selected', checked);
+    row.setAttribute('aria-selected', String(checked));
   }
   const all = table.querySelector('[data-sheet-check="all"]');
   const count = state.selected.size;
@@ -94,7 +94,8 @@ function syncSelection(table, state) {
   all.indeterminate = selectedOnPage > 0 && !all.checked;
   all.disabled = visibleRows(table).length === 0;
   state.bar.hidden = count === 0;
-  state.bar.querySelector('[role="status"]').textContent = `${count} ${state.entity} selected`;
+  const entity = count === 1 ? ({ customers: 'customer', queries: 'query', tasks: 'task' }[state.entity] ?? state.entity) : state.entity;
+  state.bar.querySelector('[role="status"]').textContent = `${count} ${entity} selected`;
 }
 
 export function readLayoutPreference(module) {

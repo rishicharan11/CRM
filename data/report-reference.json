@@ -1,0 +1,1566 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-10-01T13:29:58.240Z",
+  "description": "Local sample records from the finalized Packages, Booking, Vendor CRM and Finance modules. Not a live cross-application connection.",
+  "finance": {
+    "REVIEW_DATE": "2026-09-26",
+    "OBLIGATIONS": [
+      {
+        "id": "COL-00031",
+        "kind": "customer",
+        "party": "XYZ Family",
+        "booking": "BK-2026-000003",
+        "item": "Final instalment · Dubai",
+        "amount": 12000000,
+        "applied": 4000000,
+        "postedAt": "2026-09-01",
+        "due": "2026-09-30",
+        "document": "INV-2026-0084",
+        "documentState": "Issued",
+        "owner": "Anjali Menon",
+        "note": "Accepted booking price ₹1,20,000. The verified ₹40,000 receipt is applied; ₹80,000 remains."
+      },
+      {
+        "id": "COL-00029",
+        "kind": "customer",
+        "party": "Kapoor Group",
+        "booking": "BK-2026-000018",
+        "item": "Second instalment · Alleppey",
+        "amount": 1200000,
+        "applied": 0,
+        "postedAt": "2026-09-15",
+        "due": "2026-09-24",
+        "document": "INV-2026-0079",
+        "documentState": "Issued",
+        "owner": "Nisha Rao",
+        "note": "An existing ₹12,000 receipt awaits verification. It does not settle this balance yet."
+      },
+      {
+        "id": "PAY-00044",
+        "kind": "supplier",
+        "party": "Trailmakers Experiences",
+        "booking": "BK-2026-000003",
+        "item": "Hotel · Dubai",
+        "amount": 7000000,
+        "applied": 3000000,
+        "postedAt": "2026-09-18",
+        "due": "2026-09-28",
+        "document": "COM-2026-0094",
+        "documentState": "Bill not received",
+        "owner": "Anjali Menon",
+        "note": "The confirmed ₹70,000 hotel commitment includes the ₹30,000 already paid. A later bill documents this cost; it does not add it again."
+      },
+      {
+        "id": "PAY-00045",
+        "kind": "supplier",
+        "party": "Desert Wheels",
+        "booking": "BK-2026-000003",
+        "item": "Transfers · Dubai",
+        "amount": 2500000,
+        "applied": 0,
+        "postedAt": "2026-09-19",
+        "due": "2026-10-03",
+        "document": "COM-2026-0095",
+        "documentState": "Bill not received",
+        "owner": "Anjali Menon",
+        "note": "Confirmed transport commitment. Supplier confirmation remains a Booking service action."
+      },
+      {
+        "id": "CLM-2026-0012",
+        "kind": "reimbursement",
+        "party": "Meera Iyer",
+        "booking": "BK-2026-000021",
+        "item": "Trip incidentals · Kerala",
+        "amount": 700000,
+        "applied": 0,
+        "postedAt": "2026-09-25",
+        "due": "2026-09-28",
+        "document": "EXP-2026-0030",
+        "documentState": "Claim approved",
+        "owner": "Finance team",
+        "note": "Approved staff claim: one expense and one unpaid reimbursement obligation, with no recorded cash payment yet."
+      }
+    ],
+    "TRANSACTIONS": [
+      {
+        "id": "RCPT-2026-0081",
+        "type": "Receipt",
+        "party": "XYZ Family",
+        "amount": 4000000,
+        "direction": "in",
+        "occurredAt": "2026-09-25T10:34:00",
+        "recordedAt": "2026-09-25T11:12:00",
+        "recordedBy": "Anjali Menon",
+        "account": "HDFC Bank · 2163",
+        "linked": "BK-2026-000003 / INV-2026-0084",
+        "verification": "Verified",
+        "allocation": "₹40,000 applied",
+        "bankMatch": "Matched",
+        "externalReference": "HDFC-UTR-56824"
+      },
+      {
+        "id": "PAY-2026-0109",
+        "type": "Supplier payment",
+        "party": "Trailmakers Experiences",
+        "amount": 3000000,
+        "direction": "out",
+        "occurredAt": "2026-09-25T14:30:00",
+        "recordedAt": "2026-09-25T16:05:00",
+        "recordedBy": "Anjali Menon",
+        "account": "HDFC Bank · 2163",
+        "linked": "BK-2026-000003 / COM-2026-0094",
+        "verification": "Verified",
+        "allocation": "₹30,000 applied",
+        "bankMatch": "Matched",
+        "externalReference": "HDFC-UTR-56831"
+      },
+      {
+        "id": "RCPT-2026-0088",
+        "type": "Receipt",
+        "party": "Kapoor Group",
+        "amount": 1200000,
+        "direction": "in",
+        "occurredAt": "2026-09-26T09:10:00",
+        "recordedAt": "2026-09-26T09:42:00",
+        "recordedBy": "Nisha Rao",
+        "account": "HDFC Bank · 2163",
+        "linked": "BK-2026-000018 / INV-2026-0079",
+        "verification": "Awaiting verification",
+        "allocation": "Not applied",
+        "bankMatch": "Unmatched",
+        "externalReference": "UPI-904186"
+      },
+      {
+        "id": "PAY-2026-0108",
+        "type": "Agency payment",
+        "party": "Studio North",
+        "amount": 280000,
+        "direction": "out",
+        "occurredAt": "2026-09-24T12:15:00",
+        "recordedAt": "2026-09-24T13:02:00",
+        "recordedBy": "Meera Iyer",
+        "account": "HDFC Bank · 2163",
+        "linked": "Agency / EXP-2026-0032",
+        "verification": "Verified",
+        "allocation": "Expense settled",
+        "bankMatch": "Matched",
+        "externalReference": "HDFC-UTR-56307"
+      },
+      {
+        "id": "RCPT-2026-0072",
+        "type": "Receipt",
+        "party": "Singh Family",
+        "amount": 1000000,
+        "direction": "in",
+        "occurredAt": "2026-09-20T10:20:00",
+        "recordedAt": "2026-09-20T11:04:00",
+        "recordedBy": "Nisha Rao",
+        "account": "HDFC Bank · 2163",
+        "linked": "Customer account / ADV-2026-0024",
+        "verification": "Verified",
+        "allocation": "Unallocated customer advance",
+        "bankMatch": "Matched",
+        "externalReference": "HDFC-UTR-55322"
+      },
+      {
+        "id": "PAY-2026-0091",
+        "type": "Agency payment",
+        "party": "MG Road Properties",
+        "amount": 7500000,
+        "direction": "out",
+        "occurredAt": "2026-09-05T13:15:00",
+        "recordedAt": "2026-09-05T14:08:00",
+        "recordedBy": "Meera Iyer",
+        "account": "HDFC Bank · 2163",
+        "linked": "Agency / EXP-2026-0031",
+        "verification": "Verified",
+        "allocation": "Expense settled",
+        "bankMatch": "Matched",
+        "externalReference": "HDFC-UTR-53830"
+      },
+      {
+        "id": "TRF-2026-0007",
+        "type": "Transfer",
+        "party": "HDFC Bank → Petty cash",
+        "amount": 100000,
+        "direction": "neutral",
+        "occurredAt": "2026-09-23T15:00:00",
+        "recordedAt": "2026-09-23T15:22:00",
+        "recordedBy": "Meera Iyer",
+        "account": "HDFC Bank → Petty cash",
+        "linked": "Internal account transfer",
+        "verification": "Verified",
+        "allocation": "Not applicable",
+        "bankMatch": "Partially matched",
+        "externalReference": "CASH-TRANSFER-007"
+      }
+    ],
+    "EXPENSES": [
+      {
+        "id": "EXP-2026-0032",
+        "category": "Software subscription",
+        "payee": "Studio North",
+        "scope": "Agency · Operations",
+        "incurred": "2026-09-24",
+        "due": "2026-09-24",
+        "amount": 280000,
+        "review": "Approved",
+        "payment": "Paid",
+        "evidence": "Invoice attached",
+        "linkedPayment": "PAY-2026-0108"
+      },
+      {
+        "id": "EXP-2026-0031",
+        "category": "Office rent",
+        "payee": "MG Road Properties",
+        "scope": "Agency · Kochi office",
+        "incurred": "2026-09-01",
+        "due": "2026-09-05",
+        "amount": 7500000,
+        "review": "Approved",
+        "payment": "Paid",
+        "evidence": "Receipt attached",
+        "linkedPayment": "PAY-2026-0091"
+      },
+      {
+        "id": "EXP-2026-0030",
+        "category": "Trip incidentals",
+        "payee": "Meera Iyer",
+        "scope": "BK-2026-000021 · Direct cost",
+        "incurred": "2026-09-22",
+        "due": "2026-09-28",
+        "amount": 700000,
+        "review": "Approved",
+        "payment": "Reimbursement due",
+        "evidence": "4 receipts attached"
+      }
+    ],
+    "ACCOUNTS": [
+      {
+        "id": "hdfc",
+        "name": "HDFC Bank",
+        "meta": "Current account · ending 2163",
+        "recorded": 23680000,
+        "lastReview": "Reconciled through 25 Sep"
+      },
+      {
+        "id": "cash",
+        "name": "Petty cash",
+        "meta": "Kochi office · custodian Meera Iyer",
+        "recorded": 1000000,
+        "lastReview": "Count due today"
+      }
+    ],
+    "ACTIVITY": [
+      {
+        "id": "EVT-00918",
+        "event": "Proof attached for review",
+        "category": "Review",
+        "occurredAt": "2026-09-26T09:43:00",
+        "recordedAt": "2026-09-26T09:43:00",
+        "actor": "Nisha Rao",
+        "recordId": "RCPT-2026-0088",
+        "party": "Kapoor Group",
+        "context": "BK-2026-000018",
+        "detail": "The existing receipt proof is queued for verification. This did not create another receipt or change the due date."
+      },
+      {
+        "id": "EVT-00917",
+        "event": "Receipt proof submitted",
+        "category": "Money",
+        "occurredAt": "2026-09-26T09:10:00",
+        "recordedAt": "2026-09-26T09:42:00",
+        "actor": "Nisha Rao",
+        "recordId": "RCPT-2026-0088",
+        "party": "Kapoor Group",
+        "context": "BK-2026-000018 · INV-2026-0079",
+        "detail": "The ₹12,000 receipt was recorded against the Kapoor Group instalment. Its debt remains outstanding until verification and application."
+      },
+      {
+        "id": "EVT-00911",
+        "event": "Supplier payment verified",
+        "category": "Verification",
+        "occurredAt": "2026-09-25T17:05:00",
+        "recordedAt": "2026-09-25T17:06:00",
+        "actor": "Finance reviewer",
+        "recordId": "PAY-2026-0109",
+        "party": "Trailmakers Experiences",
+        "context": "BK-2026-000003 · COM-2026-0094",
+        "detail": "The existing ₹30,000 supplier payment was verified; Booking, Vendor CRM and Agency Finance show its allocation."
+      },
+      {
+        "id": "EVT-00910",
+        "event": "Supplier payment allocated",
+        "category": "Allocation",
+        "occurredAt": "2026-09-25T16:08:00",
+        "recordedAt": "2026-09-25T16:08:00",
+        "actor": "Anjali Menon",
+        "recordId": "PAY-2026-0109",
+        "party": "Trailmakers Experiences",
+        "context": "BK-2026-000003 · COM-2026-0094",
+        "detail": "₹30,000 was applied to the confirmed hotel commitment; ₹40,000 remains due."
+      },
+      {
+        "id": "EVT-00909",
+        "event": "Supplier payment recorded",
+        "category": "Money",
+        "occurredAt": "2026-09-25T14:30:00",
+        "recordedAt": "2026-09-25T16:05:00",
+        "actor": "Anjali Menon",
+        "recordId": "PAY-2026-0109",
+        "party": "Trailmakers Experiences",
+        "context": "BK-2026-000003 · Hotel",
+        "detail": "An external bank transfer was recorded. Payment recording did not confirm the supplier service."
+      },
+      {
+        "id": "EVT-00907",
+        "event": "Customer receipt verified and applied",
+        "category": "Verification",
+        "occurredAt": "2026-09-25T11:40:00",
+        "recordedAt": "2026-09-25T11:42:00",
+        "actor": "Finance reviewer",
+        "recordId": "RCPT-2026-0081",
+        "party": "XYZ Family",
+        "context": "BK-2026-000003 · INV-2026-0084",
+        "detail": "The existing ₹40,000 receipt was verified and applied. The final customer balance is ₹80,000."
+      },
+      {
+        "id": "EVT-00906",
+        "event": "Customer receipt recorded",
+        "category": "Money",
+        "occurredAt": "2026-09-25T10:34:00",
+        "recordedAt": "2026-09-25T11:12:00",
+        "actor": "Anjali Menon",
+        "recordId": "RCPT-2026-0081",
+        "party": "XYZ Family",
+        "context": "BK-2026-000003",
+        "detail": "An external customer payment was entered using HDFC reference HDFC-UTR-56824."
+      },
+      {
+        "id": "EVT-00892",
+        "event": "Expense claim approved",
+        "category": "Review",
+        "occurredAt": "2026-09-25T09:15:00",
+        "recordedAt": "2026-09-25T09:16:00",
+        "actor": "Finance reviewer",
+        "recordId": "EXP-2026-0030",
+        "party": "Meera Iyer",
+        "context": "BK-2026-000021 · CLM-2026-0012",
+        "detail": "The ₹7,000 claim was approved. Reimbursement remains due; no cash payment was recorded."
+      },
+      {
+        "id": "EVT-00888",
+        "event": "Agency payment recorded",
+        "category": "Money",
+        "occurredAt": "2026-09-24T12:15:00",
+        "recordedAt": "2026-09-24T13:02:00",
+        "actor": "Meera Iyer",
+        "recordId": "PAY-2026-0108",
+        "party": "Studio North",
+        "context": "Agency · EXP-2026-0032",
+        "detail": "The software subscription payment was recorded once and linked to the existing expense."
+      },
+      {
+        "id": "EVT-00879",
+        "event": "Bank statement matched",
+        "category": "Bank match",
+        "occurredAt": "2026-09-24T13:12:00",
+        "recordedAt": "2026-09-24T13:14:00",
+        "actor": "Finance reviewer",
+        "recordId": "PAY-2026-0108",
+        "party": "Studio North",
+        "context": "HDFC Bank · EXP-2026-0032",
+        "detail": "An imported statement row was matched to the existing agency payment. No second payment was created."
+      },
+      {
+        "id": "EVT-00870",
+        "event": "Account transfer recorded",
+        "category": "Money",
+        "occurredAt": "2026-09-23T15:00:00",
+        "recordedAt": "2026-09-23T15:22:00",
+        "actor": "Meera Iyer",
+        "recordId": "TRF-2026-0007",
+        "party": "HDFC Bank → Petty cash",
+        "context": "Internal account transfer",
+        "detail": "₹1,000 was transferred between agency accounts. The transfer is neither customer income nor an agency expense."
+      },
+      {
+        "id": "EVT-00851",
+        "event": "Customer advance received",
+        "category": "Money",
+        "occurredAt": "2026-09-20T10:20:00",
+        "recordedAt": "2026-09-20T11:04:00",
+        "actor": "Nisha Rao",
+        "recordId": "RCPT-2026-0072",
+        "party": "Singh Family",
+        "context": "ADV-2026-0024 · customer account",
+        "detail": "₹10,000 was received as a party-owned advance. It is still unallocated and does not settle another customer's debt."
+      },
+      {
+        "id": "EVT-00818",
+        "event": "Office rent payment recorded",
+        "category": "Money",
+        "occurredAt": "2026-09-05T13:15:00",
+        "recordedAt": "2026-09-05T14:08:00",
+        "actor": "Meera Iyer",
+        "recordId": "PAY-2026-0091",
+        "party": "MG Road Properties",
+        "context": "Agency · EXP-2026-0031",
+        "detail": "The ₹75,000 office rent payment was linked to the existing expense. The expense was not counted twice."
+      }
+    ],
+    "FORECAST": [
+      {
+        "date": "27 Sep",
+        "source": "Trailmakers hotel balance",
+        "reference": "COM-2026-0094",
+        "amount": -4000000,
+        "basis": "Due"
+      },
+      {
+        "date": "28 Sep",
+        "source": "Meera Iyer reimbursement",
+        "reference": "CLM-2026-0012",
+        "amount": -700000,
+        "basis": "Approved"
+      },
+      {
+        "date": "29 Sep",
+        "source": "Nair Family refund",
+        "reference": "RFND-2026-0016",
+        "amount": -1800000,
+        "basis": "Approved"
+      },
+      {
+        "date": "30 Sep",
+        "source": "Singh Family scheduled advance",
+        "reference": "ADV-SCHED-2026-0025",
+        "amount": 3500000,
+        "basis": "Payer confirmed · not received"
+      },
+      {
+        "date": "03 Oct",
+        "source": "Desert Wheels balance",
+        "reference": "COM-2026-0095",
+        "amount": -2500000,
+        "basis": "Due"
+      },
+      {
+        "date": "04 Oct",
+        "source": "XYZ Family final instalment",
+        "reference": "INV-2026-0084",
+        "amount": 8000000,
+        "basis": "Assumed"
+      },
+      {
+        "date": "06 Oct",
+        "source": "Agency bills",
+        "reference": "EXP-SCHEDULE-SEP",
+        "amount": -1350000,
+        "basis": "Scheduled"
+      }
+    ],
+    "CUSTOMER_ADVANCE": {
+      "id": "ADV-2026-0024",
+      "party": "Singh Family",
+      "amount": 1000000,
+      "recorded": "2026-09-20",
+      "receipt": "RCPT-2026-0072"
+    },
+    "REFUND": {
+      "id": "RFND-2026-0016",
+      "party": "Nair Family",
+      "amount": 1800000,
+      "due": "2026-09-29",
+      "booking": "BK-2026-000016",
+      "state": "Approved · payment due"
+    },
+    "statementDifference": 75000,
+    "unmatchedStatementRow": 750000,
+    "bookingProjectedMargin": 2500000,
+    "recordedCash": 24680000,
+    "forecastClosing": 25830000,
+    "forecastMinimum": 18180000
+  },
+  "bookings": [
+    {
+      "id": "BK-2026-000003",
+      "title": "XYZ Family · Dubai",
+      "stage": "upcoming",
+      "queue": "mine",
+      "status": "At risk",
+      "travel": "18–22 Aug",
+      "nextAction": "Confirm hotel with ABC DMC",
+      "financeStatus": "Overdue"
+    },
+    {
+      "id": "BK-2026-000004",
+      "title": "Sharma Family · Goa",
+      "stage": "upcoming",
+      "queue": "mine",
+      "status": "At risk",
+      "travel": "18–22 Aug",
+      "nextAction": "Confirm water sports add-on",
+      "financeStatus": "Settled"
+    },
+    {
+      "id": "BK-2026-000006",
+      "title": "Patel Family · Manali",
+      "stage": "upcoming",
+      "queue": "unassigned",
+      "status": "At risk",
+      "travel": "24–28 Aug",
+      "nextAction": "Request missing documents",
+      "financeStatus": "To collect"
+    },
+    {
+      "id": "BK-2026-000010",
+      "title": "Kapoor Family · Jaipur",
+      "stage": "travelling",
+      "queue": "mine",
+      "status": "On trip",
+      "travel": "12–19 Sep",
+      "nextAction": "Confirm airport pickup window",
+      "financeStatus": "To collect"
+    },
+    {
+      "id": "BK-2026-000001",
+      "title": "Singh Family · Paris",
+      "stage": "completed",
+      "queue": "mine",
+      "status": "Completed",
+      "travel": "2–9 Aug",
+      "nextAction": "Trip closed",
+      "financeStatus": "Settled"
+    },
+    {
+      "id": "BK-2026-000002",
+      "title": "Iyer Family · Kerala",
+      "stage": "completed",
+      "queue": "mine",
+      "status": "Completed",
+      "travel": "20–27 Jul",
+      "nextAction": "Trip closed",
+      "financeStatus": "Settled"
+    },
+    {
+      "id": "BK-2026-000005",
+      "title": "Reddy Family · Bali",
+      "stage": "cancelled",
+      "queue": "unassigned",
+      "status": "Cancelled",
+      "travel": "1–8 Oct",
+      "nextAction": "Refund in progress",
+      "financeStatus": "Refund"
+    }
+  ],
+  "packages": [
+    {
+      "id": "PKG-0241",
+      "name": "Bali Indonesia",
+      "destination": "Bali, Indonesia",
+      "region": "Southeast Asia",
+      "startingPrice": 145000,
+      "updated": "Aug 14, 2026",
+      "status": "Published",
+      "source": "Your catalog"
+    },
+    {
+      "id": "PKG-0238",
+      "name": "Bali Honeymoon",
+      "destination": "Bali, Indonesia",
+      "region": "Southeast Asia",
+      "startingPrice": 145000,
+      "updated": "Aug 4, 2026",
+      "status": "Draft",
+      "source": "Your catalog"
+    },
+    {
+      "id": "PKG-0232",
+      "name": "Himachal stays",
+      "destination": "Himachal Pradesh, India",
+      "region": "North India",
+      "startingPrice": 62000,
+      "updated": "Aug 1, 2026",
+      "status": "Draft",
+      "source": "Your catalog"
+    },
+    {
+      "id": "PKG-0226",
+      "name": "Rajasthan heritage experiences",
+      "destination": "Rajasthan, India",
+      "region": "Western India",
+      "startingPrice": 78000,
+      "updated": "Jul 25, 2026",
+      "status": "Published",
+      "source": "Your catalog"
+    },
+    {
+      "id": "PKG-0219",
+      "name": "Dubai visa assistance",
+      "destination": "Dubai, UAE",
+      "region": "Middle East",
+      "startingPrice": 96000,
+      "updated": "Jul 18, 2026",
+      "status": "Draft",
+      "source": "Paryatech"
+    },
+    {
+      "id": "PKG-0204",
+      "name": "Kerala private transfers",
+      "destination": "Kerala, India",
+      "region": "South India",
+      "startingPrice": 54000,
+      "updated": "Jun 30, 2026",
+      "status": "Archived",
+      "source": "Your catalog"
+    },
+    {
+      "id": "PKG-0198",
+      "name": "Delhi to Denpasar flight plan",
+      "destination": "Bali, Indonesia",
+      "region": "Southeast Asia",
+      "startingPrice": 42000,
+      "updated": "Jun 24, 2026",
+      "status": "Draft",
+      "source": "Paryatech"
+    },
+    {
+      "id": "PKG-0192",
+      "name": "Bangalore city discovery",
+      "destination": "Bangalore, India",
+      "region": "South India",
+      "startingPrice": 36000,
+      "updated": "Jun 18, 2026",
+      "status": "Published",
+      "source": "Your catalog"
+    },
+    {
+      "id": "PKG-0189",
+      "name": "Bangalore airport transfers",
+      "destination": "Bengaluru, Karnataka",
+      "region": "South India",
+      "startingPrice": 4800,
+      "updated": "Jun 12, 2026",
+      "status": "Draft",
+      "source": "Paryatech"
+    }
+  ],
+  "proposals": [
+    {
+      "id": "PRP-1088",
+      "name": "Menon family Kerala",
+      "customer": "Devika Menon",
+      "value": 0,
+      "updated": "Sep 27, 2026",
+      "status": "Itinerary shared",
+      "travelStart": "2027-02-08",
+      "travelEnd": "2027-02-10"
+    },
+    {
+      "id": "PRP-1087",
+      "name": "Rao family Bali",
+      "customer": "Nisha Rao",
+      "value": 360000,
+      "updated": "Sep 26, 2026",
+      "status": "Draft",
+      "travelStart": "2027-01-12",
+      "travelEnd": "2027-01-17"
+    },
+    {
+      "id": "PRP-1084",
+      "name": "Mehta family Bali",
+      "customer": "Ananya Mehta",
+      "value": 290000,
+      "updated": "Sep 25, 2026",
+      "status": "Sent"
+    },
+    {
+      "id": "PRP-1081",
+      "name": "Shah family Dubai",
+      "customer": "Rohan Shah",
+      "value": 235000,
+      "updated": "Sep 24, 2026",
+      "status": "Draft"
+    },
+    {
+      "id": "PRP-1076",
+      "name": "Kapoor family Himachal",
+      "customer": "Ira Kapoor",
+      "value": 312000,
+      "updated": "Sep 21, 2026",
+      "status": "Accepted"
+    },
+    {
+      "id": "PRP-1072",
+      "name": "Khanna Bali honeymoon",
+      "customer": "Samar Khanna",
+      "value": 268000,
+      "updated": "Sep 19, 2026",
+      "status": "Changes requested"
+    }
+  ],
+  "vendors": [
+    {
+      "id": "trailmakers",
+      "code": "V-TRAILMAKERS",
+      "name": "Trailmakers Experiences",
+      "status": "Active",
+      "location": "Kochi, India",
+      "owner": "Priya Nair",
+      "categories": [
+        "Activities",
+        "Flights",
+        "Transport"
+      ],
+      "updated": "3 months ago",
+      "setup": {
+        "profileComplete": true,
+        "hasService": true,
+        "hasContactsDocs": true,
+        "hasRateCard": true,
+        "activated": true
+      }
+    },
+    {
+      "id": "exhosp",
+      "code": "V-EXHOSP",
+      "name": "Example Hospitality",
+      "status": "Active",
+      "location": "Kochi, India",
+      "owner": "Anjali Menon",
+      "categories": [
+        "DMC/Ground handling",
+        "Accommodation"
+      ],
+      "updated": "3 months ago",
+      "setup": {
+        "profileComplete": true,
+        "hasService": true,
+        "hasContactsDocs": true,
+        "hasRateCard": true,
+        "activated": true
+      }
+    },
+    {
+      "id": "wanderlust",
+      "code": "V-WANDERLUST",
+      "name": "Wanderlust Trails",
+      "status": "Active",
+      "location": "Kochi, India",
+      "owner": "Rahul Iyer",
+      "categories": [
+        "DMC/Ground handling",
+        "Accommodation",
+        "Transport"
+      ],
+      "updated": "3 months ago",
+      "setup": {
+        "profileComplete": true,
+        "hasService": true,
+        "hasContactsDocs": true,
+        "hasRateCard": true,
+        "activated": true
+      }
+    },
+    {
+      "id": "atlas-visa",
+      "code": "V-ATLASVISA",
+      "name": "Atlas Visa Services",
+      "status": "Active",
+      "location": "Kochi, India",
+      "owner": "Sneha Rao",
+      "categories": [
+        "Visa"
+      ],
+      "updated": "3 months ago",
+      "setup": {
+        "profileComplete": true,
+        "hasService": true,
+        "hasContactsDocs": true,
+        "hasRateCard": true,
+        "activated": true
+      }
+    },
+    {
+      "id": "summit",
+      "code": "V-SUMMIT",
+      "name": "Summit Adventures",
+      "status": "Active",
+      "location": "Kochi, India",
+      "owner": "Dev Krishnan",
+      "categories": [
+        "Activities",
+        "Transport"
+      ],
+      "updated": "3 months ago",
+      "setup": {
+        "profileComplete": true,
+        "hasService": true,
+        "hasContactsDocs": true,
+        "hasRateCard": true,
+        "activated": true
+      }
+    },
+    {
+      "id": "coastal",
+      "code": "V-COASTAL",
+      "name": "Coastal Stay Properties",
+      "status": "Active",
+      "location": "Kochi, India",
+      "owner": "Meera Joseph",
+      "categories": [
+        "Accommodation"
+      ],
+      "updated": "3 months ago",
+      "setup": {
+        "profileComplete": true,
+        "hasService": true,
+        "hasContactsDocs": true,
+        "hasRateCard": true,
+        "activated": true
+      }
+    },
+    {
+      "id": "horizon",
+      "code": "V-HORIZON",
+      "name": "Horizon DMC Partners",
+      "status": "Active",
+      "location": "Kochi, India",
+      "owner": "Arjun Pillai",
+      "categories": [
+        "DMC/Ground handling",
+        "Transport",
+        "Accommodation"
+      ],
+      "updated": "3 months ago",
+      "setup": {
+        "profileComplete": true,
+        "hasService": true,
+        "hasContactsDocs": true,
+        "hasRateCard": true,
+        "activated": true
+      }
+    },
+    {
+      "id": "bluewave",
+      "code": "V-BLUEWAVE",
+      "name": "BlueWave Transfers",
+      "status": "Active",
+      "location": "Kochi, India",
+      "owner": "Nisha Thomas",
+      "categories": [
+        "Transport"
+      ],
+      "updated": "3 months ago",
+      "setup": {
+        "profileComplete": true,
+        "hasService": true,
+        "hasContactsDocs": true,
+        "hasRateCard": true,
+        "activated": true
+      }
+    },
+    {
+      "id": "kerala-heritage",
+      "code": "V-KHERITAGE",
+      "name": "Kerala Heritage Hotels",
+      "status": "Active",
+      "location": "Kochi, India",
+      "owner": "Vivek Menon",
+      "categories": [
+        "Accommodation",
+        "DMC/Ground handling"
+      ],
+      "updated": "3 months ago",
+      "setup": {
+        "profileComplete": true,
+        "hasService": true,
+        "hasContactsDocs": true,
+        "hasRateCard": true,
+        "activated": true
+      }
+    },
+    {
+      "id": "spice-route",
+      "code": "V-SPICEROUTE",
+      "name": "Spice Route Experiences",
+      "status": "Active",
+      "location": "Kochi, India",
+      "owner": "Lakshmi Das",
+      "categories": [
+        "Activities",
+        "DMC/Ground handling",
+        "Transport"
+      ],
+      "updated": "3 months ago",
+      "setup": {
+        "profileComplete": true,
+        "hasService": true,
+        "hasContactsDocs": true,
+        "hasRateCard": true,
+        "activated": true
+      }
+    },
+    {
+      "id": "harbour-light-stays",
+      "code": "V-HARBOURLIGHT",
+      "name": "Harbour Light Stays",
+      "status": "Draft",
+      "location": "Alappuzha, India",
+      "owner": "Meera Joseph",
+      "categories": [
+        "Accommodation"
+      ],
+      "updated": "Just now",
+      "setup": {
+        "profileComplete": true,
+        "hasService": false,
+        "hasContactsDocs": false,
+        "hasRateCard": false,
+        "activated": false
+      }
+    },
+    {
+      "id": "malabar-transit",
+      "code": "V-MALABARTRANSIT",
+      "name": "Malabar Transit Co.",
+      "status": "Draft",
+      "location": "Kozhikode, India",
+      "owner": "Nisha Thomas",
+      "categories": [
+        "Transport"
+      ],
+      "updated": "Just now",
+      "setup": {
+        "profileComplete": true,
+        "hasService": false,
+        "hasContactsDocs": false,
+        "hasRateCard": false,
+        "activated": false
+      }
+    }
+  ],
+  "services": [
+    {
+      "id": "taj-exotica",
+      "serviceId": "svc-taj-exotica",
+      "profileVendorId": "exhosp",
+      "name": "Taj Exotica Resort & Spa",
+      "category": "Accommodation",
+      "location": "Goa",
+      "status": "Active"
+    },
+    {
+      "id": "taj-lake-palace",
+      "serviceId": "svc-taj-lake-palace",
+      "profileVendorId": "kerala-heritage",
+      "name": "Taj Lake Palace",
+      "category": "Accommodation",
+      "location": "Udaipur",
+      "status": "Active"
+    },
+    {
+      "id": "taj-bekal",
+      "serviceId": "svc-taj-bekal",
+      "profileVendorId": "coastal",
+      "name": "Taj Bekal Resort & Spa",
+      "category": "Accommodation",
+      "location": "Kerala",
+      "status": "Active"
+    },
+    {
+      "id": "example-lake",
+      "serviceId": "svc-lake",
+      "profileVendorId": "exhosp",
+      "name": "Example Lake Resort",
+      "category": "Accommodation",
+      "location": "Alleppey",
+      "status": "Active"
+    },
+    {
+      "id": "example-hill",
+      "serviceId": "svc-hill",
+      "profileVendorId": "exhosp",
+      "name": "Example Hill Retreat",
+      "category": "Accommodation",
+      "location": "Munnar",
+      "status": "Draft"
+    },
+    {
+      "id": "kochi-transfer",
+      "serviceId": "svc-transfer-cok",
+      "profileVendorId": "trailmakers",
+      "name": "Kochi Airport Transfer",
+      "category": "Transport",
+      "location": "Kochi",
+      "status": "Active"
+    },
+    {
+      "id": "munnar-trek",
+      "serviceId": "svc-trek-munnar",
+      "profileVendorId": "trailmakers",
+      "name": "Munnar Ridge Trek",
+      "category": "Activities",
+      "location": "Munnar",
+      "status": "Active"
+    },
+    {
+      "id": "backwater-kayak",
+      "serviceId": "svc-kayak",
+      "profileVendorId": "trailmakers",
+      "name": "Backwater Kayak",
+      "category": "Activities",
+      "location": "Alleppey",
+      "status": "Active"
+    },
+    {
+      "id": "cardamom-tour",
+      "serviceId": "svc-cardamom",
+      "profileVendorId": "exhosp",
+      "name": "Cardamom Plantation Tour",
+      "category": "Activities",
+      "location": "Thekkady",
+      "status": "Active"
+    },
+    {
+      "id": "uae-visa",
+      "serviceId": "svc-uae-visa",
+      "profileVendorId": "atlas-visa",
+      "name": "UAE Tourist Visa",
+      "category": "Visa",
+      "location": "UAE",
+      "status": "Active"
+    },
+    {
+      "id": "kerala-flights",
+      "serviceId": "svc-kerala-flights",
+      "profileVendorId": "trailmakers",
+      "name": "Kerala Flight Ticketing",
+      "category": "Flights",
+      "location": "India",
+      "status": "Active"
+    }
+  ],
+  "connections": [
+    {
+      "id": "taj-exotica-exhosp",
+      "vendorId": "exhosp",
+      "serviceId": "taj-exotica",
+      "supplierType": "Direct supplier",
+      "productsCovered": "12 room types",
+      "rateCardId": "rc-acc-2627",
+      "rateCardName": "Accommodation tariff 2026–27",
+      "validity": "01 Apr 26–31 Mar 27",
+      "status": "Active"
+    },
+    {
+      "id": "taj-exotica-wanderlust",
+      "vendorId": "wanderlust",
+      "serviceId": "taj-exotica",
+      "supplierType": "DMC",
+      "productsCovered": "8 room types",
+      "rateCardId": "rc-acc-2526",
+      "rateCardName": "Taj Goa contracted rates",
+      "validity": "01 Oct 26–30 Sep 27",
+      "status": "Active"
+    },
+    {
+      "id": "taj-exotica-coastal",
+      "vendorId": "coastal",
+      "serviceId": "taj-exotica",
+      "supplierType": "Wholesaler",
+      "productsCovered": "5 room types",
+      "rateCardId": "rc-hill-2627",
+      "rateCardName": "Winter FIT tariff",
+      "validity": "01 Oct 26–31 Mar 27",
+      "status": "Expiring soon"
+    },
+    {
+      "id": "taj-lake-heritage",
+      "vendorId": "kerala-heritage",
+      "serviceId": "taj-lake-palace",
+      "supplierType": "Direct supplier",
+      "productsCovered": "9 room types",
+      "rateCardId": "rc-acc-2627",
+      "rateCardName": "Palace stay tariff 2026–27",
+      "validity": "01 Apr 26–31 Mar 27",
+      "status": "Active"
+    },
+    {
+      "id": "taj-lake-horizon",
+      "vendorId": "horizon",
+      "serviceId": "taj-lake-palace",
+      "supplierType": "DMC",
+      "productsCovered": "6 room types",
+      "rateCardId": "rc-acc-2526",
+      "rateCardName": "Rajasthan DMC rates",
+      "validity": "01 Apr 26–31 Mar 27",
+      "status": "Active"
+    },
+    {
+      "id": "taj-bekal-coastal",
+      "vendorId": "coastal",
+      "serviceId": "taj-bekal",
+      "supplierType": "Direct supplier",
+      "productsCovered": "10 room types",
+      "rateCardId": "rc-acc-2627",
+      "rateCardName": "Bekal direct tariff",
+      "validity": "01 Apr 26–31 Mar 27",
+      "status": "Active"
+    },
+    {
+      "id": "taj-bekal-exhosp",
+      "vendorId": "exhosp",
+      "serviceId": "taj-bekal",
+      "supplierType": "Wholesaler",
+      "productsCovered": "7 room types",
+      "rateCardId": "rc-acc-2526",
+      "rateCardName": "North Kerala FIT rates",
+      "validity": "01 Oct 26–31 Mar 27",
+      "status": "Active"
+    },
+    {
+      "id": "taj-bekal-wanderlust",
+      "vendorId": "wanderlust",
+      "serviceId": "taj-bekal",
+      "supplierType": "DMC",
+      "productsCovered": "6 room types",
+      "rateCardId": "rc-hill-2627",
+      "rateCardName": "Bekal contracted rates",
+      "validity": "01 Apr 26–31 Mar 27",
+      "status": "Active"
+    },
+    {
+      "id": "taj-bekal-horizon",
+      "vendorId": "horizon",
+      "serviceId": "taj-bekal",
+      "supplierType": "Wholesaler",
+      "productsCovered": "4 room types",
+      "rateCardId": "rc-acc-2526",
+      "rateCardName": "Seasonal hotel allotment",
+      "validity": "01 Oct 26–31 Mar 27",
+      "status": "Expiring soon"
+    },
+    {
+      "id": "lake-exhosp",
+      "vendorId": "exhosp",
+      "serviceId": "example-lake",
+      "supplierType": "Direct supplier",
+      "productsCovered": "2 room types",
+      "rateCardId": "rc-acc-2627",
+      "rateCardName": "Accommodation tariff 2026–27",
+      "validity": "01 Apr 26–31 Mar 27",
+      "status": "Active"
+    },
+    {
+      "id": "lake-wanderlust",
+      "vendorId": "wanderlust",
+      "serviceId": "example-lake",
+      "supplierType": "DMC",
+      "productsCovered": "2 room types",
+      "rateCardId": "rc-acc-2526",
+      "rateCardName": "Backwater stay rates",
+      "validity": "01 Apr 26–31 Mar 27",
+      "status": "Active"
+    },
+    {
+      "id": "hill-exhosp",
+      "vendorId": "exhosp",
+      "serviceId": "example-hill",
+      "supplierType": "Direct supplier",
+      "productsCovered": "3 room types",
+      "rateCardId": "rc-hill-2627",
+      "rateCardName": "Hill Retreat tariff 2026–27",
+      "validity": "01 Apr 26–31 Mar 27",
+      "status": "Draft"
+    },
+    {
+      "id": "hill-horizon",
+      "vendorId": "horizon",
+      "serviceId": "example-hill",
+      "supplierType": "DMC",
+      "productsCovered": "3 room types",
+      "rateCardId": "rc-hill-2627",
+      "rateCardName": "Munnar winter rates",
+      "validity": "01 Oct 26–31 Mar 27",
+      "status": "Draft"
+    },
+    {
+      "id": "transfer-bluewave",
+      "vendorId": "bluewave",
+      "serviceId": "kochi-transfer",
+      "supplierType": "Direct supplier",
+      "productsCovered": "Sedan · SUV · Tempo",
+      "rateCardId": "rc-air-2026",
+      "rateCardName": "Airport transfer rates 2026",
+      "validity": "01 Jan–31 Dec 26",
+      "status": "Active"
+    },
+    {
+      "id": "transfer-trailmakers",
+      "vendorId": "trailmakers",
+      "serviceId": "kochi-transfer",
+      "supplierType": "DMC",
+      "productsCovered": "Sedan · Tempo",
+      "rateCardId": "rc-air-2026",
+      "rateCardName": "Kerala transfers 2026",
+      "validity": "01 Jan–31 Dec 26",
+      "status": "Active"
+    },
+    {
+      "id": "transfer-wanderlust",
+      "vendorId": "wanderlust",
+      "serviceId": "kochi-transfer",
+      "supplierType": "DMC",
+      "productsCovered": "Sedan · SUV",
+      "rateCardId": "rc-air-2026",
+      "rateCardName": "Kochi ground rates",
+      "validity": "01 Jan–31 Dec 26",
+      "status": "Active"
+    },
+    {
+      "id": "transfer-spice",
+      "vendorId": "spice-route",
+      "serviceId": "kochi-transfer",
+      "supplierType": "Wholesaler",
+      "productsCovered": "Sedan",
+      "rateCardId": "rc-air-2026",
+      "rateCardName": "Airport FIT transfers",
+      "validity": "01 Jan–31 Dec 26",
+      "status": "Active"
+    },
+    {
+      "id": "trek-trailmakers",
+      "vendorId": "trailmakers",
+      "serviceId": "munnar-trek",
+      "supplierType": "Direct supplier",
+      "productsCovered": "Half day · max 12",
+      "rateCardId": "rc-acc-2627",
+      "rateCardName": "Activity tariff 2026",
+      "validity": "01 Jan–31 Dec 26",
+      "status": "Active"
+    },
+    {
+      "id": "trek-summit",
+      "vendorId": "summit",
+      "serviceId": "munnar-trek",
+      "supplierType": "Direct supplier",
+      "productsCovered": "Half day · max 10",
+      "rateCardId": "rc-acc-2526",
+      "rateCardName": "Guided trek rates",
+      "validity": "01 Oct 26–31 Mar 27",
+      "status": "Active"
+    },
+    {
+      "id": "trek-spice",
+      "vendorId": "spice-route",
+      "serviceId": "munnar-trek",
+      "supplierType": "DMC",
+      "productsCovered": "Private groups",
+      "rateCardId": "rc-hill-2627",
+      "rateCardName": "Munnar experiences",
+      "validity": "01 Oct 26–31 Mar 27",
+      "status": "Active"
+    },
+    {
+      "id": "kayak-trailmakers",
+      "vendorId": "trailmakers",
+      "serviceId": "backwater-kayak",
+      "supplierType": "Direct supplier",
+      "productsCovered": "Single · tandem kayak",
+      "rateCardId": "rc-acc-2627",
+      "rateCardName": "Activity tariff 2026",
+      "validity": "01 Jan–31 Dec 26",
+      "status": "Active"
+    },
+    {
+      "id": "kayak-spice",
+      "vendorId": "spice-route",
+      "serviceId": "backwater-kayak",
+      "supplierType": "DMC",
+      "productsCovered": "Private groups",
+      "rateCardId": "rc-acc-2526",
+      "rateCardName": "Backwater experiences",
+      "validity": "01 Oct 26–31 Mar 27",
+      "status": "Active"
+    },
+    {
+      "id": "cardamom-exhosp",
+      "vendorId": "exhosp",
+      "serviceId": "cardamom-tour",
+      "supplierType": "DMC",
+      "productsCovered": "Half day tour",
+      "rateCardId": "rc-hill-2627",
+      "rateCardName": "Hill Retreat tariff 2026–27",
+      "validity": "01 Apr 26–31 Mar 27",
+      "status": "Active"
+    },
+    {
+      "id": "cardamom-spice",
+      "vendorId": "spice-route",
+      "serviceId": "cardamom-tour",
+      "supplierType": "Direct supplier",
+      "productsCovered": "Private · shared",
+      "rateCardId": "rc-acc-2627",
+      "rateCardName": "Spice plantation rates",
+      "validity": "01 Jan–31 Dec 26",
+      "status": "Active"
+    },
+    {
+      "id": "visa-atlas",
+      "vendorId": "atlas-visa",
+      "serviceId": "uae-visa",
+      "supplierType": "Direct supplier",
+      "productsCovered": "30 · 60 · 90 days",
+      "rateCardId": "rc-visa-uae",
+      "rateCardName": "Visa services tariff · UAE",
+      "validity": "01 Apr–30 Sep 26",
+      "status": "Active"
+    },
+    {
+      "id": "visa-horizon",
+      "vendorId": "horizon",
+      "serviceId": "uae-visa",
+      "supplierType": "DMC",
+      "productsCovered": "30 · 60 days",
+      "rateCardId": "rc-visa-uae",
+      "rateCardName": "UAE visa handling",
+      "validity": "01 Apr–30 Sep 26",
+      "status": "Expiring soon"
+    },
+    {
+      "id": "flights-trailmakers",
+      "vendorId": "trailmakers",
+      "serviceId": "kerala-flights",
+      "supplierType": "Wholesaler",
+      "productsCovered": "Domestic · international",
+      "rateCardId": "rc-air-2026",
+      "rateCardName": "Air ticketing fees 2026",
+      "validity": "01 Jan–31 Dec 26",
+      "status": "Active"
+    },
+    {
+      "id": "flights-wanderlust",
+      "vendorId": "wanderlust",
+      "serviceId": "kerala-flights",
+      "supplierType": "Direct supplier",
+      "productsCovered": "Domestic · regional",
+      "rateCardId": "rc-air-2026",
+      "rateCardName": "Flight desk contract 2026",
+      "validity": "01 Jan–31 Dec 26",
+      "status": "Active"
+    },
+    {
+      "id": "flights-horizon",
+      "vendorId": "horizon",
+      "serviceId": "kerala-flights",
+      "supplierType": "DMC",
+      "productsCovered": "Domestic · international",
+      "rateCardId": "rc-air-2026",
+      "rateCardName": "Air consolidation rates 2026",
+      "validity": "01 Jan–31 Dec 26",
+      "status": "Active"
+    }
+  ],
+  "rateCards": [
+    {
+      "id": "rc-acc-2627",
+      "ref": "RC-2026-0114",
+      "title": "Accommodation tariff · 2026–27",
+      "category": "Accommodation",
+      "status": "published",
+      "validity": "01 Apr 2026 – 31 Mar 2027",
+      "coverageCount": 4
+    },
+    {
+      "id": "rc-acc-2526",
+      "ref": "RC-2025-0114",
+      "title": "Accommodation tariff · 2025–26",
+      "category": "Accommodation",
+      "status": "expired",
+      "validity": "01 Apr 2025 – 31 Mar 2026",
+      "coverageCount": 4
+    },
+    {
+      "id": "rc-hill-2627",
+      "ref": "RC-2026-0218",
+      "title": "Hill Retreat tariff · 2026–27",
+      "category": "Accommodation",
+      "status": "draft",
+      "validity": "01 Apr 2026 – 31 Mar 2027",
+      "coverageCount": 6
+    },
+    {
+      "id": "rc-air-2026",
+      "ref": "RC-2026-0119",
+      "title": "Airport transfer rates · 2026",
+      "category": "Transport",
+      "status": "published",
+      "validity": "01 Jan – 31 Dec 2026",
+      "coverageCount": 5
+    },
+    {
+      "id": "rc-visa-uae",
+      "ref": "RC-2026-0301",
+      "title": "Visa services tariff · UAE",
+      "category": "Visa",
+      "status": "published",
+      "validity": "01 Apr – 30 Sep 2026",
+      "coverageCount": 4
+    }
+  ],
+  "compliance": [
+    {
+      "id": "d1",
+      "name": "Public liability insurance",
+      "validUntil": "2026-09-28",
+      "status": "expiring",
+      "ownerName": "Deepa Thomas",
+      "reference": "POL/8841/26"
+    },
+    {
+      "id": "d2",
+      "name": "Rate agreement 2026–27",
+      "validUntil": "2027-03-31",
+      "status": "awaiting",
+      "ownerName": "Rahul Sharma",
+      "reference": "AGR/2026/EH"
+    },
+    {
+      "id": "d3",
+      "name": "GST registration certificate",
+      "status": "verified",
+      "ownerName": "Deepa Thomas",
+      "reference": "GST/32AABCE"
+    },
+    {
+      "id": "d4",
+      "name": "PAN card",
+      "status": "verified",
+      "ownerName": "Ravi Nair",
+      "reference": "PAN/AABCE"
+    },
+    {
+      "id": "d5",
+      "name": "Cancellation policy",
+      "validUntil": "2027-03-31",
+      "status": "verified",
+      "ownerName": "Ravi Nair",
+      "reference": "POL/CANCEL/26"
+    },
+    {
+      "id": "d6",
+      "name": "Cancelled cheque",
+      "status": "verified",
+      "ownerName": "Deepa Thomas",
+      "reference": "BANK/ICICI/8841"
+    },
+    {
+      "id": "d7",
+      "name": "Fire safety certificate",
+      "validUntil": "2027-01-14",
+      "status": "verified",
+      "ownerName": "Ravi Nair",
+      "reference": "FSC/KKD/1182"
+    },
+    {
+      "id": "d8",
+      "name": "Trade licence",
+      "validUntil": "2026-12-31",
+      "status": "verified",
+      "ownerName": "Deepa Thomas",
+      "reference": "TL/KOC/4421"
+    }
+  ],
+  "vendorTasks": [
+    {
+      "id": "TSK-2026-000001",
+      "title": "Confirm rate card for 2026–27 season",
+      "context": "Rate cards · Accommodation tariff",
+      "assigneeName": "Anjali Menon",
+      "assigneeRole": "Vendor desk",
+      "assigneeInitials": "AM",
+      "assigneeTone": "pink",
+      "due": "Today 4 PM",
+      "status": "In progress"
+    },
+    {
+      "id": "TSK-2026-000002",
+      "title": "Collect signed contract amendment",
+      "context": "Docs · Commercial",
+      "assigneeName": "Meera Joseph",
+      "assigneeRole": "Operations",
+      "assigneeInitials": "MJ",
+      "assigneeTone": "default",
+      "due": "Today 6 PM",
+      "status": "Open"
+    },
+    {
+      "id": "TSK-2026-000003",
+      "title": "Update stop-sale notice window",
+      "context": "Commercial · Terms",
+      "assigneeName": "Anjali Menon",
+      "assigneeRole": "Vendor desk",
+      "assigneeInitials": "AM",
+      "assigneeTone": "pink",
+      "due": "13 Aug",
+      "status": "Open"
+    },
+    {
+      "id": "TSK-2026-000004",
+      "title": "Review group allotment request",
+      "context": "Services · Example Lake Resort",
+      "assigneeName": "Vrushabh Jain",
+      "assigneeRole": "Owner",
+      "assigneeInitials": "VJ",
+      "assigneeTone": "pink",
+      "due": "14 Aug",
+      "status": "Open"
+    },
+    {
+      "id": "TSK-2026-000005",
+      "title": "Publish Hill Retreat draft tariff",
+      "context": "Blocked by missing meal plans",
+      "assigneeName": "Anjali Menon",
+      "assigneeRole": "Vendor desk",
+      "assigneeInitials": "AM",
+      "assigneeTone": "pink",
+      "due": "—",
+      "status": "Blocked"
+    },
+    {
+      "id": "TSK-2026-000006",
+      "title": "Onboard primary vendor contacts",
+      "context": "Overview · Contacts",
+      "assigneeName": "Anjali Menon",
+      "assigneeRole": "Vendor desk",
+      "assigneeInitials": "AM",
+      "assigneeTone": "pink",
+      "due": "10 Aug",
+      "status": "Done"
+    },
+    {
+      "id": "TSK-2026-000007",
+      "title": "Import base accommodation tariff",
+      "context": "Rate cards · Example Lake Resort",
+      "assigneeName": "Meera Joseph",
+      "assigneeRole": "Operations",
+      "assigneeInitials": "MJ",
+      "assigneeTone": "default",
+      "due": "8 Aug",
+      "status": "Done"
+    },
+    {
+      "id": "TSK-2026-000008",
+      "title": "Set payment terms to Net 30",
+      "context": "Commercial · Terms",
+      "assigneeName": "Vrushabh Jain",
+      "assigneeRole": "Owner",
+      "assigneeInitials": "VJ",
+      "assigneeTone": "pink",
+      "due": "7 Aug",
+      "status": "Done"
+    }
+  ]
+}
